@@ -18,9 +18,25 @@
 
 package de.phoenix.submission;
 
-public interface Submission {
+public class Submission {
 
-    public String getAuthor();
+    private String author;
+    private String text;
 
-    public String getText();
+    public Submission(String author, String text) {
+        this.author = author;
+        this.text = text;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String toString() {
+        return String.format("Submission={Author=%s;Text=%s}", author, text);
+    }
 }
