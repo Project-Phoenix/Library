@@ -30,7 +30,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.ClientFilter;
 import com.sun.jersey.core.util.Base64;
 
-public final class LoginFilter extends ClientFilter {
+public class LoginFilter extends ClientFilter {
 
     // Base64 encoded string for Basic Http Authentifaction
     private final String authentication;
