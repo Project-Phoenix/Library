@@ -18,22 +18,20 @@
 
 package de.phoenix.security;
 
-import java.io.UnsupportedEncodingException;
-
-import javax.ws.rs.core.HttpHeaders;
-
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.ClientFilter;
-import com.sun.jersey.core.util.Base64;
 
 public class LoginFilter extends ClientFilter {
 
-    // Base64 encoded string for Basic Http Authentifaction
-    private final String authentication;
+    private final String username;
+    private final String password;
+
+    public static final String NAME_HEAD = "Username";
+    public static final String PASS_HEAD = "Password";
 
     /**
      * A single use filter to authentifacte the user by its username and
@@ -46,37 +44,16 @@ public class LoginFilter extends ClientFilter {
      *            The password in plain text. It will be pre hashed in the class
      */
     public LoginFilter(String user, String password) {
-        authentication = createAuthentificationString(user, password);
-    }
-
-    // Using SHA512 for creating a hexadecimal encoded hash
-    private static final int HASH_PASSWORD_LENGTH = 64;
-
-    private String createAuthentificationString(String user, String password) {
-
-        // Authentifaction string as defined in HTTP for Basic
-        // Authentification(User:Password in Base64)
-
-        // Build string
-        StringBuilder sBuilder = new StringBuilder(user.length() + HASH_PASSWORD_LENGTH);
-        sBuilder.append(user).append(':');
-        // Hash password with sha512
-        sBuilder.append(DigestUtils.sha512Hex(password));
-        try {
-            // Encode the string
-            return "Basic " + new String(Base64.encode(sBuilder.toString()), "ASCII");
-        } catch (UnsupportedEncodingException e) {
-            return null;
-        }
+        this.username = user;
+        this.password = DigestUtils.sha512Hex(password);
     }
 
     @Override
     public ClientResponse handle(ClientRequest cr) throws ClientHandlerException {
 
-        // Append authentifaction string to the http request
-        if (!cr.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
-            cr.getHeaders().add(HttpHeaders.AUTHORIZATION, authentication);
-        }
+        cr.getHeaders().add(NAME_HEAD, username);
+        cr.getHeaders().add(PASS_HEAD, password);
+
         return getNext().handle(cr);
     }
 
