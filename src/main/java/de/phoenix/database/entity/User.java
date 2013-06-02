@@ -52,7 +52,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findBySurname", query = "SELECT u FROM User u WHERE u.surname = :surname"),
     @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name"),
     @NamedQuery(name = "User.findByTitle", query = "SELECT u FROM User u WHERE u.title = :title"),
-    @NamedQuery(name = "User.findByMatrikelNr", query = "SELECT u FROM User u WHERE u.matrikelNr = :matrikelNr"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findBySalt", query = "SELECT u FROM User u WHERE u.salt = :salt"),
@@ -81,9 +80,6 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "title")
     private String title;
-
-    @Column(name = "matrikelNr")
-    private String matrikelNr;
 
     @Basic(optional = false)
     @Column(name = "username")
@@ -195,14 +191,6 @@ public class User implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getMatrikelNr() {
-        return matrikelNr;
-    }
-
-    public void setMatrikelNr(String matrikelNr) {
-        this.matrikelNr = matrikelNr;
     }
 
     public String getUsername() {
