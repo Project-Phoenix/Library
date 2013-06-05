@@ -42,6 +42,8 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 @Entity
 @Table(name = "user")
 @XmlRootElement
@@ -142,6 +144,10 @@ public class User implements Serializable {
     private Role roleId;
 
     public User() {
+    }
+    
+    public User(String password) {
+        this.password = DigestUtils.sha512Hex(password);
     }
 
     public User(Integer id) {
