@@ -32,7 +32,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "defaultRole")
@@ -102,7 +101,6 @@ public class DefaultRole implements Serializable {
         this.inheritatedRole = inheritatedRole;
     }
 
-    @XmlTransient
     public List<DefaultPermission> getDefaultPermissions() {
         return defaultPermissionList;
     }

@@ -31,7 +31,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "tag")
@@ -87,7 +86,6 @@ public class Tag implements Serializable {
         this.tag = tag;
     }
 
-    @XmlTransient
     public List<TaskPool> getTaskPool() {
         return taskPoolList;
     }

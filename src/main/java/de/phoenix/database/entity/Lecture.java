@@ -39,7 +39,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "lecture")
@@ -177,7 +176,6 @@ public class Lecture implements Serializable {
         this.isActive = false;
     }
 
-    @XmlTransient
     public List<Material> getMaterials() {
         return materialList;
     }
@@ -186,7 +184,6 @@ public class Lecture implements Serializable {
         this.materialList = materials;
     }
 
-    @XmlTransient
     public List<User> getLectureLeader() {
         return userList;
     }
@@ -195,7 +192,6 @@ public class Lecture implements Serializable {
         this.userList = lectureLeader;
     }
 
-    @XmlTransient
     public List<User> getGroupLeader() {
         return userList1;
     }
@@ -212,7 +208,6 @@ public class Lecture implements Serializable {
         this.instanceId = instance;
     }
 
-    @XmlTransient
     public List<News> getNews() {
         return newsList;
     }
@@ -221,7 +216,6 @@ public class Lecture implements Serializable {
         this.newsList = news;
     }
 
-    @XmlTransient
     public List<SampleSolution> getSampleSolutions() {
         return sampleSolutionList;
     }
@@ -230,7 +224,6 @@ public class Lecture implements Serializable {
         this.sampleSolutionList = sampleSolutions;
     }
 
-    @XmlTransient
     public List<Group> getGroups() {
         return groupList;
     }

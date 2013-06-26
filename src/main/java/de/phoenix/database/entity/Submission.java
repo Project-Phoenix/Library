@@ -40,7 +40,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "submission")
@@ -169,7 +168,6 @@ public class Submission implements Serializable {
         this.task = task;
     }
 
-    @XmlTransient
     public List<SubmissionFiles> getSubmissionFilesList() {
         return submissionFilesList;
     }

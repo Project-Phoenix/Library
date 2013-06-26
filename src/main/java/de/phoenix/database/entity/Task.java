@@ -30,7 +30,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "task")
@@ -97,7 +96,6 @@ public class Task implements Serializable {
         this.exerciseSheetPool = exerciseSheetPool;
     }
 
-    @XmlTransient
     public List<SampleSolution> getSampleSolutions() {
         return sampleSolutionList;
     }
@@ -106,7 +104,6 @@ public class Task implements Serializable {
         this.sampleSolutionList = sampleSolutions;
     }
 
-    @XmlTransient
     public List<Submission> getSubmissions() {
         return submissionList;
     }

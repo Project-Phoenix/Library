@@ -34,7 +34,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "automaticTask")
@@ -102,7 +101,6 @@ public class AutomaticTask implements Serializable {
         this.taskPoolid = taskPool;
     }
 
-    @XmlTransient
     public List<AutomaticTaskFiles> getAutomaticTaskFiles() {
         return automaticTaskFilesList;
     }

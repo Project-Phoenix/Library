@@ -34,7 +34,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "role")
@@ -111,7 +110,6 @@ public class Role implements Serializable {
         this.inheritatedRole = inheritatedRole;
     }
 
-    @XmlTransient
     public List<Permission> getPermissions() {
         return permissionList;
     }
@@ -128,7 +126,6 @@ public class Role implements Serializable {
         this.instanceId = instance;
     }
 
-    @XmlTransient
     public List<User> getUser() {
         return userList;
     }

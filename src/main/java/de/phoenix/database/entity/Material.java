@@ -35,7 +35,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "material")
@@ -151,7 +150,6 @@ public class Material implements Serializable {
         this.releaseDate = releaseDate;
     }
 
-    @XmlTransient
     public List<Lecture> getLectures() {
         return lectureList;
     }
@@ -160,7 +158,6 @@ public class Material implements Serializable {
         this.lectureList = lectures;
     }
 
-    @XmlTransient
     public List<Group> getGroups() {
         return groupList;
     }

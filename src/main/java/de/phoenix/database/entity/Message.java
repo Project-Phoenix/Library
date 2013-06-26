@@ -38,7 +38,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "message")
@@ -128,7 +127,6 @@ public class Message implements Serializable {
         this.text = text;
     }
 
-    @XmlTransient
     public List<User> getReceiver() {
         return userList;
     }

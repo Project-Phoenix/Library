@@ -40,7 +40,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "user")
@@ -241,7 +240,6 @@ public class User implements Serializable {
         this.isActive = isActive;
     }
 
-    @XmlTransient
     public List<Instance> getLeadingInstances() {
         return instanceList;
     }
@@ -250,7 +248,6 @@ public class User implements Serializable {
         this.instanceList = leadingInstances;
     }
 
-    @XmlTransient
     public List<Message> getReceivedMessages() {
         return messageList;
     }
@@ -259,7 +256,6 @@ public class User implements Serializable {
         this.messageList = receivedMessages;
     }
 
-    @XmlTransient
     public List<Group> getJoinedGroups() {
         return groupList;
     }
@@ -268,7 +264,6 @@ public class User implements Serializable {
         this.groupList = joinedGroups;
     }
 
-    @XmlTransient
     public List<Lecture> getLeadingLectures() {
         return lectureList;
     }
@@ -277,9 +272,8 @@ public class User implements Serializable {
         this.lectureList = leadingLectures;
     }
 
-    @XmlTransient
     /**
-     * @return Lectures where the user is a group leader 
+     * @return Lectures where the user is a group leader
      */
     public List<Lecture> getLeadingGroups() {
         return lectureList1;
@@ -293,7 +287,6 @@ public class User implements Serializable {
         this.lectureList1 = leadingGroups;
     }
 
-    @XmlTransient
     public List<News> getWrittenNews() {
         return newsList;
     }
@@ -302,7 +295,6 @@ public class User implements Serializable {
         this.newsList = writtenNews;
     }
 
-    @XmlTransient
     public List<Submission> getSubmissions() {
         return submissionList;
     }
@@ -311,7 +303,6 @@ public class User implements Serializable {
         this.submissionList = submissions;
     }
 
-    @XmlTransient
     public List<Message> getSentMessages() {
         return messageList1;
     }
@@ -320,7 +311,6 @@ public class User implements Serializable {
         this.messageList1 = sentMessages;
     }
 
-    @XmlTransient
     /**
      * @return Groups where this user is exercise leader
      */

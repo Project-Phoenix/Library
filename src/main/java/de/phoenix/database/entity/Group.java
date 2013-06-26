@@ -39,7 +39,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "group")
@@ -181,7 +180,6 @@ public class Group implements Serializable {
         this.registrationEndDate = registrationEndDate;
     }
 
-    @XmlTransient
     public List<User> getMember() {
         return userList;
     }
@@ -190,7 +188,6 @@ public class Group implements Serializable {
         this.userList = member;
     }
 
-    @XmlTransient
     public List<Material> getMaterials() {
         return materialList;
     }
@@ -199,7 +196,6 @@ public class Group implements Serializable {
         this.materialList = materials;
     }
 
-    @XmlTransient
     public List<ExerciseSheet> getExerciseSheets() {
         return exerciseSheetList;
     }

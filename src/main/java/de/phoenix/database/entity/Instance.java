@@ -33,7 +33,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "instance")
@@ -123,7 +122,6 @@ public class Instance implements Serializable {
         this.port = port;
     }
 
-    @XmlTransient
     public List<User> getInstanceAdmins() {
         return userList;
     }
@@ -132,7 +130,6 @@ public class Instance implements Serializable {
         this.userList = instanceAdmins;
     }
 
-    @XmlTransient
     public List<Lecture> getLectureList() {
         return lectureList;
     }
@@ -141,7 +138,6 @@ public class Instance implements Serializable {
         this.lectureList = lectureList;
     }
 
-    @XmlTransient
     public List<Role> getRoles() {
         return roleList;
     }
