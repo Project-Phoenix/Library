@@ -46,6 +46,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 @Entity
 @Table(name = "user")
 @XmlRootElement
@@ -152,6 +154,10 @@ public class User implements Serializable {
     private Role roleId;
 
     public User() {
+    }
+    
+    public User(String password) {
+        this.password = DigestUtils.sha512Hex(password);
     }
 
     public User(Integer id) {
