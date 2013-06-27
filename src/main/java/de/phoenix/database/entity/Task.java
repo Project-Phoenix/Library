@@ -20,6 +20,7 @@ package de.phoenix.database.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -31,6 +32,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "task")
 @XmlRootElement
@@ -40,6 +46,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Task.findByExerciseSheetPoolId", query = "SELECT t FROM Task t WHERE t.taskPK.exerciseSheetPoolId = :exerciseSheetPoolId"),
     @NamedQuery(name = "Task.findByTaskId", query = "SELECT t FROM Task t WHERE t.taskPK.taskId = :taskId")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Task implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,17 +54,21 @@ public class Task implements Serializable {
     @EmbeddedId
     protected TaskPK taskPK;
 
+    @JsonBackReference("taskPool-task")
     @JoinColumn(name = "task_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TaskPool taskPool;
 
+    @JsonBackReference("exerciseSheetPool-task")
     @JoinColumn(name = "exercise_sheet_pool_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ExerciseSheetPool exerciseSheetPool;
 
+    @JsonManagedReference("task-sampleSolution")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
     private List<SampleSolution> sampleSolutionList;
 
+    @JsonManagedReference("task-submission")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "task")
     private List<Submission> submissionList;
 

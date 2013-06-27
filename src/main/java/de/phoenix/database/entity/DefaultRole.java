@@ -20,6 +20,7 @@ package de.phoenix.database.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,6 +34,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "defaultRole")
 @XmlRootElement
@@ -43,6 +48,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "DefaultRole.findByName", query = "SELECT d FROM DefaultRole d WHERE d.name = :name"),
     @NamedQuery(name = "DefaultRole.findByInheritatedRole", query = "SELECT d FROM DefaultRole d WHERE d.inheritatedRole = :inheritatedRole")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class DefaultRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,6 +67,7 @@ public class DefaultRole implements Serializable {
     @Column(name = "inheritatedRole")
     private int inheritatedRole;
 
+    @JsonManagedReference("defaultRole-defaultPermission")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "defaultRoleId")
     private List<DefaultPermission> defaultPermissionList;
 

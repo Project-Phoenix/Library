@@ -20,6 +20,7 @@ package de.phoenix.database.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,6 +35,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "instance")
 @XmlRootElement
@@ -45,6 +50,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Instance.findByHost", query = "SELECT i FROM Instance i WHERE i.host = :host"),
     @NamedQuery(name = "Instance.findByPort", query = "SELECT i FROM Instance i WHERE i.port = :port")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Instance implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,9 +76,11 @@ public class Instance implements Serializable {
     @ManyToMany(mappedBy = "instanceList")
     private List<User> userList;
 
+    @JsonManagedReference("instance-lecture")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "instanceId")
     private List<Lecture> lectureList;
 
+    @JsonManagedReference("instance-role")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "instanceId")
     private List<Role> roleList;
 

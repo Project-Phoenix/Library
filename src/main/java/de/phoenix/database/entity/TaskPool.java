@@ -20,6 +20,7 @@ package de.phoenix.database.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,6 +38,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "taskPool")
 @XmlRootElement
@@ -46,6 +51,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TaskPool.findById", query = "SELECT t FROM TaskPool t WHERE t.id = :id"),
     @NamedQuery(name = "TaskPool.findByName", query = "SELECT t FROM TaskPool t WHERE t.name = :name")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class TaskPool implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,9 +75,11 @@ public class TaskPool implements Serializable {
     @ManyToMany
     private List<Tag> tagList;
 
+    @JsonManagedReference("taskPool-task")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskPool")
     private List<Task> taskList;
-
+    
+    @JsonManagedReference("taskPool-automaticTask")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskPoolid")
     private List<AutomaticTask> automaticTaskList;
 

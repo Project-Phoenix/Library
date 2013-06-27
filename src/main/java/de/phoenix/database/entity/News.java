@@ -20,6 +20,7 @@ package de.phoenix.database.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +37,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "news")
 @XmlRootElement
@@ -47,6 +52,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "News.findByCreationDate", query = "SELECT n FROM News n WHERE n.creationDate = :creationDate"),
     @NamedQuery(name = "News.findByReleaseDate", query = "SELECT n FROM News n WHERE n.releaseDate = :releaseDate")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class News implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,10 +81,12 @@ public class News implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date releaseDate;
 
+    @JsonBackReference("user-news")
     @JoinColumn(name = "author", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User author;
 
+    @JsonBackReference("lecture-news")
     @JoinColumn(name = "lecture_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Lecture lectureId;

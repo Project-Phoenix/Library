@@ -20,6 +20,7 @@ package de.phoenix.database.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,6 +34,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "exerciseSheetPool")
 @XmlRootElement
@@ -42,6 +47,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ExerciseSheetPool.findById", query = "SELECT e FROM ExerciseSheetPool e WHERE e.id = :id"),
     @NamedQuery(name = "ExerciseSheetPool.findByName", query = "SELECT e FROM ExerciseSheetPool e WHERE e.name = :name")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class ExerciseSheetPool implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,9 +62,11 @@ public class ExerciseSheetPool implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @JsonManagedReference("exerciseSheetPool-task")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exerciseSheetPool")
     private List<Task> taskList;
 
+    @JsonManagedReference("exerciseSheetPool-exerciseSheet")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exerciseSheetPool")
     private List<ExerciseSheet> exerciseSheetList;
 

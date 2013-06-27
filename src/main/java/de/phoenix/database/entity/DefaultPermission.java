@@ -19,6 +19,7 @@
 package de.phoenix.database.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +31,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "defaultPermission")
 @XmlRootElement
@@ -38,6 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "DefaultPermission.findAll", query = "SELECT d FROM DefaultPermission d"),
     @NamedQuery(name = "DefaultPermission.findByNode", query = "SELECT d FROM DefaultPermission d WHERE d.node = :node")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class DefaultPermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,6 +53,7 @@ public class DefaultPermission implements Serializable {
     @Column(name = "node")
     private String node;
 
+    @JsonBackReference("defaultRole-defaultPermission")
     @JoinColumn(name = "default_role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private DefaultRole defaultRoleId;

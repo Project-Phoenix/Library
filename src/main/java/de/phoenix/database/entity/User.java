@@ -41,6 +41,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "user")
 @XmlRootElement
@@ -58,6 +63,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "User.findByRegdate", query = "SELECT u FROM User u WHERE u.regdate = :regdate"),
     @NamedQuery(name = "User.findByIsActive", query = "SELECT u FROM User u WHERE u.isActive = :isActive")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -114,7 +120,7 @@ public class User implements Serializable {
 
     @JoinTable(name = "groupMember", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "group_id", referencedColumnName = "id")})
     @ManyToMany
-    private List<Group> groupList;
+    private List<ExerciseGroup> exerciseGroupList;
 
     @JoinTable(name = "lectureLeader", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "lecture_id", referencedColumnName = "id")})
     @ManyToMany
@@ -124,18 +130,23 @@ public class User implements Serializable {
     @ManyToMany
     private List<Lecture> lectureList1;
 
+    @JsonManagedReference("user-news")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
     private List<News> newsList;
 
+    @JsonManagedReference("user-submission")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private List<Submission> submissionList;
 
+    @JsonManagedReference("user-message")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
     private List<Message> messageList1;
 
+    @JsonManagedReference("user-exerciseGroup")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exerciseLeader")
-    private List<Group> groupList1;
+    private List<ExerciseGroup> exerciseGroupList1;
 
+    @JsonBackReference("role-user")
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Role roleId;
@@ -256,12 +267,12 @@ public class User implements Serializable {
         this.messageList = receivedMessages;
     }
 
-    public List<Group> getJoinedGroups() {
-        return groupList;
+    public List<ExerciseGroup> getJoinedGroups() {
+        return exerciseGroupList;
     }
 
-    public void setJoinedGroups(List<Group> joinedGroups) {
-        this.groupList = joinedGroups;
+    public void setJoinedGroups(List<ExerciseGroup> joinedGroups) {
+        this.exerciseGroupList = joinedGroups;
     }
 
     public List<Lecture> getLeadingLectures() {
@@ -314,12 +325,12 @@ public class User implements Serializable {
     /**
      * @return Groups where this user is exercise leader
      */
-    public List<Group> getLeadingExerciseGroups() {
-        return groupList1;
+    public List<ExerciseGroup> getLeadingExerciseGroups() {
+        return exerciseGroupList1;
     }
 
-    public void setLeadingExerciseGroups(List<Group> leadingExerciseGroups) {
-        this.groupList1 = leadingExerciseGroups;
+    public void setLeadingExerciseGroups(List<ExerciseGroup> leadingExerciseGroups) {
+        this.exerciseGroupList1 = leadingExerciseGroups;
     }
 
     public Role getRole() {

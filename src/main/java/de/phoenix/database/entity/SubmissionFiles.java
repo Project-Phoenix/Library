@@ -19,6 +19,7 @@
 package de.phoenix.database.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +34,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "submissionFiles")
 @XmlRootElement
@@ -42,6 +47,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SubmissionFiles.findById", query = "SELECT s FROM SubmissionFiles s WHERE s.id = :id"),
     @NamedQuery(name = "SubmissionFiles.findByFilename", query = "SELECT s FROM SubmissionFiles s WHERE s.filename = :filename")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class SubmissionFiles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,6 +67,7 @@ public class SubmissionFiles implements Serializable {
     @Column(name = "filename")
     private String filename;
 
+    @JsonBackReference("submission-submissionFiles")
     @JoinColumn(name = "submission_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Submission submissionId;

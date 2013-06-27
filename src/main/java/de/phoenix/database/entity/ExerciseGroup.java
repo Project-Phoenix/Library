@@ -1,19 +1,19 @@
 /*
  * Copyright (C) 2013 Project-Phoenix
  * 
- * This file is part of WebService.
+ * This file is part of library.
  * 
- * WebService is free software: you can redistribute it and/or modify
+ * library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, version 3 of the License.
  * 
- * WebService is distributed in the hope that it will be useful,
+ * library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with WebService.  If not, see <http://www.gnu.org/licenses/>.
+ * along with library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package de.phoenix.database.entity;
@@ -21,6 +21,7 @@ package de.phoenix.database.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,21 +41,27 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
-@Table(name = "group")
+@Table(name = "exerciseGroup")
 @XmlRootElement
 //@formatter:off
 @NamedQueries({
-    @NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g"),
-    @NamedQuery(name = "Group.findById", query = "SELECT g FROM Group g WHERE g.id = :id"),
-    @NamedQuery(name = "Group.findByName", query = "SELECT g FROM Group g WHERE g.name = :name"),
-    @NamedQuery(name = "Group.findByRoom", query = "SELECT g FROM Group g WHERE g.room = :room"),
-    @NamedQuery(name = "Group.findByTurnus", query = "SELECT g FROM Group g WHERE g.turnus = :turnus"),
-    @NamedQuery(name = "Group.findBySubmissionExpireDate", query = "SELECT g FROM Group g WHERE g.submissionExpireDate = :submissionExpireDate"),
-    @NamedQuery(name = "Group.findByRegistrationStartDate", query = "SELECT g FROM Group g WHERE g.registrationStartDate = :registrationStartDate"),
-    @NamedQuery(name = "Group.findByRegistrationEndDate", query = "SELECT g FROM Group g WHERE g.registrationEndDate = :registrationEndDate")})
+    @NamedQuery(name = "ExerciseGroup.findAll", query = "SELECT e FROM ExerciseGroup e"),
+    @NamedQuery(name = "ExerciseGroup.findById", query = "SELECT e FROM ExerciseGroup e WHERE e.id = :id"),
+    @NamedQuery(name = "ExerciseGroup.findByName", query = "SELECT e FROM ExerciseGroup e WHERE e.name = :name"),
+    @NamedQuery(name = "ExerciseGroup.findByRoom", query = "SELECT e FROM ExerciseGroup e WHERE e.room = :room"),
+    @NamedQuery(name = "ExerciseGroup.findByTurnus", query = "SELECT e FROM ExerciseGroup e WHERE e.turnus = :turnus"),
+    @NamedQuery(name = "ExerciseGroup.findBySubmissionExpireDate", query = "SELECT e FROM ExerciseGroup e WHERE e.submissionExpireDate = :submissionExpireDate"),
+    @NamedQuery(name = "ExerciseGroup.findByRegistrationStartDate", query = "SELECT e FROM ExerciseGroup e WHERE e.registrationStartDate = :registrationStartDate"),
+    @NamedQuery(name = "ExerciseGroup.findByRegistrationEndDate", query = "SELECT e FROM ExerciseGroup e WHERE e.registrationEndDate = :registrationEndDate")})
 //@formatter:on
-public class Group implements Serializable {
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class ExerciseGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -90,32 +97,35 @@ public class Group implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date registrationEndDate;
 
-    @ManyToMany(mappedBy = "groupList")
+    @ManyToMany(mappedBy = "exerciseGroupList")
     private List<User> userList;
 
     @JoinTable(name = "groupMaterial", joinColumns = {@JoinColumn(name = "group_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "material_id", referencedColumnName = "id")})
     @ManyToMany
     private List<Material> materialList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
-    private List<ExerciseSheet> exerciseSheetList;
-
+    @JsonBackReference("user-exerciseGroup")
     @JoinColumn(name = "exerciseLeader", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User exerciseLeader;
 
+    @JsonBackReference("lecture-exerciseGroup")
     @JoinColumn(name = "lecture", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Lecture lecture;
 
-    public Group() {
+    @JsonManagedReference("exerciseGroup-exerciseSheet")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exerciseGroup")
+    private List<ExerciseSheet> exerciseSheetList;
+
+    public ExerciseGroup() {
     }
 
-    public Group(Integer id) {
+    public ExerciseGroup(Integer id) {
         this.id = id;
     }
 
-    public Group(Integer id, String name, String room, String turnus, Date registrationStartDate, Date registrationEndDate) {
+    public ExerciseGroup(Integer id, String name, String room, String turnus, Date registrationStartDate, Date registrationEndDate) {
         this.id = id;
         this.name = name;
         this.room = room;
@@ -180,12 +190,12 @@ public class Group implements Serializable {
         this.registrationEndDate = registrationEndDate;
     }
 
-    public List<User> getMember() {
+    public List<User> getGroupMember() {
         return userList;
     }
 
-    public void setMember(List<User> member) {
-        this.userList = member;
+    public void setGroupMember(List<User> groupMember) {
+        this.userList = groupMember;
     }
 
     public List<Material> getMaterials() {
@@ -194,14 +204,6 @@ public class Group implements Serializable {
 
     public void setMaterials(List<Material> materials) {
         this.materialList = materials;
-    }
-
-    public List<ExerciseSheet> getExerciseSheets() {
-        return exerciseSheetList;
-    }
-
-    public void setExerciseSheets(List<ExerciseSheet> exerciseSheets) {
-        this.exerciseSheetList = exerciseSheets;
     }
 
     public User getExerciseLeader() {
@@ -220,6 +222,14 @@ public class Group implements Serializable {
         this.lecture = lecture;
     }
 
+    public List<ExerciseSheet> getExerciseSheets() {
+        return exerciseSheetList;
+    }
+
+    public void setExerciseSheets(List<ExerciseSheet> exerciseSheets) {
+        this.exerciseSheetList = exerciseSheets;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -231,10 +241,10 @@ public class Group implements Serializable {
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are
         // not set
-        if (!(object instanceof Group)) {
+        if (!(object instanceof ExerciseGroup)) {
             return false;
         }
-        Group other = (Group) object;
+        ExerciseGroup other = (ExerciseGroup) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -243,7 +253,7 @@ public class Group implements Serializable {
 
     @Override
     public String toString() {
-        return "de.phoenix.database.entity.Group[ id=" + id + " ]";
+        return "de.phoenix.database.entity.ExerciseGroup[ id=" + id + " ]";
     }
 
 }

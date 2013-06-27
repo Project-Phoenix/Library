@@ -19,6 +19,7 @@
 package de.phoenix.database.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "sampleSolutionFile")
 @XmlRootElement
@@ -40,6 +45,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SampleSolutionFile.findById", query = "SELECT s FROM SampleSolutionFile s WHERE s.id = :id"),
     @NamedQuery(name = "SampleSolutionFile.findByFileName", query = "SELECT s FROM SampleSolutionFile s WHERE s.fileName = :fileName")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class SampleSolutionFile implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,6 +64,7 @@ public class SampleSolutionFile implements Serializable {
     @Column(name = "fileName")
     private String fileName;
 
+    @JsonBackReference("sampleSolution-sampleSolutionFile")
     @JoinColumn(name = "sampleSolution_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SampleSolution sampleSolutionid;

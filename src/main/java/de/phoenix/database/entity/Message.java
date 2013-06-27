@@ -21,6 +21,7 @@ package de.phoenix.database.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,6 +40,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "message")
 @XmlRootElement
@@ -49,6 +54,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Message.findByTitle", query = "SELECT m FROM Message m WHERE m.title = :title"),
     @NamedQuery(name = "Message.findBySentDate", query = "SELECT m FROM Message m WHERE m.sentDate = :sentDate")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Message implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,6 +83,7 @@ public class Message implements Serializable {
     @ManyToMany
     private List<User> userList;
 
+    @JsonBackReference("user-message")
     @JoinColumn(name = "sender", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User sender;

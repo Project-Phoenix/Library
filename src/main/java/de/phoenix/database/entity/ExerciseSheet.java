@@ -33,6 +33,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "exerciseSheet")
 @XmlRootElement
@@ -45,6 +49,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ExerciseSheet.findByExpirationDate", query = "SELECT e FROM ExerciseSheet e WHERE e.expirationDate = :expirationDate"),
     @NamedQuery(name = "ExerciseSheet.findByVisible", query = "SELECT e FROM ExerciseSheet e WHERE e.visible = :visible")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class ExerciseSheet implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,13 +68,15 @@ public class ExerciseSheet implements Serializable {
     @Column(name = "visible")
     private Boolean visible;
 
+    @JsonBackReference("exerciseSheetPool-exerciseSheet")
     @JoinColumn(name = "exercise_sheet_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ExerciseSheetPool exerciseSheetPool;
 
+    @JsonBackReference("exerciseGroup-exerciseSheet")
     @JoinColumn(name = "group_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Group group;
+    private ExerciseGroup exerciseGroup;
 
     public ExerciseSheet() {
     }
@@ -126,12 +133,12 @@ public class ExerciseSheet implements Serializable {
         this.exerciseSheetPool = exerciseSheetPool;
     }
 
-    public Group getGroup() {
-        return group;
+    public ExerciseGroup getExerciseGroupGroup() {
+        return exerciseGroup;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setExerciseGroup(ExerciseGroup exerciseGroup) {
+        this.exerciseGroup = exerciseGroup;
     }
 
     @Override

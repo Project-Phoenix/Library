@@ -20,6 +20,7 @@ package de.phoenix.database.entity;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,6 +37,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "sampleSolution")
 @XmlRootElement
@@ -45,6 +51,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SampleSolution.findById", query = "SELECT s FROM SampleSolution s WHERE s.id = :id"),
     @NamedQuery(name = "SampleSolution.findByAuthor", query = "SELECT s FROM SampleSolution s WHERE s.author = :author")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class SampleSolution implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,13 +66,16 @@ public class SampleSolution implements Serializable {
     @Column(name = "author")
     private String author;
 
+    @JsonManagedReference("sampleSolution-sampleSolutionFile")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sampleSolutionid")
     private List<SampleSolutionFile> sampleSolutionFileList;
 
+    @JsonBackReference("lecture-sampleSolution")
     @JoinColumn(name = "lecture_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Lecture lectureId;
 
+    @JsonBackReference("task-sampleSolution")
     @JoinColumns({@JoinColumn(name = "task_exercise_sheet_pool_id", referencedColumnName = "exercise_sheet_pool_id"), @JoinColumn(name = "task_task_id", referencedColumnName = "task_id")})
     @ManyToOne(optional = false)
     private Task task;

@@ -21,6 +21,7 @@ package de.phoenix.database.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +37,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "material")
 @XmlRootElement
@@ -48,6 +52,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Material.findByVisible", query = "SELECT m FROM Material m WHERE m.visible = :visible"),
     @NamedQuery(name = "Material.findByReleaseDate", query = "SELECT m FROM Material m WHERE m.releaseDate = :releaseDate")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Material implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -82,7 +87,7 @@ public class Material implements Serializable {
     private List<Lecture> lectureList;
 
     @ManyToMany(mappedBy = "materialList")
-    private List<Group> groupList;
+    private List<ExerciseGroup> exerciseGroupList;
 
     public Material() {
     }
@@ -158,12 +163,12 @@ public class Material implements Serializable {
         this.lectureList = lectures;
     }
 
-    public List<Group> getGroups() {
-        return groupList;
+    public List<ExerciseGroup> getExerciseGroups() {
+        return exerciseGroupList;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groupList = groups;
+    public void setExerciseGroups(List<ExerciseGroup> groups) {
+        this.exerciseGroupList = groups;
     }
 
     @Override

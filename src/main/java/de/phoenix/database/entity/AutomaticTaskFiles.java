@@ -19,6 +19,7 @@
 package de.phoenix.database.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "automaticTaskFiles")
 @XmlRootElement
@@ -39,6 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "AutomaticTaskFiles.findAll", query = "SELECT a FROM AutomaticTaskFiles a"),
     @NamedQuery(name = "AutomaticTaskFiles.findById", query = "SELECT a FROM AutomaticTaskFiles a WHERE a.id = :id")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class AutomaticTaskFiles implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +63,7 @@ public class AutomaticTaskFiles implements Serializable {
     @Column(name = "unitTest", columnDefinition = "text")
     private String unitTest;
 
+    @JsonBackReference("automaticTask-automaticTaskFiles")
     @JoinColumn(name = "automaticTask_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AutomaticTask automaticTaskid;

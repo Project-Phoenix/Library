@@ -41,6 +41,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "submission")
 @XmlRootElement
@@ -52,6 +57,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Submission.findByStatus", query = "SELECT s FROM Submission s WHERE s.status = :status"),
     @NamedQuery(name = "Submission.findByControllStatus", query = "SELECT s FROM Submission s WHERE s.controllStatus = :controllStatus")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Submission implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -79,14 +85,17 @@ public class Submission implements Serializable {
     @Column(name = "controllMessage", columnDefinition = "text")
     private String controllMessage;
 
+    @JsonBackReference("user-submission")
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
 
+    @JsonBackReference("task-submission")
     @JoinColumns({@JoinColumn(name = "task_exercise_sheet_pool_id", referencedColumnName = "exercise_sheet_pool_id"), @JoinColumn(name = "task_task_id", referencedColumnName = "task_id")})
     @ManyToOne(optional = false)
     private Task task;
 
+    @JsonManagedReference("submission-submissionFiles")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "submissionId")
     private List<SubmissionFiles> submissionFilesList;
 

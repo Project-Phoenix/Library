@@ -21,6 +21,7 @@ package de.phoenix.database.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,6 +41,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "lecture")
 @XmlRootElement
@@ -53,6 +59,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Lecture.findByRoom", query = "SELECT l FROM Lecture l WHERE l.room = :room"),
     @NamedQuery(name = "Lecture.findByIsActive", query = "SELECT l FROM Lecture l WHERE l.isActive = :isActive")})
 //@formatter:on
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Lecture implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -95,18 +102,22 @@ public class Lecture implements Serializable {
     @ManyToMany(mappedBy = "lectureList1")
     private List<User> userList1;
 
+    @JsonBackReference("instance-lecture")
     @JoinColumn(name = "instance_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Instance instanceId;
 
+    @JsonManagedReference("lecture-news")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lectureId")
     private List<News> newsList;
 
+    @JsonManagedReference("lecture-sampleSolution")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lectureId")
     private List<SampleSolution> sampleSolutionList;
 
+    @JsonManagedReference("lecture-exerciseGroup")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lecture")
-    private List<Group> groupList;
+    private List<ExerciseGroup> exerciseGroupList;
 
     public Lecture() {
     }
@@ -224,12 +235,12 @@ public class Lecture implements Serializable {
         this.sampleSolutionList = sampleSolutions;
     }
 
-    public List<Group> getGroups() {
-        return groupList;
+    public List<ExerciseGroup> getExerciseGroups() {
+        return exerciseGroupList;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groupList = groups;
+    public void setExerciseGroups(List<ExerciseGroup> groups) {
+        this.exerciseGroupList = groups;
     }
 
     @Override
