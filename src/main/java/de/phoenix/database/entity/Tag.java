@@ -69,6 +69,10 @@ public class Tag implements Serializable {
     public Tag(Integer id) {
         this.id = id;
     }
+    
+    public Tag(String tag) {
+        this.tag = tag;
+    }
 
     public Tag(Integer id, String tag) {
         this.id = id;

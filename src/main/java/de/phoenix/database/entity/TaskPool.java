@@ -78,7 +78,7 @@ public class TaskPool implements Serializable {
     @JsonManagedReference("taskPool-task")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskPool")
     private List<Task> taskList;
-    
+
     @JsonManagedReference("taskPool-automaticTask")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskPoolid")
     private List<AutomaticTask> automaticTaskList;
@@ -88,6 +88,11 @@ public class TaskPool implements Serializable {
 
     public TaskPool(Integer id) {
         this.id = id;
+    }
+
+    public TaskPool(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public TaskPool(Integer id, String name, String description) {
