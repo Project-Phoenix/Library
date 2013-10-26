@@ -22,7 +22,15 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 public interface Sendable {
-    
+
+    /**
+     * Transfer the object via a defined protocol of the webservice from a
+     * client to webresource.
+     * 
+     * @param rs
+     *            Webresource to use as an channel to transfer the object
+     * @return The response of the webservice
+     */
     public ClientResponse send(WebResource rs);
 
 }

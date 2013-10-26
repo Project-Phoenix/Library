@@ -19,6 +19,7 @@
 package de.phoenix.rs.entity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
@@ -29,6 +30,12 @@ import com.sun.jersey.multipart.FormDataBodyPart;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
+/**
+ * Wrapper class for a Task to communicate with the phoenix RS service.
+ * 
+ * @author Meldanor
+ * 
+ */
 public class PhoenixTask implements Sendable {
 
     private String describtion;
@@ -36,6 +43,17 @@ public class PhoenixTask implements Sendable {
     private List<File> attachments;
     private List<File> pattern;
 
+    /**
+     * Creates an Task with an general description, different attachments(binary
+     * files like pictures) and different answer pattern
+     * 
+     * @param description
+     *            The taskdescription
+     * @param attachments
+     *            Binary files like pictures
+     * @param pattern
+     *            Text files as answer pattern
+     */
     public PhoenixTask(String description, List<File> attachments, List<File> pattern) {
         this.describtion = description;
 
@@ -43,14 +61,23 @@ public class PhoenixTask implements Sendable {
         this.pattern = pattern;
     }
 
+    /**
+     * @return Copy of the binary attachments of this task
+     */
     public List<File> getAttachments() {
-        return attachments;
+        return new ArrayList<File>(attachments);
     }
 
+    /**
+     * @return Task description
+     */
     public String getDescribtion() {
         return describtion;
     }
 
+    /**
+     * @return Copy of the text answer pattern
+     */
     public List<File> getPattern() {
         return pattern;
     }
