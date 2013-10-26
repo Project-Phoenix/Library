@@ -51,6 +51,8 @@ public class UploadHelper {
         // Add files to the packet
         for (File file : files) {
             multiPart.bodyPart(new FileDataBodyPart("file", file, MediaType.APPLICATION_OCTET_STREAM_TYPE));
+//            multiPart.getFields("lol");
+//            multiPart.
         }
 
         // Send file to server
