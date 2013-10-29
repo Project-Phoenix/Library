@@ -19,80 +19,107 @@
 package de.phoenix.rs.entity;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.multipart.FormDataBodyPart;
-import com.sun.jersey.multipart.FormDataMultiPart;
-import com.sun.jersey.multipart.file.FileDataBodyPart;
 
 /**
  * Wrapper class for a Task to communicate with the phoenix RS service.
- * 
- * @author Meldanor
- * 
  */
 public class PhoenixTask implements Sendable {
 
-    private String describtion;
+    private String description;
 
-    private List<File> attachments;
-    private List<File> pattern;
+    private List<PhoenixAttachment> attachments;
+    private List<PhoenixText> pattern;
 
     /**
-     * Creates an Task with an general description, different attachments(binary
-     * files like pictures) and different answer pattern
-     * 
-     * @param description
-     *            The taskdescription
-     * @param attachments
-     *            Binary files like pictures
-     * @param pattern
-     *            Text files as answer pattern
+     * Empty constructor for json transport
      */
-    public PhoenixTask(String description, List<File> attachments, List<File> pattern) {
-        this.describtion = description;
+    public PhoenixTask() {
 
+    }
+
+    /**
+     * Constructor for the server
+     * 
+     * @param attachments
+     * @param pattern
+     * @param description
+     */
+    public PhoenixTask(List<PhoenixAttachment> attachments, List<PhoenixText> pattern, String description) {
+
+        this.description = description;
         this.attachments = attachments;
         this.pattern = pattern;
     }
 
     /**
-     * @return Copy of the binary attachments of this task
+     * Constructor for the client
+     * 
+     * @param description
+     *            The task description
+     * @param fileAttachments
+     *            A list of binary files
+     * @param filePattern
+     *            A list of text based files
+     * @throws IOException
      */
-    public List<File> getAttachments() {
-        return new ArrayList<File>(attachments);
+    public PhoenixTask(String description, List<File> fileAttachments, List<File> filePattern) throws IOException {
+        this.description = description;
+
+        Date now = new Date();
+        this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
+        for (File attachment : fileAttachments) {
+            attachments.add(new PhoenixAttachment(attachment, now));
+        }
+        this.pattern = new ArrayList<PhoenixText>(filePattern.size());
+        for (File patter : filePattern) {
+            pattern.add(new PhoenixText(patter, now));
+        }
     }
 
     /**
-     * @return Task description
+     * @return The task description
      */
-    public String getDescribtion() {
-        return describtion;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * @return Copy of the text answer pattern
+     * @return Copy of list to the text pattern
      */
-    public List<File> getPattern() {
-        return pattern;
+    public List<PhoenixText> getPattern() {
+        return new ArrayList<PhoenixText>(pattern);
     }
 
+    /**
+     * @return Copy of list to the attachments
+     */
+    public List<PhoenixAttachment> getAttachments() {
+        return new ArrayList<PhoenixAttachment>(attachments);
+    }
+
+    @JsonIgnore
+    public int getAttachmentsSize() {
+        return attachments.size();
+    }
+
+    @JsonIgnore
+    public int getPatternSize() {
+        return pattern.size();
+    }
+
+    @Override
     public ClientResponse send(WebResource rs) {
-        FormDataMultiPart multiPart = new FormDataMultiPart();
-        multiPart.bodyPart(new FormDataBodyPart("description", this.getDescribtion()));
-
-        for (File attachment : attachments) {
-            multiPart.bodyPart(new FileDataBodyPart("attachment", attachment, MediaType.APPLICATION_OCTET_STREAM_TYPE));
-        }
-        for (File patter : pattern) {
-            multiPart.bodyPart(new FileDataBodyPart("pattern", patter, MediaType.APPLICATION_OCTET_STREAM_TYPE));
-        }
-
-        return rs.type(MediaType.MULTIPART_FORM_DATA_TYPE).post(ClientResponse.class, multiPart);
+        return rs.type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, this);
     }
+
 }
