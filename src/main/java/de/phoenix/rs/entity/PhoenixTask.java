@@ -44,7 +44,7 @@ public class PhoenixTask implements Sendable {
     /**
      * Empty constructor for json transport
      */
-    public PhoenixTask() {
+    protected PhoenixTask() {
 
     }
 

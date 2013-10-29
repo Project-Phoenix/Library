@@ -36,7 +36,7 @@ public class PhoenixText {
     /**
      * Empty constructor for json transport
      */
-    public PhoenixText() {
+    protected PhoenixText() {
 
     }
 

@@ -42,7 +42,7 @@ public class PhoenixAttachment {
     /**
      * Empty constructor for json transport
      */
-    public PhoenixAttachment() {
+    protected PhoenixAttachment() {
 
     }
 
