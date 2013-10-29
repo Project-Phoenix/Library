@@ -35,6 +35,7 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class PhoenixTask implements Sendable {
 
+    private String title;
     private String description;
 
     private List<PhoenixAttachment> attachments;
@@ -50,12 +51,13 @@ public class PhoenixTask implements Sendable {
     /**
      * Constructor for the server
      * 
+     * @param title
      * @param attachments
      * @param pattern
      * @param description
      */
-    public PhoenixTask(List<PhoenixAttachment> attachments, List<PhoenixText> pattern, String description) {
-
+    public PhoenixTask(List<PhoenixAttachment> attachments, List<PhoenixText> pattern, String description, String title) {
+        this.title = title;
         this.description = description;
         this.attachments = attachments;
         this.pattern = pattern;
@@ -64,6 +66,8 @@ public class PhoenixTask implements Sendable {
     /**
      * Constructor for the client
      * 
+     * @param title
+     *            The title of the task
      * @param description
      *            The task description
      * @param fileAttachments
@@ -72,7 +76,8 @@ public class PhoenixTask implements Sendable {
      *            A list of text based files
      * @throws IOException
      */
-    public PhoenixTask(String description, List<File> fileAttachments, List<File> filePattern) throws IOException {
+    public PhoenixTask(String title, String description, List<File> fileAttachments, List<File> filePattern) throws IOException {
+        this.title = title;
         this.description = description;
 
         Date now = new Date();
@@ -115,6 +120,10 @@ public class PhoenixTask implements Sendable {
     @JsonIgnore
     public int getPatternSize() {
         return pattern.size();
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     @Override
