@@ -35,6 +35,33 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class PhoenixTask implements Sendable {
 
+    /** URI of the task resource */
+    public static final String WEB_RESOURCE_ROOT = "task";
+    /**
+     * SubURI of the task resource to create an task
+     * 
+     * @param PhoenixTask
+     *            Task to create
+     */
+    public static final String WEB_RESOURCE_CREATE = "create";
+    /**
+     * SubURI of the task resource to update an task
+     * 
+     * @param Updateable
+     *            <PhoenixTask, String> Task to update identified by the old
+     *            title
+     */
+    public static final String WEB_RESOURCE_UPDATE = "update";
+    /** SubURI of the task resource to get all tasks */
+    public static final String WEB_RESOURCE_GETALL = "getAll";
+    /**
+     * SubURI of the task resource to look for a task by its title
+     * 
+     * @param String
+     *            The title of the task
+     */
+    public static final String WEB_RESOURCE_GETBYTITLE = "getByTitle";
+
     private String title;
     private String description;
 
@@ -122,6 +149,9 @@ public class PhoenixTask implements Sendable {
         return pattern.size();
     }
 
+    /**
+     * @return The title of the task
+     */
     public String getTitle() {
         return title;
     }
