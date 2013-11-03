@@ -47,11 +47,11 @@ public class PhoenixAttachment {
     }
 
     /**
-     * Constructor for the server
      * 
-     * @param attachments
-     * @param pattern
-     * @param description
+     * @param content
+     * @param creationDate
+     * @param name
+     * @param type
      */
     public PhoenixAttachment(byte[] content, Date creationDate, String name, String type) {
         this.content = content;
