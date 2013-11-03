@@ -145,6 +145,14 @@ public class PhoenixTask implements Sendable {
     public List<PhoenixAttachment> getAttachments() {
         return new ArrayList<PhoenixAttachment>(attachments);
     }
+    
+    protected void setAttachments(List<PhoenixAttachment> attachments) {
+        this.attachments = attachments;
+    }
+    
+    protected void setPattern(List<PhoenixText> pattern) {
+        this.pattern = pattern;
+    }
 
     @JsonIgnore
     public int getAttachmentsSize() {

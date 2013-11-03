@@ -43,7 +43,6 @@ public class OrderedRunner extends BlockJUnit4ClassRunner {
 
     private static final Comparator<FrameworkMethod> ORDER_COMPARATOR = new Comparator<FrameworkMethod>() {
 
-        @Override
         public int compare(FrameworkMethod m1, FrameworkMethod m2) {
             Order o1 = m1.getAnnotation(Order.class);
             Order o2 = m2.getAnnotation(Order.class);
