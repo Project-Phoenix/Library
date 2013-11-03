@@ -52,6 +52,13 @@ public class PhoenixTask implements Sendable {
      *            title
      */
     public static final String WEB_RESOURCE_UPDATE = "update";
+    /**
+     * SubURI of the task resource to delete an single task
+     * 
+     * @param PhoenixTask
+     *            Task to delete from the system
+     */
+    public static final String WEB_RESOURCE_DELETE = "delete";
     /** SubURI of the task resource to get all tasks */
     public static final String WEB_RESOURCE_GETALL = "getAll";
     /**
