@@ -24,16 +24,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 
 /**
  * Wrapper class for a Task to communicate with the phoenix RS service.
  */
-public class PhoenixTask implements Sendable {
+public class PhoenixTask {
 
     /** URI of the task resource */
     public static final String WEB_RESOURCE_ROOT = "task";
@@ -147,11 +143,11 @@ public class PhoenixTask implements Sendable {
     public List<PhoenixAttachment> getAttachments() {
         return new ArrayList<PhoenixAttachment>(attachments);
     }
-    
+
     protected void setAttachments(List<PhoenixAttachment> attachments) {
         this.attachments = attachments;
     }
-    
+
     protected void setPattern(List<PhoenixText> pattern) {
         this.pattern = pattern;
     }
@@ -172,10 +168,4 @@ public class PhoenixTask implements Sendable {
     public String getTitle() {
         return title;
     }
-
-    @Override
-    public ClientResponse send(WebResource rs) {
-        return rs.type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, this);
-    }
-
 }

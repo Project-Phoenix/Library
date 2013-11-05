@@ -25,13 +25,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 
-public class PhoenixSubmission implements Sendable {
+public class PhoenixSubmission {
 
     /** URI of the submission resource */
     public static final String WEB_RESOURCE_ROOT = "submission";
@@ -49,7 +45,7 @@ public class PhoenixSubmission implements Sendable {
      *            Submission to submit
      */
     public static final String WEB_RESOURCE_GET_TASK_SUBMISSIONS = "getByTask";
-    
+
     private Date date;
 
     private PhoenixTask task;
@@ -147,10 +143,4 @@ public class PhoenixSubmission implements Sendable {
     public int getTextsSize() {
         return texts.size();
     }
-
-    @Override
-    public ClientResponse send(WebResource rs) {
-        return rs.type(MediaType.APPLICATION_JSON_TYPE).post(ClientResponse.class, this);
-    }
-
 }
