@@ -42,7 +42,14 @@ public class PhoenixSubmission implements Sendable {
      *            Submission to submit
      */
     public static final String WEB_RESOURCE_SUBMIT = "submit";
-
+    /**
+     * SubURI of the submission resource to submit a submission for a task
+     * 
+     * @param PhoenixSubmission
+     *            Submission to submit
+     */
+    public static final String WEB_RESOURCE_GET_TASK_SUBMISSIONS = "getByTask";
+    
     private Date date;
 
     private PhoenixTask task;
