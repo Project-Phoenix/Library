@@ -47,7 +47,7 @@ public class PhoenixAttachment {
     }
 
     /**
-     * 
+     * Constructor for server
      * @param content
      * @param creationDate
      * @param name
@@ -69,10 +69,8 @@ public class PhoenixAttachment {
      *            The creation date of the file
      * @throws IOException
      */
-    public PhoenixAttachment(File file, Date creationDate) throws IOException {
+    public PhoenixAttachment(File file) throws IOException {
         read(file);
-
-        this.creationDate = creationDate;
 
         this.name = file.getName();
         int fileSeperator = name.lastIndexOf('.');

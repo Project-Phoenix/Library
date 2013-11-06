@@ -65,10 +65,8 @@ public class PhoenixText {
      *            Creation date of the file
      * @throws IOException
      */
-    public PhoenixText(File file, Date creationDate) throws IOException {
+    public PhoenixText(File file) throws IOException {
         read(file);
-
-        this.creationDate = creationDate;
 
         this.name = file.getName();
         int fileSeperator = name.lastIndexOf('.');

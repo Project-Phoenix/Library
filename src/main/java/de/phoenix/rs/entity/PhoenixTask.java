@@ -21,7 +21,6 @@ package de.phoenix.rs.entity;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.core.GenericEntity;
@@ -116,14 +115,13 @@ public class PhoenixTask {
         this.title = title;
         this.description = description;
 
-        Date now = new Date();
         this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
         for (File attachment : fileAttachments) {
-            attachments.add(new PhoenixAttachment(attachment, now));
+            attachments.add(new PhoenixAttachment(attachment));
         }
         this.pattern = new ArrayList<PhoenixText>(filePattern.size());
         for (File patter : filePattern) {
-            pattern.add(new PhoenixText(patter, now));
+            pattern.add(new PhoenixText(patter));
         }
     }
 

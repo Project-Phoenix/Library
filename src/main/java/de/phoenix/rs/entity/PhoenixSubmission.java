@@ -81,17 +81,14 @@ public class PhoenixSubmission {
         this.task.setAttachments(Collections.<PhoenixAttachment> emptyList());
         this.task.setPattern(Collections.<PhoenixText> emptyList());
 
-        // TODO: Date creation only on the server!
-        Date now = new Date();
-
         this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
         for (File attachment : fileAttachments) {
-            attachments.add(new PhoenixAttachment(attachment, now));
+            attachments.add(new PhoenixAttachment(attachment));
         }
 
         this.texts = new ArrayList<PhoenixText>(fileTexts.size());
         for (File text : fileTexts) {
-            texts.add(new PhoenixText(text, now));
+            texts.add(new PhoenixText(text));
         }
     }
 
