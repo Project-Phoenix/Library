@@ -25,7 +25,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.ws.rs.core.GenericEntity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 
 public class PhoenixSubmission {
 
@@ -142,5 +146,33 @@ public class PhoenixSubmission {
     @JsonIgnore
     public int getTextsSize() {
         return texts.size();
+    }
+
+    /**
+     * Generic Type for {@link PhoenixSubmission}
+     */
+    private final static GenericType<List<PhoenixSubmission>> GENERIC_TYPE = new GenericType<List<PhoenixSubmission>>() {
+    };
+
+    /**
+     * Convert a list to an generic entity to send it via JX-RS
+     * 
+     * @param list
+     *            List containing {@link PhoenixSubmission}
+     * @return Generic Entity to send via JX-RS
+     */
+    public final static GenericEntity<List<PhoenixSubmission>> toSendableList(List<PhoenixSubmission> list) {
+        return new GenericEntity<List<PhoenixSubmission>>(list, GENERIC_TYPE.getType());
+    }
+
+    /**
+     * Extract the entity from the response and convert it to a normal list
+     * 
+     * @param response
+     *            Response containg an list from JX-RS
+     * @return List containg values as {@link PhoenixSubmission}
+     */
+    public final static List<PhoenixSubmission> fromSendableList(ClientResponse response) {
+        return response.getEntity(GENERIC_TYPE);
     }
 }
