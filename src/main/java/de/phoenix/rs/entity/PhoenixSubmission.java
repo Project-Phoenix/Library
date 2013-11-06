@@ -40,17 +40,26 @@ public class PhoenixSubmission {
      * 
      * @param PhoenixSubmission
      *            Submission to submit
+     * @return PhoenixSubmission <br>
+     *         Updated and tested submission (status und statusText are now
+     *         set!)
      */
     public static final String WEB_RESOURCE_SUBMIT = "submit";
     /**
-     * SubURI of the submission resource to submit a submission for a task
+     * SubURI of the submission resource to get all submissions by one task
      * 
-     * @param PhoenixSubmission
-     *            Submission to submit
+     * @param PhoenixTask
+     *            PhoenixTask holding submissions
+     * @return List<PhoenixSubmission> <br>
+     *         Submissions for the task
+     * 
      */
     public static final String WEB_RESOURCE_GET_TASK_SUBMISSIONS = "getByTask";
 
     private Date date;
+
+    private int status;
+    private String statusText;
 
     private PhoenixTask task;
 
@@ -100,11 +109,13 @@ public class PhoenixSubmission {
      * @param attachments
      * @param texts
      */
-    public PhoenixSubmission(Date date, PhoenixTask task, List<PhoenixAttachment> attachments, List<PhoenixText> texts) {
+    public PhoenixSubmission(Date date, PhoenixTask task, int status, String statusText, List<PhoenixAttachment> attachments, List<PhoenixText> texts) {
         this.date = date;
         this.task = task;
         this.attachments = attachments;
         this.texts = texts;
+        this.status = status;
+        this.statusText = statusText;
     }
 
     /**
@@ -133,6 +144,14 @@ public class PhoenixSubmission {
      */
     public PhoenixTask getTask() {
         return task;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getStatusText() {
+        return statusText;
     }
 
     @JsonIgnore
