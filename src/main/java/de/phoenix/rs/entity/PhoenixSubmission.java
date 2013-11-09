@@ -33,6 +33,12 @@ import com.sun.jersey.api.client.GenericType;
 
 public class PhoenixSubmission {
 
+    public enum SubmissionStatus {
+
+        ERROR(), SUBMITTED(), COMPILED(), TEST_FAILED(), OK();
+
+    }
+
     /** URI of the submission resource */
     public static final String WEB_RESOURCE_ROOT = "submission";
     /**
