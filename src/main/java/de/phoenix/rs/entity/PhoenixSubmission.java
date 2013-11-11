@@ -31,32 +31,28 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
+import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
+
 public class PhoenixSubmission {
-
-    public enum SubmissionStatus {
-
-        ERROR(), SUBMITTED(), COMPILED(), TEST_FAILED(), OK();
-
-    }
 
     /** URI of the submission resource */
     public static final String WEB_RESOURCE_ROOT = "submission";
     /**
      * SubURI of the submission resource to submit a submission for a task
      * 
-     * @param PhoenixSubmission
-     *            Submission to submit
-     * @return PhoenixSubmission <br>
-     *         Updated and tested submission (status und statusText are now
-     *         set!)
+     * @param {@link PhoenixSubmission} Submission to submit
+     * 
+     * @return {@link PhoenixSubmissionResult} <br>
+     *         Result containing the {@link SubmissionStatus} and the status
+     *         text as a string
      */
     public static final String WEB_RESOURCE_SUBMIT = "submit";
     /**
      * SubURI of the submission resource to get all submissions by one task
      * 
-     * @param PhoenixTask
-     *            PhoenixTask holding submissions
-     * @return List<PhoenixSubmission> <br>
+     * @param {@link PhoenixTask} PhoenixTask holding submissions
+     * 
+     * @return List<{@link PhoenixSubmission}> <br>
      *         Submissions for the task
      * 
      */
