@@ -126,6 +126,29 @@ public class PhoenixTask {
     }
 
     /**
+     * Constructor for the client
+     * 
+     * @param title
+     *            The title of the task
+     * @param texts
+     *            A list of the answer pattern
+     * @param description
+     *            The task description
+     * @param attachments
+     *            A list of binary files
+     * @throws IOException
+     */
+    public PhoenixTask(String title, List<PhoenixText> texts, String description, List<File> attachments) throws IOException {
+        this.title = title;
+        this.description = description;
+        this.pattern = new ArrayList<PhoenixText>(texts);
+
+        for (File file : attachments) {
+            this.attachments.add(new PhoenixAttachment(file));
+        }
+    }
+
+    /**
      * @return The task description
      */
     public String getDescription() {

@@ -40,6 +40,8 @@ public class PhoenixText {
 
     }
 
+    // TODO: Generate constructor with only text
+
     /**
      * Constructor for server side
      * 
@@ -76,6 +78,22 @@ public class PhoenixText {
             this.type = name.substring(fileSeperator + 1);
             name = name.substring(0, fileSeperator);
         }
+    }
+
+    /**
+     * Constructor for client. The date is set by the server!
+     * 
+     * @param text
+     *            The content of this text
+     * @param name
+     *            The name of the text file
+     * @param type
+     *            The file ending
+     */
+    public PhoenixText(String text, String name, String type) {
+        this.text = text;
+        this.name = name;
+        this.type = type;
     }
 
     private void read(File file) throws IOException {
