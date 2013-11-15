@@ -40,8 +40,6 @@ public class PhoenixText {
 
     }
 
-    // TODO: Generate constructor with only text
-
     /**
      * Constructor for server side
      * 
