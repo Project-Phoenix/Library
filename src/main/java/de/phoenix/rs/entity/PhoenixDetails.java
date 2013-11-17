@@ -33,10 +33,12 @@ public class PhoenixDetails {
 
     private String room;
     private int weekDay;
-    // TODO: Split in start time and end time
-    private LocalTime time;
+
+    private LocalTime startTime;
+    private LocalTime endTime;
+
     // TODO: Replace with intervall! (own class)
-    private String invervall;
+    private String inverval;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -56,24 +58,25 @@ public class PhoenixDetails {
      * @param weekDay
      *            The day of the week, defined by the constants of
      *            {@link DateTimeConstants} (Monday-Sunday)
-     * @param time
-     *            The time when the events starts
-     * @param intervall
-     *            The interval of the event. Will be replaced by an enum
      * @param startTime
+     *            The time when the events starts
+     * @param interval
+     *            The interval of the event. Will be replaced by an enum
+     * @param startDate
      *            The start date of the event(before this date, the event does
      *            not exist!)
-     * @param endTime
+     * @param endDate
      *            The end date of the event(after this date, the event does not
      *            exist!)
      */
-    public PhoenixDetails(String room, int weekDay, LocalTime time, String intervall, LocalDate startTime, LocalDate endTime) {
+    public PhoenixDetails(String room, int weekDay, LocalTime startTime, LocalTime endTime, String interval, LocalDate startDate, LocalDate endDate) {
         this.room = room;
         this.weekDay = weekDay;
-        this.time = time;
-        this.invervall = intervall;
-        this.startDate = startTime;
-        this.endDate = endTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.inverval = interval;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     /**
@@ -94,15 +97,22 @@ public class PhoenixDetails {
     /**
      * @return The start time of the event
      */
-    public LocalTime getTime() {
-        return time;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
     /**
-     * @return The invervall of the event
+     * @return The end time of the event
      */
-    public String getInvervall() {
-        return invervall;
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    /**
+     * @return The inverval of the event
+     */
+    public String getInverval() {
+        return inverval;
     }
 
     /**
