@@ -25,6 +25,7 @@ import javax.ws.rs.core.GenericEntity;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.joda.time.Period;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -37,8 +38,7 @@ public class PhoenixDetails {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    // TODO: Replace with intervall! (own class)
-    private String inverval;
+    private Period inverval;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -69,7 +69,7 @@ public class PhoenixDetails {
      *            The end date of the event(after this date, the event does not
      *            exist!)
      */
-    public PhoenixDetails(String room, int weekDay, LocalTime startTime, LocalTime endTime, String interval, LocalDate startDate, LocalDate endDate) {
+    public PhoenixDetails(String room, int weekDay, LocalTime startTime, LocalTime endTime, Period interval, LocalDate startDate, LocalDate endDate) {
         this.room = room;
         this.weekDay = weekDay;
         this.startTime = startTime;
@@ -111,7 +111,7 @@ public class PhoenixDetails {
     /**
      * @return The inverval of the event
      */
-    public String getInverval() {
+    public Period getInverval() {
         return inverval;
     }
 
