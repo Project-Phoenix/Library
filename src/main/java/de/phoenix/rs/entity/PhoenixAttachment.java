@@ -48,6 +48,7 @@ public class PhoenixAttachment {
 
     /**
      * Constructor for server
+     * 
      * @param content
      * @param creationDate
      * @param name
@@ -70,9 +71,20 @@ public class PhoenixAttachment {
      * @throws IOException
      */
     public PhoenixAttachment(File file) throws IOException {
-        read(file);
+        this(file, file.getName());
+    }
 
-        this.name = file.getName();
+    // TODO: Clean up constructors
+    /**
+     * Markus constructor
+     * 
+     * @param file
+     * @param name
+     * @throws IOException
+     */
+    public PhoenixAttachment(File file, String name) throws IOException {
+        read(file);
+        this.name = name;
         int fileSeperator = name.lastIndexOf('.');
         if (fileSeperator == -1) {
             this.type = "";
