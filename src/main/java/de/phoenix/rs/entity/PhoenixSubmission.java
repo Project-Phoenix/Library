@@ -94,12 +94,12 @@ public class PhoenixSubmission {
 
         this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
         for (File attachment : fileAttachments) {
-            attachments.add(new PhoenixAttachment(attachment));
+            attachments.add(new PhoenixAttachment(attachment, attachment.getName()));
         }
 
         this.texts = new ArrayList<PhoenixText>(fileTexts.size());
         for (File text : fileTexts) {
-            texts.add(new PhoenixText(text));
+            texts.add(new PhoenixText(text, text.getName()));
         }
     }
 

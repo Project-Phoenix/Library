@@ -74,7 +74,7 @@ public class PhoenixTask {
     private String description;
 
     private List<PhoenixAttachment> attachments;
-    private List<PhoenixText> pattern;
+    private List<PhoenixText> answerPattern;
 
     /**
      * Empty constructor for json transport
@@ -84,18 +84,24 @@ public class PhoenixTask {
     }
 
     /**
-     * Constructor for the server
+     * Constructor for the client/server and creates an task with a description
+     * and answer pattern
      * 
      * @param title
+     *            The title of the task, should be unique(firstly!)
      * @param attachments
-     * @param pattern
+     *            List of binary attachments which can be helpful for task
+     *            solution
+     * @param answerPattern
+     *            Pattern to use to solve the task
      * @param description
+     *            Descripe, what are the requirements of the tasks
      */
-    public PhoenixTask(List<PhoenixAttachment> attachments, List<PhoenixText> pattern, String description, String title) {
+    public PhoenixTask(List<PhoenixAttachment> attachments, List<PhoenixText> answerPattern, String description, String title) {
         this.title = title;
         this.description = description;
         this.attachments = attachments;
-        this.pattern = pattern;
+        this.answerPattern = answerPattern;
     }
 
     /**
@@ -110,6 +116,9 @@ public class PhoenixTask {
      * @param filePattern
      *            A list of text based files
      * @throws IOException
+     * 
+     * @deprecated Use {@link #PhoenixTask(List, List, String, String)} instead
+     *             to avoid wrong file names
      */
     public PhoenixTask(String title, String description, List<File> fileAttachments, List<File> filePattern) throws IOException {
         this.title = title;
@@ -119,13 +128,14 @@ public class PhoenixTask {
         for (File attachment : fileAttachments) {
             attachments.add(new PhoenixAttachment(attachment));
         }
-        this.pattern = new ArrayList<PhoenixText>(filePattern.size());
+        this.answerPattern = new ArrayList<PhoenixText>(filePattern.size());
         for (File patter : filePattern) {
-            pattern.add(new PhoenixText(patter));
+            answerPattern.add(new PhoenixText(patter));
         }
     }
 
     /**
+     * 
      * Constructor for the client
      * 
      * @param title
@@ -137,11 +147,13 @@ public class PhoenixTask {
      * @param attachments
      *            A list of binary files
      * @throws IOException
+     * @deprecated Use {@link #PhoenixTask(List, List, String, String)} instead
+     *             to avoid wrong filenames
      */
     public PhoenixTask(String title, List<PhoenixText> texts, String description, List<File> attachments) throws IOException {
         this.title = title;
         this.description = description;
-        this.pattern = new ArrayList<PhoenixText>(texts);
+        this.answerPattern = new ArrayList<PhoenixText>(texts);
 
         for (File file : attachments) {
             this.attachments.add(new PhoenixAttachment(file));
@@ -159,7 +171,7 @@ public class PhoenixTask {
      * @return Copy of list to the text pattern
      */
     public List<PhoenixText> getPattern() {
-        return new ArrayList<PhoenixText>(pattern);
+        return new ArrayList<PhoenixText>(answerPattern);
     }
 
     /**
@@ -174,7 +186,7 @@ public class PhoenixTask {
     }
 
     protected void setPattern(List<PhoenixText> pattern) {
-        this.pattern = pattern;
+        this.answerPattern = pattern;
     }
 
     @JsonIgnore
@@ -184,7 +196,7 @@ public class PhoenixTask {
 
     @JsonIgnore
     public int getPatternSize() {
-        return pattern.size();
+        return answerPattern.size();
     }
 
     /**

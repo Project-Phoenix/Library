@@ -64,6 +64,10 @@ public class PhoenixText {
      * @param creationDate
      *            Creation date of the file
      * @throws IOException
+     * 
+     * 
+     * @deprecated Use {@link #PhoenixText(File, String)} instead to avoid wrong
+     *             filenames
      */
     public PhoenixText(File file) throws IOException {
         read(file);
@@ -87,6 +91,10 @@ public class PhoenixText {
      *            The name of the text file
      * @param type
      *            The file ending
+     * 
+     * 
+     * @deprecated Use {@link #PhoenixText(File, String)} instead to avoid wrong
+     *             filenames and wrong types
      */
     public PhoenixText(String text, String name, String type) {
         this.text = text;
@@ -94,13 +102,52 @@ public class PhoenixText {
         this.type = type;
     }
 
-    private void read(File file) throws IOException {
+    /**
+     * Constructor for client. Creates an phoenix text and capsulates a text
+     * file
+     * 
+     * @param text
+     *            The content of the {@link PhoenixText}
+     * @param fileName
+     *            The name of this text
+     */
+    public PhoenixText(String text, String fileName) {
+        this.text = text;
+        readFilenameAndType(fileName);
+    }
+
+    /**
+     * Constructor for client. Creates an phoenix text and capsulates a text
+     * file
+     * 
+     * @param File
+     *            File containing the text
+     * @param fileName
+     *            The name of this text
+     * @throws IOException
+     */
+    public PhoenixText(File file, String fileName) throws IOException {
+        this.text = read(file);
+        readFilenameAndType(fileName);
+    }
+
+    private String read(File file) throws IOException {
         FileInputStream fis = new FileInputStream(file);
         byte[] tmp = new byte[(int) file.length()];
         fis.read(tmp);
         fis.close();
 
-        this.text = new String(tmp);
+        return new String(tmp);
+    }
+
+    private void readFilenameAndType(String fileName) {
+        int fileSeperator = name.lastIndexOf('.');
+        if (fileSeperator == -1) {
+            this.type = "";
+        } else {
+            this.type = name.substring(fileSeperator + 1);
+            name = name.substring(0, fileSeperator);
+        }
     }
 
     /**

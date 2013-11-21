@@ -69,17 +69,21 @@ public class PhoenixAttachment {
      * @param creationDate
      *            The creation date of the file
      * @throws IOException
+     * @deprecated Use {@link #PhoenixAttachment(File, String)} instead to avoid
+     *             wrong filenames
      */
     public PhoenixAttachment(File file) throws IOException {
         this(file, file.getName());
     }
 
-    // TODO: Clean up constructors
     /**
-     * Markus constructor
+     * Constructor for client. Creates an phoenix attachment and capsulates a
+     * binary file
      * 
      * @param file
+     *            The file containing bytes
      * @param name
+     *            The name of the attachment
      * @throws IOException
      */
     public PhoenixAttachment(File file, String name) throws IOException {
