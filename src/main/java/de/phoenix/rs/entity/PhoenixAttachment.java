@@ -88,13 +88,14 @@ public class PhoenixAttachment {
      */
     public PhoenixAttachment(File file, String name) throws IOException {
         read(file);
+
         this.name = name;
         int fileSeperator = name.lastIndexOf('.');
         if (fileSeperator == -1) {
             this.type = "";
         } else {
             this.type = name.substring(fileSeperator + 1);
-            name = name.substring(0, fileSeperator);
+            this.name = name.substring(0, fileSeperator);
         }
     }
 

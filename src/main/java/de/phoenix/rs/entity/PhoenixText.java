@@ -141,12 +141,12 @@ public class PhoenixText {
     }
 
     private void readFilenameAndType(String fileName) {
-        int fileSeperator = name.lastIndexOf('.');
+        int fileSeperator = fileName.lastIndexOf('.');
         if (fileSeperator == -1) {
             this.type = "";
         } else {
-            this.type = name.substring(fileSeperator + 1);
-            name = name.substring(0, fileSeperator);
+            this.type = fileName.substring(fileSeperator + 1);
+            this.name = fileName.substring(0, fileSeperator);
         }
     }
 
