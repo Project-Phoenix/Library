@@ -107,10 +107,10 @@ public class PhoenixAttachment {
     }
 
     /**
-     * Creates an temponary file containg the bytes of the attachment. The file
+     * Creates an temporary file containing the bytes of the attachment. The file
      * will deleted automatically when the VM terminates
      * 
-     * @return A temponary file
+     * @return A temporary file
      * @throws IOException
      */
     @JsonIgnore
@@ -143,6 +143,17 @@ public class PhoenixAttachment {
      */
     public String getType() {
         return type;
+    }
+
+    /**
+     * @return The name concated with its type
+     */
+    @JsonIgnore
+    public String getFullname() {
+        if (type == null || type.isEmpty())
+            return getName();
+        else
+            return name + "." + type;
     }
 
     /**

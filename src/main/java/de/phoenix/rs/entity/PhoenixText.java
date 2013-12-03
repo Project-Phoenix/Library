@@ -20,8 +20,11 @@ package de.phoenix.rs.entity;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Wrapper class for a Text to communicate with the phoenix RS service.
@@ -158,6 +161,23 @@ public class PhoenixText {
     }
 
     /**
+     * Creates an temporary file containing text of the attachment. The file
+     * will deleted automatically when the VM terminates
+     * 
+     * @return A temporary file
+     * @throws IOException
+     */
+    @JsonIgnore
+    public File getFile() throws IOException {
+        File f = File.createTempFile(name, type);
+        f.deleteOnExit();
+        FileOutputStream fout = new FileOutputStream(f);
+        fout.write(text.getBytes());
+        fout.close();
+        return f;
+    }
+
+    /**
      * @return The name of the text
      */
     public String getName() {
@@ -169,6 +189,17 @@ public class PhoenixText {
      */
     public String getType() {
         return type;
+    }
+
+    /**
+     * @return The name concated with its type
+     */
+    @JsonIgnore
+    public String getFullname() {
+        if (type == null || type.isEmpty())
+            return getName();
+        else
+            return name + "." + type;
     }
 
     /**
