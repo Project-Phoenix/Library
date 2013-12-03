@@ -26,6 +26,9 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import de.phoenix.parser.HTMLFilter;
+import de.phoenix.parser.TextFilter;
+
 /**
  * Wrapper class for a Text to communicate with the phoenix RS service.
  */
@@ -158,6 +161,24 @@ public class PhoenixText {
      */
     public String getText() {
         return text;
+    }
+
+    /**
+     * Filter the text using {@link TextFilter}. <br>
+     * For example the {@link HTMLFilter} removes all html tags <br>
+     * This remove a new text and does not change this text!
+     * 
+     * @param remover
+     *            Filter to apply on this text
+     * @return The filtered text
+     */
+    public String filterText(TextFilter... remover) {
+        String original = text;
+        for (int i = 0; i < remover.length; i++) {
+            TextFilter stringRemover = remover[i];
+            original = stringRemover.filter(original);
+        }
+        return original;
     }
 
     /**

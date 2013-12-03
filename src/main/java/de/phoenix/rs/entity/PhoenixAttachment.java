@@ -115,6 +115,7 @@ public class PhoenixAttachment {
      */
     @JsonIgnore
     public File getFile() throws IOException {
+        // TODO: Use better version Files.
         File f = File.createTempFile(name, type);
         f.deleteOnExit();
         FileOutputStream fout = new FileOutputStream(f);
