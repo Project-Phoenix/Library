@@ -26,8 +26,8 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import de.phoenix.parser.HTMLFilter;
-import de.phoenix.parser.TextFilter;
+import de.phoenix.filter.HTMLFilter;
+import de.phoenix.filter.TextFilter;
 
 /**
  * Wrapper class for a Text to communicate with the phoenix RS service.

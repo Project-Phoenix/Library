@@ -16,7 +16,7 @@
  * along with library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.phoenix.parser;
+package de.phoenix.filter;
 
 import de.phoenix.rs.entity.PhoenixText;
 
