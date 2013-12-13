@@ -38,6 +38,12 @@ public class EduFilter implements TextFilter {
 
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
+    public static final TextFilter INSTANCE = new EduFilter();
+
+    private EduFilter() {
+
+    }
+
     @Override
     public String filter(String original) {
 

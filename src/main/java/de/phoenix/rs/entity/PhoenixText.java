@@ -26,6 +26,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import de.phoenix.filter.EduFilter;
 import de.phoenix.filter.HTMLFilter;
 import de.phoenix.filter.TextFilter;
 
@@ -166,6 +167,7 @@ public class PhoenixText {
     /**
      * Filter the text using {@link TextFilter}. <br>
      * For example the {@link HTMLFilter} removes all html tags <br>
+     * Use for Edu content the {@link EduFilter} <br>
      * This remove a new text and does not change this text!
      * 
      * @param remover
