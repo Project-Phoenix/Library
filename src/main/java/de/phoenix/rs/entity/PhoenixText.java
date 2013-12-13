@@ -192,6 +192,11 @@ public class PhoenixText {
      */
     @JsonIgnore
     public File getFile() throws IOException {
+        // Temporary files must be at least 3 chars long
+        String name = this.name;
+        for (int i = name.length(); i < 3; ++i) {
+            name = name + "a";
+        }
         File f = File.createTempFile(name, type);
         f.deleteOnExit();
         FileOutputStream fout = new FileOutputStream(f);
