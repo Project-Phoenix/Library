@@ -26,12 +26,18 @@ import java.util.List;
 import javax.ws.rs.core.GenericEntity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
 /**
  * Wrapper class for a Task to communicate with the phoenix RS service.
  */
+// Needed for polymorphie!
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({@Type(value = PhoenixAutomaticTask.class, name = "phoenixAutomaticTask")})
 public class PhoenixTask {
 
     /** URI of the task resource */
