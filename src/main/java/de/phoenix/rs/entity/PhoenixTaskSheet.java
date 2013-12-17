@@ -24,7 +24,6 @@ import java.util.List;
 
 import javax.ws.rs.core.GenericEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
@@ -86,11 +85,6 @@ public class PhoenixTaskSheet {
      */
     public List<PhoenixTask> getTasks() {
         return new ArrayList<PhoenixTask>(tasks);
-    }
-
-    @JsonIgnore
-    public int getTasksSize() {
-        return tasks.size();
     }
 
     /**

@@ -27,7 +27,6 @@ import java.util.List;
 
 import javax.ws.rs.core.GenericEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
@@ -154,16 +153,6 @@ public class PhoenixSubmission {
 
     public String getStatusText() {
         return statusText;
-    }
-
-    @JsonIgnore
-    public int getAttachmentsSize() {
-        return attachments.size();
-    }
-
-    @JsonIgnore
-    public int getTextsSize() {
-        return texts.size();
     }
 
     /**

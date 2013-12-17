@@ -23,7 +23,6 @@ import java.util.List;
 
 import javax.ws.rs.core.GenericEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
@@ -83,14 +82,6 @@ public class PhoenixLecture {
      */
     public List<PhoenixDetails> getLectureDetails() {
         return new ArrayList<PhoenixDetails>(lectureDetails);
-    }
-
-    /**
-     * @return The size of lecture details list
-     */
-    @JsonIgnore
-    public int lectureDetailsSize() {
-        return lectureDetails.size();
     }
 
     /**

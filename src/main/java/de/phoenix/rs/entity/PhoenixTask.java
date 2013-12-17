@@ -25,7 +25,6 @@ import java.util.List;
 
 import javax.ws.rs.core.GenericEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -193,16 +192,6 @@ public class PhoenixTask {
 
     protected void setPattern(List<PhoenixText> pattern) {
         this.answerPattern = pattern;
-    }
-
-    @JsonIgnore
-    public int getAttachmentsSize() {
-        return attachments.size();
-    }
-
-    @JsonIgnore
-    public int getPatternSize() {
-        return answerPattern.size();
     }
 
     /**

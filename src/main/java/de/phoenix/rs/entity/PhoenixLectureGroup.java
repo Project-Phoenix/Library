@@ -26,7 +26,6 @@ import javax.ws.rs.core.GenericEntity;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
@@ -133,11 +132,6 @@ public class PhoenixLectureGroup {
      */
     public List<PhoenixDetails> getDetails() {
         return new ArrayList<PhoenixDetails>(details);
-    }
-
-    @JsonIgnore
-    public int getDetailsSize() {
-        return details.size();
     }
 
     /**

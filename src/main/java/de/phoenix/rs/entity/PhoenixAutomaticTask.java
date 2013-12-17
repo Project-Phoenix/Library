@@ -21,8 +21,6 @@ package de.phoenix.rs.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * Wrapper class for task which are controlled by the system automatically
  * 
@@ -76,11 +74,6 @@ public class PhoenixAutomaticTask extends PhoenixTask {
      */
     public List<PhoenixText> getTests() {
         return new ArrayList<PhoenixText>(tests);
-    }
-
-    @JsonIgnore
-    public int getTestsSize() {
-        return tests.size();
     }
 
 }
