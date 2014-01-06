@@ -23,7 +23,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 @Provider
@@ -38,6 +40,8 @@ public class JacksonConfigurator implements ContextResolver<ObjectMapper> {
     public JacksonConfigurator() {
         // Support joda datetime
         mapper.registerModule(new JodaModule());
+        mapper.enableDefaultTyping();
+        mapper.enableDefaultTyping(DefaultTyping.NON_FINAL, As.WRAPPER_OBJECT);
     }
 
     @Override
