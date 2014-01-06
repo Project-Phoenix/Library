@@ -29,14 +29,30 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import de.phoenix.rs.key.Key;
+import de.phoenix.rs.key.PhoenixEntity;
+
 /**
  * Wrapper class for a Attachment to communicate with the phoenix RS service.
  */
-public class PhoenixAttachment {
+public class PhoenixAttachment implements PhoenixEntity {
+
+    /** URI of the attachment resource */
+    public static final String WEB_RESOURCE_ROOT = "attachment";
+
+    /** Sub URI of the attachment resource to update a single attachment */
+    public static final String WEB_RESOURCE_UPDATE = "update";
+
+    /** Sub URI of the attachment resource to delete a single attachment */
+    public static final String WEB_RESOURCE_DELETE = "delete";
 
     private byte[] content;
+
+    @Key
     private Date creationDate;
+    @Key
     private String name;
+    @Key
     private String type;
 
     /**

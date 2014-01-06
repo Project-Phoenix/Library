@@ -27,10 +27,13 @@ import javax.ws.rs.core.GenericEntity;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
+import de.phoenix.rs.key.Key;
+import de.phoenix.rs.key.PhoenixEntity;
+
 /**
  * Wrapper class for a TaskSheet to communicate with the phoenix RS service.
  */
-public class PhoenixTaskSheet {
+public class PhoenixTaskSheet implements PhoenixEntity {
 
     /** URI of the task resource */
     public static final String WEB_RESOURCE_ROOT = "taskSheet";
@@ -50,6 +53,8 @@ public class PhoenixTaskSheet {
     public static final String WEB_RESOURCE_GETALL = "getAll";
 
     private List<PhoenixTask> tasks;
+    
+    @Key
     private Date creationDate;
 
     /**

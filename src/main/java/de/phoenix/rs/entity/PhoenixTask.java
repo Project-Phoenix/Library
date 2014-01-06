@@ -31,13 +31,16 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
+import de.phoenix.rs.key.Key;
+import de.phoenix.rs.key.PhoenixEntity;
+
 /**
  * Wrapper class for a Task to communicate with the phoenix RS service.
  */
 // Needed for polymorphie!
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({@Type(value = PhoenixAutomaticTask.class, name = "phoenixAutomaticTask")})
-public class PhoenixTask {
+public class PhoenixTask implements PhoenixEntity {
 
     /** URI of the task resource */
     public static final String WEB_RESOURCE_ROOT = "task";
@@ -63,18 +66,29 @@ public class PhoenixTask {
      *            Task to delete from the system
      */
     public static final String WEB_RESOURCE_DELETE = "delete";
-    /** SubURI of the task resource to get all tasks */
+    /**
+     * SubURI of the task resource to get all tasks
+     * 
+     * @deprecated Use {@link #WEB_RESOURCE_GET}
+     */
     public static final String WEB_RESOURCE_GETALL = "getAll";
-    /** SubURI of the task resource to get all tasks */
+    /**
+     * SubURI of the task resource to get all tasks
+     */
     public static final String WEB_RESOURCE_GETALL_TITLES = "getAllTitles";
     /**
      * SubURI of the task resource to look for a task by its title
      * 
      * @param String
      *            The title of the task
+     * @deprecated Use {@link #WEB_RESOURCE_GET}
      */
+
     public static final String WEB_RESOURCE_GETBYTITLE = "getByTitle";
 
+    public static final String WEB_RESOURCE_GET = "get";
+
+    @Key
     private String title;
     private String description;
 

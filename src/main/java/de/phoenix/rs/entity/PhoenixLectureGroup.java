@@ -29,7 +29,10 @@ import org.joda.time.LocalTime;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
-public class PhoenixLectureGroup {
+import de.phoenix.rs.key.Key;
+import de.phoenix.rs.key.PhoenixEntity;
+
+public class PhoenixLectureGroup implements PhoenixEntity {
 
     /** URI of the lecture group resource */
     public static final String WEB_RESOURCE_ROOT = "lectureGroup";
@@ -49,10 +52,11 @@ public class PhoenixLectureGroup {
      */
     public static final String WEB_RESOURCE_GETALL = "getAll";
 
+    @Key
     private String name;
     private int maxMember;
 
-    private int submissionDeadlineWeekyday;
+    private int submissionDeadlineWeekday;
     private LocalTime submissionDeadlineTime;
 
     private List<PhoenixDetails> details;
@@ -73,7 +77,7 @@ public class PhoenixLectureGroup {
      *            The name of the group
      * @param maxMember
      *            The max possible member of the group
-     * @param submissionDeadlineWeekyday
+     * @param submissionDeadlineWeekday
      *            The weekday of the default submission. Use
      *            {@link DateTimeConstants} Monday-Sunday
      * @param submissionDeadlineTime
@@ -86,10 +90,10 @@ public class PhoenixLectureGroup {
      * @param lecture
      *            The lecture the group is assigned to
      */
-    public PhoenixLectureGroup(String name, int maxMember, int submissionDeadlineWeekyday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details, PhoenixLecture lecture) {
+    public PhoenixLectureGroup(String name, int maxMember, int submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details, PhoenixLecture lecture) {
         this.name = name;
         this.maxMember = maxMember;
-        this.submissionDeadlineWeekyday = submissionDeadlineWeekyday;
+        this.submissionDeadlineWeekday = submissionDeadlineWeekday;
         this.submissionDeadlineTime = submissionDeadlineTime;
         this.details = new ArrayList<PhoenixDetails>(details);
         this.lecture = lecture;
@@ -112,7 +116,7 @@ public class PhoenixLectureGroup {
     /**
      * @return Returns the default deadline time for this group to assign
      *         submission. The day of the deadline is defined by
-     *         {@link #getSubmissionDeadlineWeekyday()}
+     *         {@link #getSubmissionDeadlineWeekday()}
      */
     public LocalTime getSubmissionDeadlineTime() {
         return submissionDeadlineTime;
@@ -122,8 +126,8 @@ public class PhoenixLectureGroup {
      * @return The weekday of the default submission. Use
      *         {@link DateTimeConstants} Monday-Sunday
      */
-    public int getSubmissionDeadlineWeekyday() {
-        return submissionDeadlineWeekyday;
+    public int getSubmissionDeadlineWeekday() {
+        return submissionDeadlineWeekday;
     }
 
     /**

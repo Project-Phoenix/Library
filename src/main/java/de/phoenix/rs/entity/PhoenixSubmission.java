@@ -31,8 +31,10 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
 import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
+import de.phoenix.rs.key.Key;
+import de.phoenix.rs.key.PhoenixEntity;
 
-public class PhoenixSubmission {
+public class PhoenixSubmission implements PhoenixEntity {
 
     /** URI of the submission resource */
     public static final String WEB_RESOURCE_ROOT = "submission";
@@ -57,9 +59,13 @@ public class PhoenixSubmission {
      */
     public static final String WEB_RESOURCE_GET_TASK_SUBMISSIONS = "getByTask";
 
+    @Key
     private Date date;
 
+    @Key
     private int status;
+
+    @Key
     private String statusText;
 
     private PhoenixTask task;

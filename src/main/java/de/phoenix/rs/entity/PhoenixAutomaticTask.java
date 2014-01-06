@@ -21,11 +21,13 @@ package de.phoenix.rs.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.phoenix.rs.key.PhoenixEntity;
+
 /**
  * Wrapper class for task which are controlled by the system automatically
  * 
  */
-public class PhoenixAutomaticTask extends PhoenixTask {
+public class PhoenixAutomaticTask extends PhoenixTask implements PhoenixEntity {
 
     private String backend;
     private List<PhoenixText> tests;

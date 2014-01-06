@@ -30,17 +30,36 @@ import org.joda.time.Period;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
-public class PhoenixDetails {
+import de.phoenix.rs.key.Key;
+import de.phoenix.rs.key.PhoenixEntity;
 
+public class PhoenixDetails implements PhoenixEntity {
+
+    /** URI of the details resource */
+    public static final String WEB_RESOURCE_ROOT = "details";
+
+    /** Sub URI of the details resource to update a single details */
+    public static final String WEB_RESOURCE_UPDATE = "update";
+
+    /** Sub URI of the details resource to delete a single details */
+    public static final String WEB_RESOURCE_DELETE = "delete";
+
+    @Key
     private String room;
+    @Key
     private int weekDay;
 
+    @Key
     private LocalTime startTime;
+    @Key
     private LocalTime endTime;
 
+    @Key
     private Period inverval;
 
+    @Key
     private LocalDate startDate;
+    @Key
     private LocalDate endDate;
 
     /**
@@ -158,4 +177,5 @@ public class PhoenixDetails {
     public final static List<PhoenixDetails> fromSendableList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE);
     }
+
 }

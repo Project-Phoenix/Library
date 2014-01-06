@@ -26,7 +26,10 @@ import javax.ws.rs.core.GenericEntity;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
-public class PhoenixLecture {
+import de.phoenix.rs.key.Key;
+import de.phoenix.rs.key.PhoenixEntity;
+
+public class PhoenixLecture implements PhoenixEntity {
 
     /** URI of the lecture resource */
     public static final String WEB_RESOURCE_ROOT = "lecture";
@@ -43,8 +46,20 @@ public class PhoenixLecture {
      * 
      * @return List<{@link PhoenixLecture}> All lectures
      */
+    @Deprecated
     public static final String WEB_RESOURCE_GETALL = "getAll";
 
+    /**
+     * SubURI of the lecture resource to get search for lectures
+     * 
+     * @param SelectEntity
+     *            <{@link PhoenixLecture}>
+     * @return List<{@link PhoenixLecture}> All lectures matching the select
+     *         values
+     */
+    public static final String WEB_RESOURCE_GET = "get";
+
+    @Key
     private String title;
 
     private List<PhoenixDetails> lectureDetails;
@@ -90,6 +105,10 @@ public class PhoenixLecture {
     private final static GenericType<List<PhoenixLecture>> GENERIC_TYPE = new GenericType<List<PhoenixLecture>>() {
     };
 
+    public static final String WEB_RESOURCE_UPDATE = "update";
+
+    public static final String WEB_RESOURCE_DELETE = "delete";
+
     /**
      * Convert a list to an generic entity to send it via JX-RS
      * 
@@ -111,4 +130,5 @@ public class PhoenixLecture {
     public final static List<PhoenixLecture> fromSendableList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE);
     }
+
 }

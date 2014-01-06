@@ -29,15 +29,29 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.phoenix.filter.EduFilter;
 import de.phoenix.filter.HTMLFilter;
 import de.phoenix.filter.TextFilter;
+import de.phoenix.rs.key.Key;
+import de.phoenix.rs.key.PhoenixEntity;
 
 /**
  * Wrapper class for a Text to communicate with the phoenix RS service.
  */
-public class PhoenixText {
+public class PhoenixText implements PhoenixEntity {
+
+    /** URI of the text resource */
+    public static final String WEB_RESOURCE_ROOT = "text";
+
+    /** Sub URI of the text resource to update a single text*/
+    public static final String WEB_RESOURCE_UPDATE = "update";
+
+    /** Sub URI of the text resource to delete a single text*/
+    public static final String WEB_RESOURCE_DELETE = "delete";
 
     private String text;
+    @Key
     private Date creationDate;
+    @Key
     private String name;
+    @Key
     private String type;
 
     /**
