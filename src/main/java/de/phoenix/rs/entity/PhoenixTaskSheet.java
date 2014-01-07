@@ -19,10 +19,11 @@
 package de.phoenix.rs.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.core.GenericEntity;
+
+import org.joda.time.DateTime;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -53,9 +54,9 @@ public class PhoenixTaskSheet implements PhoenixEntity {
     public static final String WEB_RESOURCE_GETALL = "getAll";
 
     private List<PhoenixTask> tasks;
-    
+
     @Key
-    private Date creationDate;
+    private DateTime creationDate;
 
     /**
      * Empty constructor for json transport
@@ -70,7 +71,7 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      * @param tasks
      * @param creationDate
      */
-    public PhoenixTaskSheet(List<PhoenixTask> tasks, Date creationDate) {
+    public PhoenixTaskSheet(List<PhoenixTask> tasks, DateTime creationDate) {
         this(tasks);
         this.creationDate = creationDate;
     }
@@ -95,7 +96,7 @@ public class PhoenixTaskSheet implements PhoenixEntity {
     /**
      * @return Creation date of this tasksheet
      */
-    public Date getCreationDate() {
+    public DateTime getCreationDate() {
         return creationDate;
     }
 

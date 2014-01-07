@@ -22,10 +22,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.core.GenericEntity;
+
+import org.joda.time.DateTime;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -60,7 +61,7 @@ public class PhoenixSubmission implements PhoenixEntity {
     public static final String WEB_RESOURCE_GET_TASK_SUBMISSIONS = "getByTask";
 
     @Key
-    private Date date;
+    private DateTime date;
 
     @Key
     private int status;
@@ -116,7 +117,7 @@ public class PhoenixSubmission implements PhoenixEntity {
      * @param attachments
      * @param texts
      */
-    public PhoenixSubmission(Date date, PhoenixTask task, int status, String statusText, List<PhoenixAttachment> attachments, List<PhoenixText> texts) {
+    public PhoenixSubmission(DateTime date, PhoenixTask task, int status, String statusText, List<PhoenixAttachment> attachments, List<PhoenixText> texts) {
         this.date = date;
         this.task = task;
         this.attachments = attachments;
@@ -142,7 +143,7 @@ public class PhoenixSubmission implements PhoenixEntity {
     /**
      * @return The creation date
      */
-    public Date getDate() {
+    public DateTime getDate() {
         return date;
     }
 

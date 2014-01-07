@@ -22,7 +22,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
+
+import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,15 +41,15 @@ public class PhoenixText implements PhoenixEntity {
     /** URI of the text resource */
     public static final String WEB_RESOURCE_ROOT = "text";
 
-    /** Sub URI of the text resource to update a single text*/
+    /** Sub URI of the text resource to update a single text */
     public static final String WEB_RESOURCE_UPDATE = "update";
 
-    /** Sub URI of the text resource to delete a single text*/
+    /** Sub URI of the text resource to delete a single text */
     public static final String WEB_RESOURCE_DELETE = "delete";
 
     private String text;
     @Key
-    private Date creationDate;
+    private DateTime creationDate;
     @Key
     private String name;
     @Key
@@ -69,7 +70,7 @@ public class PhoenixText implements PhoenixEntity {
      * @param name
      * @param type
      */
-    public PhoenixText(String text, Date creationDate, String name, String type) {
+    public PhoenixText(String text, DateTime creationDate, String name, String type) {
         this.text = text;
         this.creationDate = creationDate;
         this.name = name;
@@ -247,7 +248,7 @@ public class PhoenixText implements PhoenixEntity {
     /**
      * @return The creation date of the text
      */
-    public Date getCreationDate() {
+    public DateTime getCreationDate() {
         return creationDate;
     }
 }

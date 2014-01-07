@@ -25,7 +25,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.Date;
+
+import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -49,7 +50,7 @@ public class PhoenixAttachment implements PhoenixEntity {
     private byte[] content;
 
     @Key
-    private Date creationDate;
+    private DateTime creationDate;
     @Key
     private String name;
     @Key
@@ -70,7 +71,7 @@ public class PhoenixAttachment implements PhoenixEntity {
      * @param name
      * @param type
      */
-    public PhoenixAttachment(byte[] content, Date creationDate, String name, String type) {
+    public PhoenixAttachment(byte[] content, DateTime creationDate, String name, String type) {
         this.content = content;
         this.creationDate = creationDate;
         this.name = name;
@@ -180,7 +181,7 @@ public class PhoenixAttachment implements PhoenixEntity {
     /**
      * @return Attachments creation date
      */
-    public Date getCreationDate() {
+    public DateTime getCreationDate() {
         return creationDate;
     }
 
