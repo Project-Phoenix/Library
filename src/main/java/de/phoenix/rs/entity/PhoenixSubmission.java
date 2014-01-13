@@ -35,6 +35,7 @@ import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
+import de.phoenix.rs.key.AddToEntity;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
@@ -94,7 +95,13 @@ public class PhoenixSubmission implements PhoenixEntity {
      * @param fileTexts
      *            Text files attached to this submission
      * @throws IOException
+     * @deprecated Use {@link #PhoenixSubmission(List, List)} in combination
+     *             with {@link AddToEntity} and the
+     *             {@link PhoenixTask#submitResource(Client, String)} resource
+     *             to upload a submission. This will also send the complete task
+     *             to the database, but only the title is neccessary for this!
      */
+
     public PhoenixSubmission(PhoenixTask task, List<File> fileAttachments, List<File> fileTexts) throws IOException {
 
         this.task = task;
@@ -102,6 +109,18 @@ public class PhoenixSubmission implements PhoenixEntity {
         this.task.setAttachments(Collections.<PhoenixAttachment> emptyList());
         this.task.setPattern(Collections.<PhoenixText> emptyList());
 
+        this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
+        for (File attachment : fileAttachments) {
+            attachments.add(new PhoenixAttachment(attachment, attachment.getName()));
+        }
+
+        this.texts = new ArrayList<PhoenixText>(fileTexts.size());
+        for (File text : fileTexts) {
+            texts.add(new PhoenixText(text, text.getName()));
+        }
+    }
+
+    public PhoenixSubmission(List<File> fileAttachments, List<File> fileTexts) throws IOException {
         this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
         for (File attachment : fileAttachments) {
             attachments.add(new PhoenixAttachment(attachment, attachment.getName()));
@@ -199,6 +218,7 @@ public class PhoenixSubmission implements PhoenixEntity {
         return response.getEntity(GENERIC_TYPE);
     }
 
+    @Deprecated
     public static WebResource submitResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_SUBMIT);
     }

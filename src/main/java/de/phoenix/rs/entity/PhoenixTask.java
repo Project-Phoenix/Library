@@ -199,10 +199,12 @@ public class PhoenixTask implements PhoenixEntity {
         return new ArrayList<PhoenixAttachment>(attachments);
     }
 
+    @Deprecated
     protected void setAttachments(List<PhoenixAttachment> attachments) {
         this.attachments = attachments;
     }
 
+    @Deprecated
     protected void setPattern(List<PhoenixText> pattern) {
         this.answerPattern = pattern;
     }
