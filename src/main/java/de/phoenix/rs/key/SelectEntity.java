@@ -22,17 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//@formatter:off
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({ @Type(value = UpdateEntity.class, name = "updateEntity"),
-                @Type(value = SelectAllEntity.class, name = "selectAllEntity")})
-//@formatter:on
 public class SelectEntity<T extends PhoenixEntity> {
 
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();

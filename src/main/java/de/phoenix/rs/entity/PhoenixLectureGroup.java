@@ -43,6 +43,7 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      * it to a lecture
      * 
      * @param {@link PhoenixLectureGroup} Task to create
+     * @deprecated Use the {@link PhoenixLecture#WEB_RESOURCE_ADD_GROUP} instead
      */
     public static final String WEB_RESOURCE_CREATE = "create";
 

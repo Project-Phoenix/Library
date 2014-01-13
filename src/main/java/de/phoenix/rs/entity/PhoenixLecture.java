@@ -64,6 +64,10 @@ public class PhoenixLecture implements PhoenixEntity {
 
     public static final String WEB_RESOURCE_DELETE = "delete";
 
+    public static final String WEB_RESOURCE_ADD_GROUP = "addGroup";
+
+    public static final String WEB_RESOURCE_ADD_DETAIL = "addDetail";
+
     @Key
     private String title;
 

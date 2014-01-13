@@ -21,6 +21,7 @@ package de.phoenix.rs.key;
 import java.lang.reflect.Field;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -192,6 +193,54 @@ public class KeyReader {
      */
     public static <T extends PhoenixEntity> UpdateEntity<T> createUpdate(T oldElement, T newElement) {
         return new UpdateEntity<T>(newElement, createSelect(oldElement));
+    }
+
+    /**
+     * Creates a {@link AddToEntity} object from the {@link PhoenixEntity} by
+     * extracting all values from class attributes annotated with the
+     * {@link Key} Annotation. <br>
+     * Will create the same result as this example:
+     * <p>
+     * 
+     * <code>
+     * AddToEntity<T,E> entity = new AddToEntity<T,E>(entity, attachedEntities); <br>
+     * entity.addKey(KEY_NAME, KEY_VALUE); <br>
+     * entity.addKey(ANOTHER_KEY_NAME, ANOTHER_KEY_VALUE); <br>
+     * ... 
+     * </code>
+     * 
+     * @param entity
+     *            The phoenixEntity to add new other phoenix entitites to.
+     * @param attachedEntities
+     *            List of new phoenix entities to add to the entity
+     * @return {@link AddToEntity} with filled keys from the entity
+     */
+    public static <T extends PhoenixEntity, E extends PhoenixEntity> AddToEntity<T, E> createAddTo(T entity, List<E> attachedEntities) {
+        return new AddToEntity<T, E>(createSelect(entity), attachedEntities);
+    }
+
+    /**
+     * Creates a {@link AddToEntity} object from the {@link PhoenixEntity} by
+     * extracting all values from class attributes annotated with the
+     * {@link Key} Annotation. <br>
+     * Will create the same result as this example:
+     * <p>
+     * 
+     * <code>
+     * AddToEntity<T,E> entity = new AddToEntity<T,E>(entity, attachedEntities); <br>
+     * entity.addKey(KEY_NAME, KEY_VALUE); <br>
+     * entity.addKey(ANOTHER_KEY_NAME, ANOTHER_KEY_VALUE); <br>
+     * ... 
+     * </code>
+     * 
+     * @param entity
+     *            The phoenixEntity to add new other phoenix entitites to.
+     * @param attachedEntities
+     *            The new phoenix entities to add to the entity
+     * @return {@link AddToEntity} with filled keys from the entity
+     */
+    public static <T extends PhoenixEntity, E extends PhoenixEntity> AddToEntity<T, E> createAddTo(T entity, E... attachedEntities) {
+        return new AddToEntity<T, E>(createSelect(entity), attachedEntities);
     }
 
     /**
