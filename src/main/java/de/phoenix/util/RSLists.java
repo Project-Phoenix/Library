@@ -25,6 +25,8 @@ import javax.ws.rs.core.GenericEntity;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
+import de.phoenix.rs.EntityUtil;
+
 /**
  * Utility class to containg methods for transform list of basic classes to
  * generic entities, which can sent via JX-RS and via versa
@@ -42,6 +44,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link Boolean}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<Boolean>> GENERIC_TYPE_BOOL = new GenericType<List<Boolean>>() {
     };
@@ -52,6 +56,7 @@ public class RSLists {
      * @param list
      *            List containing {@link Boolean}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<Boolean>> toSendableBooleanList(List<Boolean> list) {
         return new GenericEntity<List<Boolean>>(list, GENERIC_TYPE_BOOL.getType());
@@ -63,6 +68,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link Boolean}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<Boolean> fromSendableBooleanList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_BOOL);
@@ -74,6 +81,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link Byte}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<Byte>> GENERIC_TYPE_BYTE = new GenericType<List<Byte>>() {
     };
@@ -84,6 +93,7 @@ public class RSLists {
      * @param list
      *            List containing {@link Byte}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<Byte>> toSendableByteList(List<Byte> list) {
         return new GenericEntity<List<Byte>>(list, GENERIC_TYPE_BYTE.getType());
@@ -95,6 +105,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link Byte}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<Byte> fromSendableByteList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_BYTE);
@@ -106,6 +118,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link Short}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<Short>> GENERIC_TYPE_SHORT = new GenericType<List<Short>>() {
     };
@@ -116,6 +130,7 @@ public class RSLists {
      * @param list
      *            List containing {@link Short}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<Short>> toSendableShortList(List<Short> list) {
         return new GenericEntity<List<Short>>(list, GENERIC_TYPE_SHORT.getType());
@@ -127,6 +142,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link Short}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<Short> fromSendableShortList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_SHORT);
@@ -138,6 +155,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link Integer}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<Integer>> GENERIC_TYPE_INTEGER = new GenericType<List<Integer>>() {
     };
@@ -148,6 +167,7 @@ public class RSLists {
      * @param list
      *            List containing {@link Integer}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<Integer>> toSendableIntList(List<Integer> list) {
         return new GenericEntity<List<Integer>>(list, GENERIC_TYPE_INTEGER.getType());
@@ -159,6 +179,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link Integer}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<Integer> fromSendableIntList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_INTEGER);
@@ -170,6 +192,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link Long}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<Long>> GENERIC_TYPE_LONG = new GenericType<List<Long>>() {
     };
@@ -180,6 +204,7 @@ public class RSLists {
      * @param list
      *            List containing {@link Long}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<Long>> toSendableLongList(List<Long> list) {
         return new GenericEntity<List<Long>>(list, GENERIC_TYPE_LONG.getType());
@@ -191,6 +216,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link Long}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<Long> fromSendableLongList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_LONG);
@@ -202,6 +229,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link Float}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<Float>> GENERIC_TYPE_FLOAT = new GenericType<List<Float>>() {
     };
@@ -212,6 +241,7 @@ public class RSLists {
      * @param list
      *            List containing {@link Float}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<Float>> toSendableFloatList(List<Float> list) {
         return new GenericEntity<List<Float>>(list, GENERIC_TYPE_FLOAT.getType());
@@ -223,6 +253,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link Float}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<Float> fromSendableFloatList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_FLOAT);
@@ -234,6 +266,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link Double}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<Double>> GENERIC_TYPE_DOUBLE = new GenericType<List<Double>>() {
     };
@@ -244,6 +278,7 @@ public class RSLists {
      * @param list
      *            List containing {@link Double}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<Double>> toSendableDoubleList(List<Double> list) {
         return new GenericEntity<List<Double>>(list, GENERIC_TYPE_DOUBLE.getType());
@@ -255,6 +290,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link Double}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<Double> fromSendableDoubleList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_DOUBLE);
@@ -266,6 +303,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link Character}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<Character>> GENERIC_TYPE_CHAR = new GenericType<List<Character>>() {
     };
@@ -276,6 +315,7 @@ public class RSLists {
      * @param list
      *            List containing {@link Character}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<Character>> toSendableCharList(List<Character> list) {
         return new GenericEntity<List<Character>>(list, GENERIC_TYPE_CHAR.getType());
@@ -287,6 +327,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link Character}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<Character> fromSendableCharList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_CHAR);
@@ -298,6 +340,8 @@ public class RSLists {
 
     /**
      * Generic Type for {@link String}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<String>> GENERIC_TYPE_STRING = new GenericType<List<String>>() {
     };
@@ -308,6 +352,7 @@ public class RSLists {
      * @param list
      *            List containing {@link String}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<String>> toSendableStringList(List<String> list) {
         return new GenericEntity<List<String>>(list, GENERIC_TYPE_STRING.getType());
@@ -319,6 +364,8 @@ public class RSLists {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link String}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<String> fromSendableStringList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE_STRING);
