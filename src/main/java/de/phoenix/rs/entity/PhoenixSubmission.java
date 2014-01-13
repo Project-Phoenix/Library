@@ -28,8 +28,10 @@ import javax.ws.rs.core.GenericEntity;
 
 import org.joda.time.DateTime;
 
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
@@ -194,5 +196,17 @@ public class PhoenixSubmission implements PhoenixEntity {
      */
     public final static List<PhoenixSubmission> fromSendableList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE);
+    }
+
+    public static WebResource submitResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_SUBMIT);
+    }
+
+    public static WebResource getByTaskResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_GET_TASK_SUBMISSIONS);
+    }
+
+    private static WebResource base(Client client, String baseURL) {
+        return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 }

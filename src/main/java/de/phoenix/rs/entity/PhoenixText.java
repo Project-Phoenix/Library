@@ -26,6 +26,8 @@ import java.io.IOException;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.filter.EduFilter;
 import de.phoenix.filter.HTMLFilter;
@@ -250,5 +252,17 @@ public class PhoenixText implements PhoenixEntity {
      */
     public DateTime getCreationDate() {
         return creationDate;
+    }
+
+    public static WebResource updateResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_UPDATE);
+    }
+
+    public static WebResource deleteResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_DELETE);
+    }
+
+    private static WebResource base(Client client, String baseURL) {
+        return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 }

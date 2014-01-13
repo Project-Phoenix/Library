@@ -25,8 +25,10 @@ import javax.ws.rs.core.GenericEntity;
 
 import org.joda.time.DateTime;
 
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
@@ -51,6 +53,7 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      * SubURI of the tasksheet resource to get all tasksheets
      * 
      * @return List<{@link PhoenixTaskSheet} All task sheets
+     * 
      * */
     public static final String WEB_RESOURCE_GETALL = "getAll";
 
@@ -132,5 +135,13 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      */
     public final static List<PhoenixTaskSheet> fromSendableList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE);
+    }
+
+    public static WebResource createResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_CREATE);
+    }
+
+    private static WebResource base(Client client, String baseURL) {
+        return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 }
