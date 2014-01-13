@@ -31,7 +31,7 @@ public class EntityUtil {
     /**
      * Wrapper for
      * <p>
-     * <code>return (List<T>) respone.getEntity(List.class);</code>
+     * <code>return (List<T>) response.getEntity(List.class);</code>
      * <p>
      * to prevent the unchecked warning.
      * 
