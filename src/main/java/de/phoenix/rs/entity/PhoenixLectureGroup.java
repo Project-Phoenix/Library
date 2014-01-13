@@ -47,13 +47,6 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      */
     public static final String WEB_RESOURCE_CREATE = "create";
 
-    /**
-     * SubURI of the lecture group resource to get all lecture groups
-     * 
-     * @return List<{@link PhoenixLectureGroup}> All lecture groups
-     */
-    public static final String WEB_RESOURCE_GETALL = "getAll";
-
     @Key
     private String name;
     private int maxMember;
