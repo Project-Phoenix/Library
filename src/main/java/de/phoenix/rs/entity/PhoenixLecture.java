@@ -26,6 +26,7 @@ import javax.ws.rs.core.GenericEntity;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
+import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
@@ -58,6 +59,10 @@ public class PhoenixLecture implements PhoenixEntity {
      *         values
      */
     public static final String WEB_RESOURCE_GET = "get";
+
+    public static final String WEB_RESOURCE_UPDATE = "update";
+
+    public static final String WEB_RESOURCE_DELETE = "delete";
 
     @Key
     private String title;
@@ -101,13 +106,12 @@ public class PhoenixLecture implements PhoenixEntity {
 
     /**
      * Generic Type for {@link PhoenixLecture}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
+
     private final static GenericType<List<PhoenixLecture>> GENERIC_TYPE = new GenericType<List<PhoenixLecture>>() {
     };
-
-    public static final String WEB_RESOURCE_UPDATE = "update";
-
-    public static final String WEB_RESOURCE_DELETE = "delete";
 
     /**
      * Convert a list to an generic entity to send it via JX-RS
@@ -115,6 +119,7 @@ public class PhoenixLecture implements PhoenixEntity {
      * @param list
      *            List containing {@link PhoenixLecture}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<PhoenixLecture>> toSendableList(List<PhoenixLecture> list) {
         return new GenericEntity<List<PhoenixLecture>>(list, GENERIC_TYPE.getType());
@@ -126,6 +131,8 @@ public class PhoenixLecture implements PhoenixEntity {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link PhoenixLecture}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<PhoenixLecture> fromSendableList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE);

@@ -31,6 +31,7 @@ import org.joda.time.DateTime;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 
+import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
@@ -164,6 +165,8 @@ public class PhoenixSubmission implements PhoenixEntity {
 
     /**
      * Generic Type for {@link PhoenixSubmission}
+     * 
+     * @deprecated No longer necessary for sending and receiving lists
      */
     private final static GenericType<List<PhoenixSubmission>> GENERIC_TYPE = new GenericType<List<PhoenixSubmission>>() {
     };
@@ -174,6 +177,7 @@ public class PhoenixSubmission implements PhoenixEntity {
      * @param list
      *            List containing {@link PhoenixSubmission}
      * @return Generic Entity to send via JX-RS
+     * @deprecated No longer necessary for sending and receiving lists
      */
     public final static GenericEntity<List<PhoenixSubmission>> toSendableList(List<PhoenixSubmission> list) {
         return new GenericEntity<List<PhoenixSubmission>>(list, GENERIC_TYPE.getType());
@@ -185,6 +189,8 @@ public class PhoenixSubmission implements PhoenixEntity {
      * @param response
      *            Response containg an list from JX-RS
      * @return List containg values as {@link PhoenixSubmission}
+     * @deprecated No longer necessary for sending and receiving lists. Use
+     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
      */
     public final static List<PhoenixSubmission> fromSendableList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE);
