@@ -85,6 +85,8 @@ public class PhoenixTask implements PhoenixEntity {
 
     public static final String WEB_RESOURCE_GET = "get";
 
+    public static final String WEB_RESOURCE_ADD_SUBMISSION = "submit";
+
     @Key
     private String title;
     private String description;
@@ -265,7 +267,12 @@ public class PhoenixTask implements PhoenixEntity {
         return base(client, baseURL).path(WEB_RESOURCE_GETALL_TITLES);
     }
 
+    public static WebResource submitResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_ADD_SUBMISSION);
+    }
+
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
+
 }

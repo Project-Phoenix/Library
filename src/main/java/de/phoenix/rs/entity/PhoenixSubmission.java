@@ -50,6 +50,7 @@ public class PhoenixSubmission implements PhoenixEntity {
      * @return {@link PhoenixSubmissionResult} <br>
      *         Result containing the {@link SubmissionStatus} and the status
      *         text as a string
+     * @deprecated Use {@link PhoenixTask#WEB_RESOURCE_ADD_SUBMISSION} instead
      */
     public static final String WEB_RESOURCE_SUBMIT = "submit";
     /**
