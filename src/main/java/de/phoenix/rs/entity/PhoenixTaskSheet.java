@@ -19,6 +19,7 @@
 package de.phoenix.rs.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.ws.rs.core.GenericEntity;
@@ -53,13 +54,19 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      * SubURI of the tasksheet resource to get all tasksheets
      * 
      * @return List<{@link PhoenixTaskSheet} All task sheets
-     * 
+     * @deprecated Use {@link #WEB_RESOURCE_GET} instead
      * */
     public static final String WEB_RESOURCE_GETALL = "getAll";
 
-    private List<PhoenixTask> tasks;
+    public static final String WEB_RESOURCE_GET = "get";
+
+    public static final String WEB_RESOURCE_CONNECT_TASKSHEET_WITH_TASK = "connectTasksheetWithTask";
 
     @Key
+    private String title;
+
+    private List<PhoenixTask> tasks;
+
     private DateTime creationDate;
 
     /**
@@ -74,6 +81,7 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      * 
      * @param tasks
      * @param creationDate
+     * @deprecated
      */
     public PhoenixTaskSheet(List<PhoenixTask> tasks, DateTime creationDate) {
         this(tasks);
@@ -85,9 +93,41 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      * 
      * @param tasks
      *            Tasks concerning to the tasksheet
+     * @deprecated
      */
     public PhoenixTaskSheet(List<PhoenixTask> tasks) {
         this.tasks = new ArrayList<PhoenixTask>(tasks);
+    }
+
+    /**
+     * Constructor for client
+     * 
+     * @param Title
+     *            The title of this task sheet
+     */
+    public PhoenixTaskSheet(String title) {
+        this.title = title;
+        this.tasks = Collections.emptyList();
+    }
+
+    /**
+     * Constructor for server
+     * 
+     * @param Title
+     *            The title of this task sheet
+     * @param tasks
+     *            The list of tasks attached to the task sheet
+     * @param creationDate
+     *            The creation date
+     */
+    public PhoenixTaskSheet(String title, List<PhoenixTask> tasks, DateTime creationDate) {
+        this(title);
+        this.tasks = new ArrayList<PhoenixTask>(tasks);
+        this.creationDate = creationDate;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     /**
@@ -139,6 +179,14 @@ public class PhoenixTaskSheet implements PhoenixEntity {
 
     public static WebResource createResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_CREATE);
+    }
+
+    public static WebResource getResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_GET);
+    }
+
+    public static WebResource connectTaskSheetWithTaskResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_CONNECT_TASKSHEET_WITH_TASK);
     }
 
     private static WebResource base(Client client, String baseURL) {
