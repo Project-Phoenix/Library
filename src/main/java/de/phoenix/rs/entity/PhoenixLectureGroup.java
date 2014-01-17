@@ -26,8 +26,10 @@ import javax.ws.rs.core.GenericEntity;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalTime;
 
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
@@ -46,6 +48,8 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      * @deprecated Use the {@link PhoenixLecture#WEB_RESOURCE_ADD_GROUP} instead
      */
     public static final String WEB_RESOURCE_CREATE = "create";
+    
+    public static final String WEB_RESOURCE_GET = "get";
 
     @Key
     private String name;
@@ -56,6 +60,7 @@ public class PhoenixLectureGroup implements PhoenixEntity {
 
     private List<PhoenixDetails> details;
 
+    @Key
     private PhoenixLecture lecture;
 
     /**
@@ -171,6 +176,14 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      */
     public final static List<PhoenixLectureGroup> fromSendableList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE);
+    }
+    
+    public static WebResource getResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_GET);
+    }
+
+    private static WebResource base(Client client, String baseURL) {
+        return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 
 }

@@ -38,6 +38,10 @@ public class SelectEntity<T extends PhoenixEntity> {
     public SelectEntity<T> addKey(String name, Object obj) {
 
         try {
+
+            if (obj instanceof PhoenixEntity)
+                obj = KeyReader.createSelect((PhoenixEntity) obj);
+
             String value = JSON_MAPPER.writeValueAsString(obj);
             values.put(name, value);
             return this;
@@ -45,7 +49,6 @@ public class SelectEntity<T extends PhoenixEntity> {
             throw new RuntimeException("Can't serialize '" + obj + "'!");
         }
     }
-
     public <E> E get(String name, Class<? extends E> clazz) {
         try {
             String value = values.get(name);
