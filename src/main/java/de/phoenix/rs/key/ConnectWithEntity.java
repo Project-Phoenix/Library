@@ -37,7 +37,7 @@ public class ConnectWithEntity<T extends PhoenixEntity, E extends PhoenixEntity>
 
     protected ConnectWithEntity(SelectEntity<T> selectEntity, E... entities) {
         this(entities);
-        this.values = new HashMap<String, String>(selectEntity.values);
+        this.values = new HashMap<String, Object>(selectEntity.values);
     }
 
     public ConnectWithEntity(List<E> entities) {
@@ -47,7 +47,7 @@ public class ConnectWithEntity<T extends PhoenixEntity, E extends PhoenixEntity>
 
     protected ConnectWithEntity(SelectEntity<T> selectEntity, List<E> entities) {
         this(entities);
-        this.values = new HashMap<String, String>(selectEntity.values);
+        this.values = new HashMap<String, Object>(selectEntity.values);
     }
 
     public void addEntity(E entity) {

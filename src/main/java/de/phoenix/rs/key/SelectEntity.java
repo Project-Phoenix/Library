@@ -22,39 +22,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SelectEntity<T extends PhoenixEntity> {
 
-    private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
-
     @JsonProperty
-    protected Map<String, String> values = new HashMap<String, String>();
+    protected Map<String, Object> values = new HashMap<String, Object>();
 
     public SelectEntity() {
     }
 
     public SelectEntity<T> addKey(String name, Object obj) {
+        if (obj instanceof PhoenixEntity)
+            obj = KeyReader.createSelect((PhoenixEntity) obj);
 
-        try {
-
-            if (obj instanceof PhoenixEntity)
-                obj = KeyReader.createSelect((PhoenixEntity) obj);
-
-            String value = JSON_MAPPER.writeValueAsString(obj);
-            values.put(name, value);
-            return this;
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Can't serialize '" + obj + "'!");
-        }
+        values.put(name, obj);
+        return this;
     }
+
+    /**
+     * 
+     * @param name
+     * @param clazz
+     * @return
+     * @deprecated Use {@link #get(String)} without class definition
+     */
     public <E> E get(String name, Class<? extends E> clazz) {
-        try {
-            String value = values.get(name);
-            return JSON_MAPPER.readValue(value, clazz);
-        } catch (Exception e) {
-            return null;
-        }
+        @SuppressWarnings("unchecked")
+        E value = (E) values.get(name);
+        return value;
+    }
+
+    public <E> E get(String attributeName) {
+        @SuppressWarnings("unchecked")
+        E value = (E) values.get(attributeName);
+        return value;
     }
 }

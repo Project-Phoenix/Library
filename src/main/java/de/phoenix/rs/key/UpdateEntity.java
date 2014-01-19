@@ -39,7 +39,7 @@ public class UpdateEntity<T extends PhoenixEntity> extends SelectEntity<T> {
 
     public UpdateEntity(T newObject, SelectEntity<T> entity) {
         this(newObject);
-        this.values = new HashMap<String, String>(entity.values);
+        this.values = new HashMap<String, Object>(entity.values);
     }
 
     public T getNewObject() {

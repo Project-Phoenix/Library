@@ -53,7 +53,7 @@ public class KeyTest {
         String title = "Title";
         PhoenixAutomaticTask task = new PhoenixAutomaticTask(new ArrayList<PhoenixAttachment>(), new ArrayList<PhoenixText>(), "Desc", title, "testBackend", new ArrayList<PhoenixText>());
         SelectEntity<PhoenixAutomaticTask> selectEntity = KeyReader.createSelect(task);
-        String keyTitle = selectEntity.get("title", String.class);
+        String keyTitle = selectEntity.get("title");
 
         assertNotNull(keyTitle);
         assertEquals("Title is indifferent!", title, keyTitle);

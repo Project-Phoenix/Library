@@ -47,6 +47,7 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      * SubURI of the tasksheet resource to create an TaskSheet
      * 
      * @param {@link PhoenixTaskSheet} TaskSheet to create
+     * @deprecated
      */
     public static final String WEB_RESOURCE_CREATE = "create";
 

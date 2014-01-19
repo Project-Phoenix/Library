@@ -40,7 +40,7 @@ public class AddToEntity<T extends PhoenixEntity, E extends PhoenixEntity> exten
 
     protected AddToEntity(SelectEntity<T> selectEntity, E... entities) {
         this(entities);
-        this.values = new HashMap<String, String>(selectEntity.values);
+        this.values = new HashMap<String, Object>(selectEntity.values);
     }
 
     public AddToEntity(List<E> entityList) {
@@ -49,7 +49,7 @@ public class AddToEntity<T extends PhoenixEntity, E extends PhoenixEntity> exten
 
     protected AddToEntity(SelectEntity<T> selectEntity, List<E> entityList) {
         this(entityList);
-        this.values = new HashMap<String, String>(selectEntity.values);
+        this.values = new HashMap<String, Object>(selectEntity.values);
     }
 
     @SuppressWarnings("unchecked")
