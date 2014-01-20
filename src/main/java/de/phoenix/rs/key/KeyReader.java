@@ -30,10 +30,12 @@ import de.phoenix.rs.entity.PhoenixAutomaticTask;
 import de.phoenix.rs.entity.PhoenixDetails;
 import de.phoenix.rs.entity.PhoenixLecture;
 import de.phoenix.rs.entity.PhoenixLectureGroup;
+import de.phoenix.rs.entity.PhoenixLectureGroupTaskSheet;
 import de.phoenix.rs.entity.PhoenixSubmission;
 import de.phoenix.rs.entity.PhoenixSubmissionResult;
 import de.phoenix.rs.entity.PhoenixTask;
 import de.phoenix.rs.entity.PhoenixTaskSheet;
+import de.phoenix.rs.entity.PhoenixTaskSubmissionDates;
 import de.phoenix.rs.entity.PhoenixText;
 
 /**
@@ -71,10 +73,12 @@ public class KeyReader {
         indexEntity(PhoenixDetails.class, map);
         indexEntity(PhoenixLecture.class, map);
         indexEntity(PhoenixLectureGroup.class, map);
+        indexEntity(PhoenixLectureGroupTaskSheet.class, map);
         indexEntity(PhoenixSubmission.class, map);
         indexEntity(PhoenixSubmissionResult.class, map);
         indexEntity(PhoenixTask.class, map);
         indexEntity(PhoenixTaskSheet.class, map);
+        indexEntity(PhoenixTaskSubmissionDates.class, map);
         indexEntity(PhoenixText.class, map);
     }
 
