@@ -244,56 +244,6 @@ public class KeyReader {
     }
 
     /**
-     * Creates a {@link ConnectWithEntity} object from the {@link PhoenixEntity}
-     * by extracting all values from class attributes annotated with the
-     * {@link Key} Annotation. <br>
-     * Will create the same result as this example:
-     * <p>
-     * 
-     * <code>
-     * ConnectWithEntity<T,E> entity = new ConnectWithEntity<T,E>(entity, toConnectEntities); <br>
-     * entity.addKey(KEY_NAME, KEY_VALUE); <br>
-     * entity.addKey(ANOTHER_KEY_NAME, ANOTHER_KEY_VALUE); <br>
-     * ... 
-     * </code>
-     * 
-     * @param entity
-     *            The phoenixEntity to the entities are connected to
-     * @param attachedEntities
-     *            List of phoenix entities to connect to the phoenix entity.
-     *            These entities must already exist in the database!
-     * @return {@link ConnectWithEntity} with filled keys from the entity
-     */
-    public static <T extends PhoenixEntity, E extends PhoenixEntity> ConnectWithEntity<T, E> createConnectWith(T entity, List<E> toConnectEntities) {
-        return new ConnectWithEntity<T, E>(createSelect(entity), toConnectEntities);
-    }
-
-    /**
-     * Creates a {@link ConnectWithEntity} object from the {@link PhoenixEntity}
-     * by extracting all values from class attributes annotated with the
-     * {@link Key} Annotation. <br>
-     * Will create the same result as this example:
-     * <p>
-     * 
-     * <code>
-     * ConnectWithEntity<T,E> entity = new ConnectWithEntity<T,E>(entity, toConnectEntities); <br>
-     * entity.addKey(KEY_NAME, KEY_VALUE); <br>
-     * entity.addKey(ANOTHER_KEY_NAME, ANOTHER_KEY_VALUE); <br>
-     * ... 
-     * </code>
-     * 
-     * @param entity
-     *            The phoenixEntity to the entities are connected to
-     * @param attachedEntities
-     *            The new phoenix entities to connect to the phoenix entity.
-     *            These entities must already exist in the database!
-     * @return {@link ConnectWithEntity} with filled keys from the entity
-     */
-    public static <T extends PhoenixEntity, E extends PhoenixEntity> ConnectWithEntity<T, E> createConnectWith(T entity, E... toConnectEntities) {
-        return new ConnectWithEntity<T, E>(createSelect(entity), toConnectEntities);
-    }
-
-    /**
      * Helper class to store the key fields from a class
      */
     private static class KeyFields {
