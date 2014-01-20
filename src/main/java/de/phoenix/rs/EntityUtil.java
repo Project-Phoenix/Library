@@ -44,4 +44,21 @@ public class EntityUtil {
         return (List<T>) response.getEntity(List.class);
     }
 
+    /**
+     * Wrapper for
+     * <p>
+     * <code>EntityUtil.extractEntityList(response).get(0);</code>
+     * 
+     * @param response
+     *            Response containing a list
+     * @return Extracted, first element of the list
+     */
+    public static <T> T extractEntity(ClientResponse response) {
+        List<T> list = extractEntityList(response);
+        if (list == null || list.isEmpty())
+            return null;
+        else
+            return list.get(0);
+    }
+
 }
