@@ -47,6 +47,8 @@ public class ConnectionEntityTest {
         ce.addSelectEntity(PhoenixTask.class, ts).addSelectEntity(PhoenixLectureGroup.class, gs);
 
         List<SelectEntity<PhoenixTask>> selectEntities = ce.getSelectEntities(PhoenixTask.class);
+        
+        ce.addSelectEntities(PhoenixTask.class, selectEntities);
         assertEquals("TestTask", selectEntities.get(0).get("title"));
 
         List<SelectEntity<PhoenixLectureGroup>> groupSelects = ce.getSelectEntities(PhoenixLectureGroup.class);

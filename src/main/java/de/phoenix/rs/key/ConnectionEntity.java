@@ -39,7 +39,7 @@ public class ConnectionEntity {
     }
 
     @SuppressWarnings("unchecked")
-    public ConnectionEntity addSelectEntity(Class<? extends PhoenixEntity> clazz, SelectEntity<? extends PhoenixEntity> entity) {
+    public <T extends PhoenixEntity> ConnectionEntity addSelectEntity(Class<T> clazz, SelectEntity<? extends PhoenixEntity> entity) {
         List<SelectEntity<PhoenixEntity>> list = connectionMap.get(clazz.getName());
         if (list == null) {
             list = new ArrayList<SelectEntity<PhoenixEntity>>();
@@ -50,7 +50,7 @@ public class ConnectionEntity {
         return this;
     }
 
-    public ConnectionEntity addSelectEntities(Class<? extends PhoenixEntity> clazz, List<SelectEntity<? extends PhoenixEntity>> entityList) {
+    public <T extends PhoenixEntity> ConnectionEntity addSelectEntities(Class<T> clazz, List<SelectEntity<T>> entityList) {
         for (SelectEntity<? extends PhoenixEntity> selectEntity : entityList) {
             addSelectEntity(clazz, selectEntity);
         }
