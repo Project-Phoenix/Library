@@ -230,4 +230,9 @@ public class PhoenixSubmission implements PhoenixEntity {
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
+
+    @Override
+    public String toString() {
+        return String.format("PhoenixSubmission={Date=%s;Status=%i;StatusText=%s;Task=%s;Attachments=%s;Texts=%s}", date, status, statusText, task, attachments, texts);
+    }
 }

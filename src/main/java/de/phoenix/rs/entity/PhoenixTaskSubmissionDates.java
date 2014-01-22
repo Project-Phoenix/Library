@@ -80,4 +80,16 @@ public class PhoenixTaskSubmissionDates implements PhoenixEntity {
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
+
+    /**
+     * private DateTime deadline; private DateTime releaseDate;
+     * 
+     * @Key private PhoenixLectureGroupTaskSheet lectureGroupTaskSheet;
+     * @Key private PhoenixTask task;
+     */
+
+    @Override
+    public String toString() {
+        return String.format("PhoenixTaskSubmissionDates={Deadline=%s;ReleaseDate=%s;PhoenixTask=%s;PhoenixLectureGroupTaskSheet=%s};", deadline, releaseDate, task, lectureGroupTaskSheet);
+    }
 }

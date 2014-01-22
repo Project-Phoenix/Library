@@ -78,4 +78,9 @@ public class PhoenixAutomaticTask extends PhoenixTask implements PhoenixEntity {
         return new ArrayList<PhoenixText>(tests);
     }
 
+    @Override
+    public String toString() {
+        return String.format("PhoenixAutomaticTask={Title=%s;Description=%s;Attachments=%s;Pattern=%s;Backend=%s;Tests=%s}", getTitle(), this.getDescription(), this.getAttachments(), this.getPattern(), backend, tests);
+    }
+
 }

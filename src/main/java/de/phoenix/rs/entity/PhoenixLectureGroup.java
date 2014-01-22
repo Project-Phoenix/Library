@@ -48,7 +48,7 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      * @deprecated Use the {@link PhoenixLecture#WEB_RESOURCE_ADD_GROUP} instead
      */
     public static final String WEB_RESOURCE_CREATE = "create";
-    
+
     public static final String WEB_RESOURCE_GET = "get";
 
     @Key
@@ -177,7 +177,7 @@ public class PhoenixLectureGroup implements PhoenixEntity {
     public final static List<PhoenixLectureGroup> fromSendableList(ClientResponse response) {
         return response.getEntity(GENERIC_TYPE);
     }
-    
+
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
     }
@@ -186,4 +186,18 @@ public class PhoenixLectureGroup implements PhoenixEntity {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 
+    /**
+     * @Key private String name; private int maxMember;
+     * 
+     *      private int submissionDeadlineWeekday; private LocalTime
+     *      submissionDeadlineTime;
+     * 
+     *      private List<PhoenixDetails> details;
+     * @Key private PhoenixLecture lecture;
+     */
+
+    @Override
+    public String toString() {
+        return String.format("PhoenixLectureGroup={Name=%s;MaxMember=%i;SubmissionDeadlineWeekday=%i;SubmissionDeadlineTime=%s;Details=%s}", name, maxMember, submissionDeadlineWeekday, submissionDeadlineTime, details);
+    }
 }

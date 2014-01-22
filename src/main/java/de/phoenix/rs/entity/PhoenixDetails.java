@@ -199,4 +199,8 @@ public class PhoenixDetails implements PhoenixEntity {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 
+    @Override
+    public String toString() {
+        return String.format("PhoenixDetails={Room=%s;WeekDay=%i;StartDate=%s;EndDate=%s;StartTime=%s;EndTime=%s;Period=%s}", this.getRoom(), this.getWeekDay(), this.getStartDate(), this.getEndDate(), this.getStartTime(), this.getEndTime(), this.getInverval());
+    }
 }

@@ -193,4 +193,9 @@ public class PhoenixTaskSheet implements PhoenixEntity {
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
+
+    @Override
+    public String toString() {
+        return String.format("PhoenixTaskSheet={Title=%s;CreationDate=%s;Tasks=%s}", title, creationDate, tasks);
+    }
 }

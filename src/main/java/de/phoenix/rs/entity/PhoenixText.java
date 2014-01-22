@@ -265,4 +265,9 @@ public class PhoenixText implements PhoenixEntity {
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
+
+    @Override
+    public String toString() {
+        return String.format("PhoenixText={Name=%s;Type=%s;CreationDate=%s;Text=%i}", name, type, creationDate, text);
+    }
 }

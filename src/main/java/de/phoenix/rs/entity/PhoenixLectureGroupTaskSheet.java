@@ -87,4 +87,9 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 
+    @Override
+    public String toString() {
+        return String.format("PhoenixLectureGroupTaskSheet={DefaultDeadline=%s;DefaultReleaseDate=%s;PhoenixTaskSheet=%s;PhoenixLectureGroup=%s}", defaultDeadline, defaultReleaseDate, taskSheet, lectureGroup);
+    }
+
 }

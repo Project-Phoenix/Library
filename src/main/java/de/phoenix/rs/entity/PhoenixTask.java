@@ -277,4 +277,9 @@ public class PhoenixTask implements PhoenixEntity {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 
+    @Override
+    public String toString() {
+        return String.format("PhoenixTask={Title=%s;Description=%s;Attachments=%s;Pattern=%s}", getTitle(), getDescription(), getAttachments(), getPattern());
+    }
+
 }

@@ -61,4 +61,9 @@ public class AddToEntity<T extends PhoenixEntity, E extends PhoenixEntity> exten
     public List<E> getAttachedEntities() {
         return new ArrayList<E>(attachedEntities);
     }
+
+    @Override
+    public String toString() {
+        return String.format("AddToEntity={%s;AttachedEntities=%s}", super.toString(), attachedEntities);
+    }
 }

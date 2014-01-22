@@ -172,4 +172,9 @@ public class PhoenixLecture implements PhoenixEntity {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
 
+    @Override
+    public String toString() {
+        return String.format("PhoenixLecture={Title=%s;Details=%s}", getTitle(), getLectureDetails());
+    }
+
 }

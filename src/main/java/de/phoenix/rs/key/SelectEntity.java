@@ -57,4 +57,9 @@ public class SelectEntity<T extends PhoenixEntity> {
         E value = (E) values.get(attributeName);
         return value;
     }
+
+    @Override
+    public String toString() {
+        return String.format("SelectEntity={ValueMap=%s}", values);
+    }
 }

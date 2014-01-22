@@ -50,4 +50,9 @@ public class UpdateEntity<T extends PhoenixEntity> extends SelectEntity<T> {
     public UpdateEntity<T> addKey(String name, Object obj) {
         return (UpdateEntity<T>) super.addKey(name, obj);
     }
+
+    @Override
+    public String toString() {
+        return String.format("UpdateEntity={%s;NewObject=%s}", super.toString(), newObject);
+    }
 }

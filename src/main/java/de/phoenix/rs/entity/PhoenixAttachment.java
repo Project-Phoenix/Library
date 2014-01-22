@@ -217,4 +217,9 @@ public class PhoenixAttachment implements PhoenixEntity {
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
+
+    @Override
+    public String toString() {
+        return String.format("PhoenixAttachment={Name=%s;Type=%s;CreationDate=%s;ContentSize=%i}", name, type, creationDate, content.length);
+    }
 }

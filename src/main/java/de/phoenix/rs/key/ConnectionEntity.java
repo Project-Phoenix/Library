@@ -105,4 +105,9 @@ public class ConnectionEntity {
         }
         return t;
     }
+
+    @Override
+    public String toString() {
+        return String.format("ConnectionEntity={ConnectionMap=%s;ConnectionAttributes=%s}", connectionMap, connectionAttribute);
+    }
 }
