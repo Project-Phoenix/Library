@@ -51,6 +51,8 @@ public class PhoenixLectureGroup implements PhoenixEntity {
 
     public static final String WEB_RESOURCE_GET = "get";
 
+    public static final String WEB_RESOURCE_DELETE = "delete";
+
     @Key
     private String name;
     private int maxMember;
@@ -180,6 +182,10 @@ public class PhoenixLectureGroup implements PhoenixEntity {
 
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
+    }
+    
+    public static WebResource deleteResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_DELETE);
     }
 
     private static WebResource base(Client client, String baseURL) {
