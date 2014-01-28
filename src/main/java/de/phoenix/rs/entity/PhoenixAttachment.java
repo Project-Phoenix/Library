@@ -220,6 +220,6 @@ public class PhoenixAttachment implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixAttachment={Name=%s;Type=%s;CreationDate=%s;ContentSize=%i}", name, type, creationDate, content.length);
+        return String.format("PhoenixAttachment={Name=%s;Type=%s;CreationDate=%s;ContentSize=%d}", name, type, creationDate, content.length);
     }
 }

@@ -201,6 +201,6 @@ public class PhoenixDetails implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixDetails={Room=%s;WeekDay=%i;StartDate=%s;EndDate=%s;StartTime=%s;EndTime=%s;Period=%s}", this.getRoom(), this.getWeekDay(), this.getStartDate(), this.getEndDate(), this.getStartTime(), this.getEndTime(), this.getInverval());
+        return String.format("PhoenixDetails={Room=%s;WeekDay=%d;StartDate=%s;EndDate=%s;StartTime=%s;EndTime=%s;Period=%s}", this.getRoom(), this.getWeekDay(), this.getStartDate(), this.getEndDate(), this.getStartTime(), this.getEndTime(), this.getInverval());
     }
 }

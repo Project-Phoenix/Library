@@ -268,6 +268,6 @@ public class PhoenixText implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixText={Name=%s;Type=%s;CreationDate=%s;Text=%i}", name, type, creationDate, text);
+        return String.format("PhoenixText={Name=%s;Type=%s;CreationDate=%s;Text=%d}", name, type, creationDate, text);
     }
 }

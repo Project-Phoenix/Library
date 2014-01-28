@@ -233,6 +233,6 @@ public class PhoenixSubmission implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixSubmission={Date=%s;Status=%i;StatusText=%s;Task=%s;Attachments=%s;Texts=%s}", date, status, statusText, task, attachments, texts);
+        return String.format("PhoenixSubmission={Date=%s;Status=%d;StatusText=%s;Task=%s;Attachments=%s;Texts=%s}", date, status, statusText, task, attachments, texts);
     }
 }
