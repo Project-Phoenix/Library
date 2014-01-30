@@ -61,9 +61,13 @@ public class PhoenixSubmission implements PhoenixEntity {
      * 
      * @return List<{@link PhoenixSubmission}> <br>
      *         Submissions for the task
-     * 
+     * @deprecated Use the get resource
      */
     public static final String WEB_RESOURCE_GET_TASK_SUBMISSIONS = "getByTask";
+
+    public static final String WEB_RESOURCE_GET = "get";
+
+    public static final String WEB_RESOURCE_DELETE = "delete";
 
     @Key
     private DateTime date;
@@ -223,10 +227,19 @@ public class PhoenixSubmission implements PhoenixEntity {
         return base(client, baseURL).path(WEB_RESOURCE_SUBMIT);
     }
 
+    @Deprecated
     public static WebResource getByTaskResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET_TASK_SUBMISSIONS);
     }
 
+    public static WebResource getResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_GET);
+    }
+
+    public static WebResource deleteResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_DELETE);
+    }
+    
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
