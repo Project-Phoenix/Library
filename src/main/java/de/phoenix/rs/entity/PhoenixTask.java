@@ -33,6 +33,7 @@ import com.sun.jersey.api.client.WebResource;
 import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
+import de.phoenix.submission.DisallowedContent;
 
 /**
  * Wrapper class for a Task to communicate with the phoenix RS service.
@@ -90,6 +91,8 @@ public class PhoenixTask implements PhoenixEntity {
     @Key
     private String title;
     private String description;
+
+    private DisallowedContent disallowedContent;
 
     private List<PhoenixAttachment> attachments;
     private List<PhoenixText> answerPattern;
@@ -197,6 +200,14 @@ public class PhoenixTask implements PhoenixEntity {
      */
     public List<PhoenixAttachment> getAttachments() {
         return new ArrayList<PhoenixAttachment>(attachments);
+    }
+
+    public void setDisallowedContent(DisallowedContent content) {
+        this.disallowedContent = content;
+    }
+
+    public DisallowedContent getDisallowedContent() {
+        return disallowedContent;
     }
 
     @Deprecated
