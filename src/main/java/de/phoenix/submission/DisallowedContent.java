@@ -36,6 +36,10 @@ public class DisallowedContent {
         this.disallowedContent.add(content);
         return this;
     }
+    
+    public List<String> getDisallowedContent() {
+        return new ArrayList<String>(disallowedContent);
+    }
 
     @Override
     public String toString() {
