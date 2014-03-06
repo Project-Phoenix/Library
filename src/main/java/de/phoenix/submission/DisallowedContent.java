@@ -21,6 +21,7 @@ package de.phoenix.submission;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DisallowedContent {
@@ -37,6 +38,7 @@ public class DisallowedContent {
         return this;
     }
     
+    @JsonIgnore
     public List<String> getDisallowedContent() {
         return new ArrayList<String>(disallowedContent);
     }
