@@ -18,7 +18,9 @@
 
 package de.phoenix.filter;
 
-import java.util.regex.Pattern;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 
 /**
  * Filter for removing format information like HTML tags or &nbsp; from the
@@ -26,18 +28,7 @@ import java.util.regex.Pattern;
  * Replace all <\p> with a line break
  */
 public class EduFilter implements TextFilter {
-
-    // Remove all HTML tags
-    private static final Pattern HTML_TAG_PATTERN = Pattern.compile("<(\"[^\"]*\"|'[^']*'|[^'\">])*>");
-
-    // Remove all secured spaces
-    private static final Pattern SPACE_PATTERN = Pattern.compile("&nbsp;");
-
-    // Change all section tags with a line separator
-    private static final Pattern BREAK_PATTERN = Pattern.compile("<\\s*p>");
-
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
+    
     public static final TextFilter INSTANCE = new EduFilter();
 
     private EduFilter() {
@@ -46,18 +37,9 @@ public class EduFilter implements TextFilter {
 
     @Override
     public String filter(String original) {
-
-        String result = original;
-
-        result = BREAK_PATTERN.matcher(result).replaceAll(LINE_SEPARATOR);
-        result = delete(result, HTML_TAG_PATTERN);
-        result = delete(result, SPACE_PATTERN);
-
-        return result;
+        Document doc = Jsoup.parse(original);
+        return doc.text();
     }
 
-    private String delete(String text, Pattern p) {
-        return p.matcher(text).replaceAll("");
-    }
 
 }

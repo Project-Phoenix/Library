@@ -30,7 +30,6 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.filter.EduFilter;
-import de.phoenix.filter.HTMLFilter;
 import de.phoenix.filter.TextFilter;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
@@ -183,8 +182,7 @@ public class PhoenixText implements PhoenixEntity {
 
     /**
      * Filter the text using {@link TextFilter}. <br>
-     * For example the {@link HTMLFilter} removes all html tags <br>
-     * Use for Edu content the {@link EduFilter} <br>
+     * Use for content from the old EDU system the {@link EduFilter} <br>
      * This remove a new text and does not change this text!
      * 
      * @param remover

@@ -1,0 +1,13 @@
+Gegeben sei der folgende rekursive Algorithmus für ganze Zahlen n: Algorithm: f(n)
+Input:     n ganzzahlig
+Output:    ?
+   if n = 1  then 1
+             else f(n-1) + 2*n - 1
+   fi Erläutern Sie anhand jeweils eines kurzen Beispiels, welche Berechnung der Algorithmus in den folgenden beiden Fällen ausführt: n > 0 und n < = 0 Gegeben sei der folgende rekursive Algorithmus für ganze Zahlen x und y (div bedeutet ganzzahlige Division): Algorithm: f(x, y)
+Input:     x, y ganzzahlig
+Output:    ?
+   if y = 0  then 1
+             else if(x < 2 * y) then f(x, x - y)
+                                else x * f(x - 1, y - 1) div y
+                  fi
+   fi Erläutern Sie anhand der Beispiele f(4,2) und f(8,5), welche Berechnungen der Algorithmus ausführt. Für welche x und y terminiert der Algorithmus nicht? Was ist die Semantik des Algorithmus?
