@@ -19,9 +19,9 @@
 package de.phoenix.rs.entity;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
 
 import org.joda.time.DateTime;
 
@@ -33,6 +33,7 @@ import de.phoenix.filter.EduFilter;
 import de.phoenix.filter.TextFilter;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
+import de.phoenix.util.TextFileReader;
 
 /**
  * Wrapper class for a Text to communicate with the phoenix RS service.
@@ -55,6 +56,12 @@ public class PhoenixText implements PhoenixEntity {
     private String name;
     @Key
     private String type;
+
+    private static final TextFileReader FILE_READER;
+
+    static {
+        FILE_READER = new TextFileReader();
+    }
 
     /**
      * Empty constructor for json transport
@@ -155,12 +162,7 @@ public class PhoenixText implements PhoenixEntity {
     }
 
     private String read(File file) throws IOException {
-        FileInputStream fis = new FileInputStream(file);
-        byte[] tmp = new byte[(int) file.length()];
-        fis.read(tmp);
-        fis.close();
-
-        return new String(tmp);
+        return FILE_READER.read(file, Charset.forName("UTF-8"));
     }
 
     private void readFilenameAndType(String fileName) {
@@ -214,9 +216,11 @@ public class PhoenixText implements PhoenixEntity {
         }
         File f = File.createTempFile(name, type);
         f.deleteOnExit();
-        FileOutputStream fout = new FileOutputStream(f);
-        fout.write(text.getBytes());
-        fout.close();
+
+        PrintWriter writer = new PrintWriter(f, "UTF-8");
+        writer.write(text);
+        writer.close();
+
         return f;
     }
 

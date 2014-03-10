@@ -19,7 +19,9 @@
 package de.phoenix.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.util.NoSuchElementException;
@@ -33,12 +35,22 @@ public class TextFileReader {
     public TextFileReader() {
     }
 
+    private static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
+    
     public String read(File file) throws FileNotFoundException, CharacterCodingException {
-        return read(file, Charset.defaultCharset());
+        return read(file, DEFAULT_CHARSET);
     }
 
     public String read(File file, Charset charset) throws FileNotFoundException, CharacterCodingException {
-        Scanner scanner = new Scanner(file, charset.toString());
+        return read(new FileInputStream(file), charset);
+    }
+    
+    public String read(InputStream source) throws CharacterCodingException {
+        return read(source, DEFAULT_CHARSET);
+    }
+
+    public String read(InputStream source, Charset charset) throws CharacterCodingException {
+        Scanner scanner = new Scanner(source, charset.toString());
         scanner.useDelimiter(FILE_ENDING_PATTERN);
         try {
             return scanner.next();
