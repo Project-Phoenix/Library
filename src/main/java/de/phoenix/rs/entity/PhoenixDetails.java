@@ -58,7 +58,7 @@ public class PhoenixDetails implements PhoenixEntity {
     private LocalTime endTime;
 
     @Key
-    private Period inverval;
+    private Period interval;
 
     @Key
     private LocalDate startDate;
@@ -96,7 +96,7 @@ public class PhoenixDetails implements PhoenixEntity {
         this.weekday = weekday;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.inverval = interval;
+        this.interval = interval;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -134,7 +134,7 @@ public class PhoenixDetails implements PhoenixEntity {
      * @return The interval of the event
      */
     public Period getInterval() {
-        return inverval;
+        return interval;
     }
 
     /**
