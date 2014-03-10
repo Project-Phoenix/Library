@@ -50,7 +50,7 @@ public class PhoenixDetails implements PhoenixEntity {
     @Key
     private String room;
     @Key
-    private int weekDay;
+    private int weekday;
 
     @Key
     private LocalTime startTime;
@@ -77,7 +77,7 @@ public class PhoenixDetails implements PhoenixEntity {
      * 
      * @param room
      *            The room where the event is happening
-     * @param weekDay
+     * @param weekday
      *            The day of the week, defined by the constants of
      *            {@link DateTimeConstants} (Monday-Sunday)
      * @param startTime
@@ -91,9 +91,9 @@ public class PhoenixDetails implements PhoenixEntity {
      *            The end date of the event(after this date, the event does not
      *            exist!)
      */
-    public PhoenixDetails(String room, int weekDay, LocalTime startTime, LocalTime endTime, Period interval, LocalDate startDate, LocalDate endDate) {
+    public PhoenixDetails(String room, int weekday, LocalTime startTime, LocalTime endTime, Period interval, LocalDate startDate, LocalDate endDate) {
         this.room = room;
-        this.weekDay = weekDay;
+        this.weekday = weekday;
         this.startTime = startTime;
         this.endTime = endTime;
         this.inverval = interval;
@@ -112,8 +112,8 @@ public class PhoenixDetails implements PhoenixEntity {
      * @return The day of the week, defined by the constants of
      *         {@link DateTimeConstants} (Monday-Sunday)
      */
-    public int getWeekDay() {
-        return weekDay;
+    public int getWeekday() {
+        return weekday;
     }
 
     /**
@@ -131,9 +131,9 @@ public class PhoenixDetails implements PhoenixEntity {
     }
 
     /**
-     * @return The inverval of the event
+     * @return The interval of the event
      */
-    public Period getInverval() {
+    public Period getInterval() {
         return inverval;
     }
 
@@ -201,6 +201,6 @@ public class PhoenixDetails implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixDetails={Room=%s;WeekDay=%d;StartDate=%s;EndDate=%s;StartTime=%s;EndTime=%s;Period=%s}", this.getRoom(), this.getWeekDay(), this.getStartDate(), this.getEndDate(), this.getStartTime(), this.getEndTime(), this.getInverval());
+        return String.format("PhoenixDetails={Room=%s;WeekDay=%d;StartDate=%s;EndDate=%s;StartTime=%s;EndTime=%s;Period=%s}", this.getRoom(), this.getWeekday(), this.getStartDate(), this.getEndDate(), this.getStartTime(), this.getEndTime(), this.getInterval());
     }
 }
