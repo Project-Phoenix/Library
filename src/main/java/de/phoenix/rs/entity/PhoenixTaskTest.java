@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Project-Phoenix
+ * Copyright (C) 2014 Project-Phoenix
  * 
  * This file is part of library.
  * 
@@ -16,23 +16,35 @@
  * along with library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.phoenix.filter;
+package de.phoenix.rs.entity;
 
-import de.phoenix.rs.entity.PhoenixText;
+public class PhoenixTaskTest {
 
-/**
- * 
- * Filter used for texts in the {@link PhoenixText}. They will remove all
- * filtered words from the original text, but not alter the original
- */
-public interface TextFilter {
+    private long timeout;
+    private PhoenixText content;
 
-    /**
-     * Apply the filter on the original String and return a filtered original
-     * (but doesn not
-     * 
-     * @param original
-     * @return
-     */
-    public String filter(String original);
+    protected PhoenixTaskTest() {
+
+    }
+
+    public PhoenixTaskTest(PhoenixText content) {
+        this.content = content;
+    }
+
+    public void setTimeout(long seconds) {
+        this.timeout = seconds;
+    }
+
+    public PhoenixText getContent() {
+        return content;
+    }
+
+    public long getTimeout() {
+        return timeout;
+    }
+
+    @Override
+    public String toString() {
+        return "PhoenixTest={timeout=" + timeout + ";content=" + content + "}";
+    }
 }

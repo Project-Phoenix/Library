@@ -30,7 +30,7 @@ import de.phoenix.rs.key.PhoenixEntity;
 public class PhoenixAutomaticTask extends PhoenixTask implements PhoenixEntity {
 
     private String backend;
-    private List<PhoenixText> tests;
+    private List<PhoenixTaskTest> tests;
 
     /**
      * Cosntructor for json transport
@@ -58,10 +58,10 @@ public class PhoenixAutomaticTask extends PhoenixTask implements PhoenixEntity {
      * @param tests
      *            The tests the system has to run
      */
-    public PhoenixAutomaticTask(List<PhoenixAttachment> attachments, List<PhoenixText> answerPattern, String description, String title, String backend, List<PhoenixText> tests) {
+    public PhoenixAutomaticTask(List<PhoenixAttachment> attachments, List<PhoenixText> answerPattern, String description, String title, String backend, List<PhoenixTaskTest> tests) {
         super(attachments, answerPattern, description, title);
         this.backend = backend;
-        this.tests = new ArrayList<PhoenixText>(tests);
+        this.tests = new ArrayList<PhoenixTaskTest>(tests);
     }
 
     /**
@@ -74,8 +74,8 @@ public class PhoenixAutomaticTask extends PhoenixTask implements PhoenixEntity {
     /**
      * @return Copy list of the the tests the system has to run
      */
-    public List<PhoenixText> getTests() {
-        return new ArrayList<PhoenixText>(tests);
+    public List<PhoenixTaskTest> getTests() {
+        return new ArrayList<PhoenixTaskTest>(tests);
     }
 
     @Override

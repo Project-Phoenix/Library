@@ -21,14 +21,13 @@ package de.phoenix.filter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-
 /**
  * Filter for removing format information like HTML tags or &nbsp; from the
  * original text. <br />
  * Replace all <\p> with a line break
  */
 public class EduFilter implements TextFilter {
-    
+
     public static final TextFilter INSTANCE = new EduFilter();
 
     private EduFilter() {
@@ -40,6 +39,5 @@ public class EduFilter implements TextFilter {
         Document doc = Jsoup.parse(original);
         return doc.text();
     }
-
 
 }

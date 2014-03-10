@@ -54,7 +54,7 @@ public class OrderedRunner extends BlockJUnit4ClassRunner {
             return o1.value() - o2.value();
         }
     };
-    
+
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Order {
         public int value();

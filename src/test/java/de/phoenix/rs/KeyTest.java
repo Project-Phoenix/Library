@@ -31,6 +31,7 @@ import de.phoenix.junit.OrderedRunner.Order;
 import de.phoenix.rs.entity.PhoenixAttachment;
 import de.phoenix.rs.entity.PhoenixAutomaticTask;
 import de.phoenix.rs.entity.PhoenixTask;
+import de.phoenix.rs.entity.PhoenixTaskTest;
 import de.phoenix.rs.entity.PhoenixText;
 import de.phoenix.rs.key.KeyReader;
 import de.phoenix.rs.key.SelectEntity;
@@ -51,7 +52,7 @@ public class KeyTest {
     @Order(2)
     public void testSelect() {
         String title = "Title";
-        PhoenixAutomaticTask task = new PhoenixAutomaticTask(new ArrayList<PhoenixAttachment>(), new ArrayList<PhoenixText>(), "Desc", title, "testBackend", new ArrayList<PhoenixText>());
+        PhoenixAutomaticTask task = new PhoenixAutomaticTask(new ArrayList<PhoenixAttachment>(), new ArrayList<PhoenixText>(), "Desc", title, "testBackend", new ArrayList<PhoenixTaskTest>());
         SelectEntity<PhoenixAutomaticTask> selectEntity = KeyReader.createSelect(task);
         String keyTitle = selectEntity.get("title");
 

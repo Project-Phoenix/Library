@@ -37,7 +37,7 @@ public class DisallowedContent {
         this.disallowedContent.add(content);
         return this;
     }
-    
+
     @JsonIgnore
     public List<String> getDisallowedContent() {
         return new ArrayList<String>(disallowedContent);

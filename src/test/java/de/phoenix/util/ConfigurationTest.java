@@ -54,14 +54,13 @@ public class ConfigurationTest {
         config.setString("name", "Gimli");
         config.setInt("age", 193);
         config.setDouble("height", 132);
-        
 
         assertEquals("Gimli", config.getString("name"));
         assertEquals(193, config.getInt("age").intValue());
         assertEquals(132, config.getDouble("height"), 0.0);
-        
+
         assertNull(config.getInt("lol"));
-        
+
         // Create new configuration -> the file now exists and the values are
         // loaded from it
         config = new JSONConfiguration("test.json");

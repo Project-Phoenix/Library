@@ -37,6 +37,7 @@ public class ToStringTest {
     private static PhoenixDetails pDetail;
 
     private static PhoenixTask pTask;
+    private static PhoenixTaskTest pTest;
     private static PhoenixAutomaticTask pAutoTask;
     private static PhoenixSubmission pSubmission;
     private static PhoenixTaskSheet pTaskSheet;
@@ -63,7 +64,9 @@ public class ToStringTest {
         pLectureGroup = new PhoenixLectureGroup("TestGroup", 1, DateTimeConstants.MONDAY, time, Arrays.asList(pDetail), pLecture);
 
         pTask = new PhoenixTask(Arrays.asList(pAttachment), Arrays.asList(pText), "TestDescription", "TestTask");
-        pAutoTask = new PhoenixAutomaticTask(Arrays.asList(pAttachment), Arrays.asList(pText), "Test Auto Description", "TestAutoTask", "TestBackend", Arrays.asList(pText));
+        pTest = new PhoenixTaskTest(pText);
+        pTest.setTimeout(10);
+        pAutoTask = new PhoenixAutomaticTask(Arrays.asList(pAttachment), Arrays.asList(pText), "Test Auto Description", "TestAutoTask", "TestBackend", Arrays.asList(pTest));
         pTaskSheet = new PhoenixTaskSheet("TestTaskSheet", Arrays.asList(pTask, pAutoTask), DateTime.now());
         pLectureGroupTaskSheet = new PhoenixLectureGroupTaskSheet(dateTime.plusDays(1), dateTime, pTaskSheet, pLectureGroup);
         pTaskSubmissionDate = new PhoenixTaskSubmissionDates(dateTime.plusHours(1), dateTime, pLectureGroupTaskSheet, pTask);
@@ -80,6 +83,7 @@ public class ToStringTest {
         assertNotNull(pLecture.toString());
         assertNotNull(pLectureGroup.toString());
         assertNotNull(pTask.toString());
+        assertNotNull(pTest.toString());
         assertNotNull(pAutoTask.toString());
         assertNotNull(pTaskSheet.toString());
         assertNotNull(pLectureGroupTaskSheet.toString());
