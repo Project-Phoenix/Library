@@ -72,10 +72,7 @@ public class PhoenixSubmission implements PhoenixEntity {
     private DateTime date;
 
     @Key
-    private int status;
-
-    @Key
-    private String statusText;
+    private PhoenixSubmissionResult result;
 
     private PhoenixTask task;
 
@@ -152,13 +149,12 @@ public class PhoenixSubmission implements PhoenixEntity {
      * @param attachments
      * @param texts
      */
-    public PhoenixSubmission(DateTime date, PhoenixTask task, int status, String statusText, List<PhoenixAttachment> attachments, List<PhoenixText> texts) {
+    public PhoenixSubmission(DateTime date, PhoenixTask task, PhoenixSubmissionResult result, List<PhoenixAttachment> attachments, List<PhoenixText> texts) {
         this.date = date;
         this.task = task;
         this.attachments = attachments;
         this.texts = texts;
-        this.status = status;
-        this.statusText = statusText;
+        this.result = result;
     }
 
     /**
@@ -190,17 +186,11 @@ public class PhoenixSubmission implements PhoenixEntity {
     }
 
     /**
-     * @return The status of this submission.
+     * @return The result for the task. Is be <code>null</code> if submission is
+     *         created via {@link #PhoenixSubmission(List, List)}
      */
-    public int getStatus() {
-        return status;
-    }
-
-    /**
-     * @return The status text of the submission
-     */
-    public String getStatusText() {
-        return statusText;
+    public PhoenixSubmissionResult getResult() {
+        return result;
     }
 
     @Deprecated
@@ -247,6 +237,6 @@ public class PhoenixSubmission implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixSubmission={Date=%s;Status=%d;StatusText=%s;Task=%s;Attachments=%s;Texts=%s}", date, status, statusText, task, attachments, texts);
+        return String.format("PhoenixSubmission={Date=%s;Result=%s;Task=%s;Attachments=%s;Texts=%s}", date, result, task, attachments, texts);
     }
 }

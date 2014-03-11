@@ -30,6 +30,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.phoenix.date.Weekday;
+import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
 
 public class ToStringTest {
 
@@ -40,6 +41,7 @@ public class ToStringTest {
     private static PhoenixTask pTask;
     private static PhoenixTaskTest pTest;
     private static PhoenixAutomaticTask pAutoTask;
+    private static PhoenixSubmissionResult pSubmissionResult;
     private static PhoenixSubmission pSubmission;
     private static PhoenixTaskSheet pTaskSheet;
     private static PhoenixLectureGroupTaskSheet pLectureGroupTaskSheet;
@@ -72,7 +74,8 @@ public class ToStringTest {
         pLectureGroupTaskSheet = new PhoenixLectureGroupTaskSheet(dateTime.plusDays(1), dateTime, pTaskSheet, pLectureGroup);
         pTaskSubmissionDate = new PhoenixTaskSubmissionDates(dateTime.plusHours(1), dateTime, pLectureGroupTaskSheet, pTask);
 
-        pSubmission = new PhoenixSubmission(dateTime, pTask, 0, "TestStatus", Arrays.asList(pAttachment), Arrays.asList(pText));
+        pSubmissionResult = new PhoenixSubmissionResult(SubmissionStatus.OK, "TestStatus");
+        pSubmission = new PhoenixSubmission(dateTime, pTask, pSubmissionResult, Arrays.asList(pAttachment), Arrays.asList(pText));
     }
 
     @Test
