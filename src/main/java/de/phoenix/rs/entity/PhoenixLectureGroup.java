@@ -211,6 +211,6 @@ public class PhoenixLectureGroup implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixLectureGroup={Name=%s;MaxMember=%d;SubmissionDeadlineWeekday=%d;SubmissionDeadlineTime=%s;Details=%s}", name, maxMember, submissionDeadlineWeekday, submissionDeadlineTime, details);
+        return String.format("PhoenixLectureGroup={Name=%s;MaxMember=%d;SubmissionDeadlineWeekday=%s;SubmissionDeadlineTime=%s;Details=%s}", name, maxMember, submissionDeadlineWeekday, submissionDeadlineTime, details);
     }
 }
