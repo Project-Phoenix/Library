@@ -24,12 +24,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
 import org.junit.Test;
 
+import de.phoenix.date.Weekday;
 import de.phoenix.rs.entity.PhoenixDetails;
 import de.phoenix.rs.entity.PhoenixLectureGroup;
 import de.phoenix.rs.entity.PhoenixTask;
@@ -59,7 +59,7 @@ public class ConnectionEntityTest {
     public void testAutomatic() {
         ConnectionEntity ce = new ConnectionEntity();
 
-        PhoenixDetails details = new PhoenixDetails("testRoom", DateTimeConstants.MONDAY, new LocalTime(12, 30), new LocalTime(14, 00), new Period(), new LocalDate(1991, 3, 3), new LocalDate(1990, 3, 3));
+        PhoenixDetails details = new PhoenixDetails("testRoom", Weekday.MONDAY, new LocalTime(12, 30), new LocalTime(14, 00), new Period(), new LocalDate(1991, 3, 3), new LocalDate(1990, 3, 3));
         ce.addEntity(details);
 
         SelectEntity<PhoenixDetails> detailsSelector = ce.getFirstSelectEntity(PhoenixDetails.class);
@@ -71,7 +71,7 @@ public class ConnectionEntityTest {
     public void testAutomaticList() {
         ConnectionEntity ce = new ConnectionEntity();
 
-        PhoenixDetails detail = new PhoenixDetails("testRoom", DateTimeConstants.MONDAY, new LocalTime(12, 30), new LocalTime(14, 00), new Period(), new LocalDate(1991, 3, 3), new LocalDate(1990, 3, 3));
+        PhoenixDetails detail = new PhoenixDetails("testRoom", Weekday.MONDAY, new LocalTime(12, 30), new LocalTime(14, 00), new Period(), new LocalDate(1991, 3, 3), new LocalDate(1990, 3, 3));
 
         List<PhoenixDetails> detailList = Arrays.asList(detail, detail);
 

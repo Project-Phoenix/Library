@@ -23,12 +23,13 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Arrays;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import de.phoenix.date.Weekday;
 
 public class ToStringTest {
 
@@ -58,10 +59,10 @@ public class ToStringTest {
 
         pText = new PhoenixText("This is an example text", dateTime, "ExampleText", "txt");
         pAttachment = new PhoenixAttachment(new byte[]{1, 2, 3, 4, 5, 6}, dateTime, "ExampleAttachment", "dat");
-        pDetail = new PhoenixDetails("G1-123", DateTimeConstants.MONDAY, time, time.plusHours(1), Period.weeks(1), date, date.plusDays(1));
+        pDetail = new PhoenixDetails("G1-123", Weekday.MONDAY, time, time.plusHours(1), Period.weeks(1), date, date.plusDays(1));
 
         pLecture = new PhoenixLecture("TestLecture", Arrays.asList(pDetail));
-        pLectureGroup = new PhoenixLectureGroup("TestGroup", 1, DateTimeConstants.MONDAY, time, Arrays.asList(pDetail), pLecture);
+        pLectureGroup = new PhoenixLectureGroup("TestGroup", 1, Weekday.MONDAY, time, Arrays.asList(pDetail), pLecture);
 
         pTask = new PhoenixTask(Arrays.asList(pAttachment), Arrays.asList(pText), "TestDescription", "TestTask");
         pTest = new PhoenixTaskTest(pText);

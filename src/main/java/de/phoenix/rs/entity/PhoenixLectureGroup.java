@@ -31,6 +31,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
+import de.phoenix.date.Weekday;
 import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
@@ -57,7 +58,7 @@ public class PhoenixLectureGroup implements PhoenixEntity {
     private String name;
     private int maxMember;
 
-    private int submissionDeadlineWeekday;
+    private Weekday submissionDeadlineWeekday;
     private LocalTime submissionDeadlineTime;
 
     private List<PhoenixDetails> details;
@@ -91,8 +92,15 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      *            often)
      * @param lecture
      *            The lecture the group is assigned to
+     * @deprecated Use
+     *             {@link #PhoenixLectureGroup(String, int, Weekday, LocalTime, List, PhoenixLecture)}
+     *             instead using {@link Weekday}
      */
     public PhoenixLectureGroup(String name, int maxMember, int submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details, PhoenixLecture lecture) {
+        this(name, maxMember, Weekday.forID(submissionDeadlineWeekday), submissionDeadlineTime, details, lecture);
+    }
+
+    public PhoenixLectureGroup(String name, int maxMember, Weekday submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details, PhoenixLecture lecture) {
         this.name = name;
         this.maxMember = maxMember;
         this.submissionDeadlineWeekday = submissionDeadlineWeekday;
@@ -125,10 +133,9 @@ public class PhoenixLectureGroup implements PhoenixEntity {
     }
 
     /**
-     * @return The weekday of the default submission. Use
-     *         {@link DateTimeConstants} Monday-Sunday
+     * @return The weekday of the default submission.
      */
-    public int getSubmissionDeadlineWeekday() {
+    public Weekday getSubmissionDeadlineWeekday() {
         return submissionDeadlineWeekday;
     }
 

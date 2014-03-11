@@ -32,6 +32,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
+import de.phoenix.date.Weekday;
 import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
@@ -50,7 +51,7 @@ public class PhoenixDetails implements PhoenixEntity {
     @Key
     private String room;
     @Key
-    private int weekday;
+    private Weekday weekday;
 
     @Key
     private LocalTime startTime;
@@ -90,8 +91,16 @@ public class PhoenixDetails implements PhoenixEntity {
      * @param endDate
      *            The end date of the event(after this date, the event does not
      *            exist!)
+     * @deprecated Use
+     *             {@link #PhoenixDetails(String, Weekday, LocalTime, LocalTime, Period, LocalDate, LocalDate)}
+     *             using the {@link Weekday} instead of unsafe constants
      */
+
     public PhoenixDetails(String room, int weekday, LocalTime startTime, LocalTime endTime, Period interval, LocalDate startDate, LocalDate endDate) {
+        this(room, Weekday.forID(weekday), startTime, endTime, interval, startDate, endDate);
+    }
+
+    public PhoenixDetails(String room, Weekday weekday, LocalTime startTime, LocalTime endTime, Period interval, LocalDate startDate, LocalDate endDate) {
         this.room = room;
         this.weekday = weekday;
         this.startTime = startTime;
@@ -109,10 +118,9 @@ public class PhoenixDetails implements PhoenixEntity {
     }
 
     /**
-     * @return The day of the week, defined by the constants of
-     *         {@link DateTimeConstants} (Monday-Sunday)
+     * @return The day of the week
      */
-    public int getWeekday() {
+    public Weekday getWeekday() {
         return weekday;
     }
 
