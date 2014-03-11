@@ -29,10 +29,11 @@ public interface TextFilter {
 
     /**
      * Apply the filter on the original String and return a filtered original
-     * (but doesn not
+     * (but does not change the original string)
      * 
      * @param original
-     * @return
+     *            The string containg text to filter
+     * @return Filtered string
      */
     public String filter(String original);
 }

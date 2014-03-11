@@ -28,6 +28,11 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 
+/**
+ * Helper class to run junits in a defined order. Useful for the entity tests.
+ * <p>
+ * Use the Annotation {@link Order} to identify the position in the test
+ */
 public class OrderedRunner extends BlockJUnit4ClassRunner {
 
     public OrderedRunner(Class<?> clazz) throws InitializationError {

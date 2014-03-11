@@ -22,14 +22,30 @@ import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Class to updated an entity using the old entity as an identifier(similiar to
+ * {@link SelectEntity}) and the new object to replace all non PhoenixEntity
+ * attributes
+ * 
+ * @param <T>
+ */
 public class UpdateEntity<T extends PhoenixEntity> extends SelectEntity<T> {
 
     @JsonProperty
     private T newObject;
 
+    /**
+     * Empty constructor for json-transport
+     */
     protected UpdateEntity() {
     }
 
+    /**
+     * Construct an empty UpdateEntity with the new Object as payload.
+     * 
+     * @param newObject
+     *            The object containing the values which replaces the old ones
+     */
     public UpdateEntity(T newObject) {
         if (newObject == null) {
             throw new NullPointerException("The new object cannot be null!");
@@ -37,11 +53,23 @@ public class UpdateEntity<T extends PhoenixEntity> extends SelectEntity<T> {
         this.newObject = newObject;
     }
 
+    /**
+     * Construct an UpdateEntity with the new object as payload and coping the
+     * keys from the select entity.
+     * 
+     * @param newObject
+     *            The object containing the values which replaces the old ones
+     * @param entity
+     *            Containing all neccessary keys
+     */
     public UpdateEntity(T newObject, SelectEntity<T> entity) {
         this(newObject);
         this.values = new HashMap<String, Object>(entity.values);
     }
 
+    /**
+     * @return The attached object
+     */
     public T getNewObject() {
         return newObject;
     }

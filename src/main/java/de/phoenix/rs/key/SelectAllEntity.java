@@ -18,6 +18,18 @@
 
 package de.phoenix.rs.key;
 
+/**
+ * Decorate class to select all entities from an entity type using no keys. Has
+ * the same effect as:<br>
+ * <code>
+ * SelectEntity<T> sel = new SelectEntity<T>(); <br>
+ * // not adding keys
+ * </code>
+ * 
+ * It forbid the operation {@link #addKey(String, Object)}
+ * 
+ * @param <T>
+ */
 public class SelectAllEntity<T extends PhoenixEntity> extends SelectEntity<T> {
 
     @Override

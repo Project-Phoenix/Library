@@ -178,14 +178,45 @@ public class PhoenixTaskSheet implements PhoenixEntity {
         return response.getEntity(GENERIC_TYPE);
     }
 
+    /**
+     * Resource needs: <xmp> PhoenixTaskSheet </xmp> Duplicate titles will
+     * return an error
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The create webresource for PhoenixTaskSheet
+     * @deprecated Use the
+     *             {@link #connectTaskSheetWithTaskResource(Client, String)}
+     *             resource
+     */
     public static WebResource createResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_CREATE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixTaskSheet> </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The get webresource for PhoenixTaskSheet
+     */
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
     }
 
+    /**
+     * Resource needs: <xmp> ConnectionEntity </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The get webresource for PhoenixTaskSheet
+     */
     public static WebResource connectTaskSheetWithTaskResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_CONNECT_TASKSHEET_WITH_TASK);
     }

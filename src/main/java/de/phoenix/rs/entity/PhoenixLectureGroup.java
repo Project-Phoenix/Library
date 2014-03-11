@@ -36,6 +36,9 @@ import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
+/**
+ * Wrapper class for a single group assigned to a lecture
+ */
 public class PhoenixLectureGroup implements PhoenixEntity {
 
     /** URI of the lecture group resource */
@@ -100,6 +103,25 @@ public class PhoenixLectureGroup implements PhoenixEntity {
         this(name, maxMember, Weekday.forID(submissionDeadlineWeekday), submissionDeadlineTime, details, lecture);
     }
 
+    /**
+     * Constructor for client
+     * 
+     * @param name
+     *            The name of the group
+     * @param maxMember
+     *            The max possible member of the group
+     * @param submissionDeadlineWeekday
+     *            The weekday of the default submission.
+     * @param submissionDeadlineTime
+     *            The default deadline time for this group to assign submission.
+     *            The day of the deadline is defined by
+     *            submissionDeadlineWeekyday
+     * @param details
+     *            Detail information about the lecture group (room, time and how
+     *            often)
+     * @param lecture
+     *            The lecture the group is assigned to
+     */
     public PhoenixLectureGroup(String name, int maxMember, Weekday submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details, PhoenixLecture lecture) {
         this.name = name;
         this.maxMember = maxMember;
@@ -187,10 +209,30 @@ public class PhoenixLectureGroup implements PhoenixEntity {
         return response.getEntity(GENERIC_TYPE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixLectureGroup> </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The get webresource for PhoenixLectureGroup
+     */
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixLectureGroup> </xmp> The
+     * SelectEntity must match only one entity to delete, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The delete webresource for PhoenixLectureGroup
+     */
     public static WebResource deleteResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_DELETE);
     }
@@ -198,16 +240,6 @@ public class PhoenixLectureGroup implements PhoenixEntity {
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
-
-    /**
-     * @Key private String name; private int maxMember;
-     * 
-     *      private int submissionDeadlineWeekday; private LocalTime
-     *      submissionDeadlineTime;
-     * 
-     *      private List<PhoenixDetails> details;
-     * @Key private PhoenixLecture lecture;
-     */
 
     @Override
     public String toString() {

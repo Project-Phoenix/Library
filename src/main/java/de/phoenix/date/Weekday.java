@@ -24,6 +24,10 @@ import java.util.Map;
 
 import org.joda.time.DateTimeConstants;
 
+/**
+ * Wrapper class for {@link DateTimeConstants}'s values for week days for value
+ * safety
+ */
 public enum Weekday {
 
     //@formatter:off
@@ -42,10 +46,14 @@ public enum Weekday {
         this.dateTimeConstant = dateTimeConstant;
     }
 
+    /**
+     * @return The corresponding value from {@link DateTimeConstants}
+     */
     public int getDateTimeConstant() {
         return dateTimeConstant;
     }
 
+    // Quick access maps
     private static Map<String, Weekday> mapByName;
     private static Map<Integer, Weekday> mapByID;
 
@@ -61,10 +69,21 @@ public enum Weekday {
         }
     }
 
+    /**
+     * @param name
+     *            case-insensitive name for the week day
+     * @return <code>null</code> if not valid name, otherwise the Weekday
+     */
     public static Weekday forName(String name) {
         return mapByName.get(name.toLowerCase());
     }
 
+    /**
+     * 
+     * @param id
+     *            The {@link DateTimeConstants} for the weekday
+     * @return <code>null</code> if not valid id, otherwise the Weekday
+     */
     public static Weekday forID(int id) {
         return mapByID.get(id);
     }

@@ -20,6 +20,7 @@ package de.phoenix.rs.key;
 
 import java.lang.reflect.Field;
 import java.security.InvalidParameterException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -242,6 +243,8 @@ public class KeyReader {
      * @param attachedEntities
      *            The new phoenix entities to add to the entity
      * @return {@link AddToEntity} with filled keys from the entity
+     * @deprecated Use {@link #createAddTo(PhoenixEntity, List)} instead with
+     *             {@link Arrays#asList(Object...)}
      */
     public static <T extends PhoenixEntity, E extends PhoenixEntity> AddToEntity<T, E> createAddTo(T entity, E... attachedEntities) {
         return new AddToEntity<T, E>(createSelect(entity), attachedEntities);

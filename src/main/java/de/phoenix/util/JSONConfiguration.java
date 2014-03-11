@@ -32,6 +32,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+/**
+ * Implementation of {@link Configuration} using a jackson JSON based
+ * serialization of the attributes. It saves the values to a json formatted file
+ * every call.<br>
+ * Also loads the values from a json formatted file if file is existing
+ */
 public class JSONConfiguration extends Configuration {
 
     @JsonIgnore
@@ -42,15 +48,38 @@ public class JSONConfiguration extends Configuration {
     private final static ObjectMapper JSON_MAPPER = new ObjectMapper();
 
     static {
+        // Configure the JSON mapper
         JSON_MAPPER.setSerializationInclusion(Include.NON_NULL);
         JSON_MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
         JSON_MAPPER.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
     }
 
+    /**
+     * Create a configuration using the filename as a path to the file. <br>
+     * Will load values from the file if the file is existing. Otherwise, the
+     * file will be created at the first setX call
+     * 
+     * @param fileName
+     *            The name of the file
+     * @throws JsonParseException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
     public JSONConfiguration(String fileName) throws JsonParseException, JsonMappingException, IOException {
         this(new File(fileName));
     }
 
+    /**
+     * Create a configuration at the file location <br>
+     * Will load values from the file if the file is existing. Otherwise, the
+     * file will be created at the first setX call
+     * 
+     * @param file
+     *            The file to locate the configuration
+     * @throws JsonParseException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
     public JSONConfiguration(File file) throws JsonParseException, JsonMappingException, IOException {
         this.configurationFile = file;
 
@@ -60,6 +89,7 @@ public class JSONConfiguration extends Configuration {
             this.values = new HashMap<String, Object>();
 
     }
+
     @SuppressWarnings("unchecked")
     private Map<String, Object> load(File file) throws JsonParseException, JsonMappingException, IOException {
         return JSON_MAPPER.readValue(file, Map.class);

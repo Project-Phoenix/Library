@@ -23,19 +23,41 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Class to select entities of an entity type using simple AND operation between
+ * the attributes
+ * 
+ * @param <T>
+ */
 public class SelectEntity<T extends PhoenixEntity> {
 
     @JsonProperty
     protected Map<String, Object> values = new HashMap<String, Object>();
 
+    /**
+     * Construct a SelectEntity of the entity type without any keys.
+     */
     public SelectEntity() {
+
     }
 
-    public SelectEntity<T> addKey(String name, Object obj) {
-        if (obj instanceof PhoenixEntity)
-            obj = KeyReader.createSelect((PhoenixEntity) obj);
+    /**
+     * Add a single attribute as a key for the SelectEntity. All entites having
+     * this attribute are selected and retrieved
+     * 
+     * @param keyName
+     *            The name of the attribute. When the object is an instance of
+     *            PhoenixEntity, it will automatically create a SelectEntity for
+     *            the value and add it as a key.
+     * @param value
+     *            The value of the attribute
+     * @return This SelectEntity with new added key
+     */
+    public SelectEntity<T> addKey(String keyName, Object value) {
+        if (value instanceof PhoenixEntity)
+            value = KeyReader.createSelect((PhoenixEntity) value);
 
-        values.put(name, obj);
+        values.put(keyName, value);
         return this;
     }
 
@@ -52,9 +74,17 @@ public class SelectEntity<T extends PhoenixEntity> {
         return value;
     }
 
-    public <E> E get(String attributeName) {
+    /**
+     * Return the value for the key name
+     * 
+     * @param keyName
+     *            The key name to identify
+     * @return <code>null</code> if, and only if, the key name was not set.
+     *         Otherwise the value of the key
+     */
+    public <E> E get(String keyName) {
         @SuppressWarnings("unchecked")
-        E value = (E) values.get(attributeName);
+        E value = (E) values.get(keyName);
         return value;
     }
 
