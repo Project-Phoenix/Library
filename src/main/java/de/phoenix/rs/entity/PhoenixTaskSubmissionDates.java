@@ -26,6 +26,10 @@ import com.sun.jersey.api.client.WebResource;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
+/**
+ * Information for a single task in a {@link PhoenixLectureGroupTaskSheet} about
+ * its own release and deadline date
+ */
 public class PhoenixTaskSubmissionDates implements PhoenixEntity {
 
     public static final String WEB_RESOURCE_ROOT = "taskSubmissionDates";
@@ -42,10 +46,26 @@ public class PhoenixTaskSubmissionDates implements PhoenixEntity {
     @Key
     private PhoenixTask task;
 
+    /**
+     * Empty constructor for json-transport
+     */
     protected PhoenixTaskSubmissionDates() {
 
     }
 
+    /**
+     * Constructor for client / server
+     * 
+     * @param deadline
+     *            The dead line until a user can submit solutions for a task
+     * @param releaseDate
+     *            The release date of the task. After this date, all user can
+     *            see and provide solutions for this task
+     * @param lectureGroupTaskSheet
+     *            The assigned task sheet
+     * @param task
+     *            The task
+     */
     public PhoenixTaskSubmissionDates(DateTime deadline, DateTime releaseDate, PhoenixLectureGroupTaskSheet lectureGroupTaskSheet, PhoenixTask task) {
         this.deadline = deadline;
         this.releaseDate = releaseDate;
@@ -53,26 +73,58 @@ public class PhoenixTaskSubmissionDates implements PhoenixEntity {
         this.task = task;
     }
 
+    /**
+     * @return The dead line until a user can submit solutions for a task
+     */
     public DateTime getDeadline() {
         return deadline;
     }
 
+    /**
+     * @return The release date of the task. After this date, all user can see
+     *         and provide solutions for this task
+     */
     public DateTime getReleaseDate() {
         return releaseDate;
     }
 
+    /**
+     * @return Its lecture group
+     */
     public PhoenixLectureGroupTaskSheet getLectureGroupTaskSheet() {
         return lectureGroupTaskSheet;
     }
 
+    /**
+     * @return The task
+     */
     public PhoenixTask getTask() {
         return task;
     }
 
+    /**
+     * Resource needs: <xmp> ConnectionEntity </xmp> Duplicate titles will
+     * return an error
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The create webresource for PhoenixTaskSubmissionDates
+     */
     public static WebResource createResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_CREATE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixTaskSubmissionDates> </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The get webresource for PhoenixTaskSubmissionDates
+     */
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
     }
@@ -80,13 +132,6 @@ public class PhoenixTaskSubmissionDates implements PhoenixEntity {
     private static WebResource base(Client client, String baseURL) {
         return client.resource(baseURL).path(WEB_RESOURCE_ROOT);
     }
-
-    /**
-     * private DateTime deadline; private DateTime releaseDate;
-     * 
-     * @Key private PhoenixLectureGroupTaskSheet lectureGroupTaskSheet;
-     * @Key private PhoenixTask task;
-     */
 
     @Override
     public String toString() {

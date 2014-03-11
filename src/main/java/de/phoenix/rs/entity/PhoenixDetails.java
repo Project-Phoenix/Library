@@ -37,6 +37,11 @@ import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
+/**
+ * Wrapper class to store information about room and time for events like
+ * lecture and groups
+ * 
+ */
 public class PhoenixDetails implements PhoenixEntity {
 
     /** URI of the details resource */
@@ -100,6 +105,24 @@ public class PhoenixDetails implements PhoenixEntity {
         this(room, Weekday.forID(weekday), startTime, endTime, interval, startDate, endDate);
     }
 
+    /**
+     * Constructor for client/server
+     * 
+     * @param room
+     *            The room where the event is happening
+     * @param weekday
+     *            The day of the week
+     * @param startTime
+     *            The time when the events starts
+     * @param interval
+     *            The interval of the event. Will be replaced by an enum
+     * @param startDate
+     *            The start date of the event(before this date, the event does
+     *            not exist!)
+     * @param endDate
+     *            The end date of the event(after this date, the event does not
+     *            exist!)
+     */
     public PhoenixDetails(String room, Weekday weekday, LocalTime startTime, LocalTime endTime, Period interval, LocalDate startDate, LocalDate endDate) {
         this.room = room;
         this.weekday = weekday;
@@ -195,10 +218,32 @@ public class PhoenixDetails implements PhoenixEntity {
         return response.getEntity(GENERIC_TYPE);
     }
 
+    /**
+     * Resource needs: <xmp> UpdateEntity<PhoenixDetails> </xmp> The
+     * UpdateEntity must match only one entity to update, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The update webresource for PhoenixDetails
+     */
     public static WebResource updateResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_UPDATE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixDetails> </xmp> The
+     * SelectEntity must match only one entity to delete, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The delete webresource for PhoenixDetails
+     */
     public static WebResource deleteResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_DELETE);
     }

@@ -18,6 +18,9 @@
 
 package de.phoenix.rs.entity;
 
+/**
+ * Result of submission for a task
+ */
 public class PhoenixSubmissionResult {
 
     public enum SubmissionStatus {
@@ -28,18 +31,34 @@ public class PhoenixSubmissionResult {
     private SubmissionStatus status;
     private String statusText;
 
-    public PhoenixSubmissionResult() {
+    /**
+     * Constructor for json-transport
+     */
+    protected PhoenixSubmissionResult() {
     }
 
+    /**
+     * 
+     * @param status
+     *            The status of the result
+     * @param statusText
+     *            A detailled message for the status
+     */
     public PhoenixSubmissionResult(SubmissionStatus status, String statusText) {
         this.status = status;
         this.statusText = statusText;
     }
 
+    /**
+     * @return The status of the submission result
+     */
     public SubmissionStatus getStatus() {
         return status;
     }
 
+    /**
+     * @return The detailled status text of the result
+     */
     public String getStatusText() {
         return statusText;
     }

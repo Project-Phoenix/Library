@@ -32,6 +32,9 @@ import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
+/**
+ * Wrapper class to store information about a single lecture
+ */
 public class PhoenixLecture implements PhoenixEntity {
 
     /** URI of the lecture resource */
@@ -144,26 +147,89 @@ public class PhoenixLecture implements PhoenixEntity {
         return response.getEntity(GENERIC_TYPE);
     }
 
+    /**
+     * Resource needs: <xmp> PhoenixLecture </xmp> Duplicate titles will return
+     * an error
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The create webresource for PhoenixLecture
+     */
     public static WebResource createResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_CREATE);
     }
 
+    /**
+     * Resource needs: <xmp> UpdateEntity<PhoenixLecture> </xmp> The
+     * LectureEntity must match only one entity to update, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The update webresource for PhoenixLecture
+     */
     public static WebResource updateResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_UPDATE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixLecture> </xmp> The
+     * SelectEntity must match only one entity to delete, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The delete webresource for PhoenixLecture
+     */
     public static WebResource deleteResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_DELETE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixLecture> </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The get webresource for PhoenixLecture
+     */
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
     }
 
+    /**
+     * Resource needs: <xmp> AddToEntity<PhoenixLecture, PhoenixGroup> </xmp>
+     * The AddToEntity must match only one entity, otherwise it will return NOT
+     * Ok
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The add group webresource for PhoenixLecture
+     */
     public static WebResource addGroupResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_ADD_GROUP);
     }
 
+    /**
+     * Resource needs: <xmp> AddToEntity<PhoenixLecture, PhoenixDetails> </xmp>
+     * The AddToEntity must match only one entity, otherwise it will return NOT
+     * Ok
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The create webresource for PhoenixLecture
+     */
     public static WebResource addDetailResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_ADD_DETAIL);
     }

@@ -22,12 +22,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 /**
- * Filter for removing format information like HTML tags or &nbsp; from the
- * original text. <br />
- * Replace all <\p> with a line break
+ * Text filter based on jsoup HTML parsing to remove all HTML tags and provide a
+ * plain text.
+ * 
  */
 public class EduFilter implements TextFilter {
 
+    /**
+     * Singleton of the filter implementation
+     */
     public static final TextFilter INSTANCE = new EduFilter();
 
     private EduFilter() {

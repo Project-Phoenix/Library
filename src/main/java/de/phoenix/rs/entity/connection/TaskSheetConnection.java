@@ -21,17 +21,46 @@ package de.phoenix.rs.entity.connection;
 import java.util.List;
 
 import de.phoenix.rs.entity.PhoenixTask;
+import de.phoenix.rs.entity.PhoenixTaskSheet;
 import de.phoenix.rs.key.ConnectionEntity;
+import de.phoenix.rs.key.SelectEntity;
 
+/**
+ * Decorate class for a {@link ConnectionEntity} to create a
+ * {@link PhoenixTaskSheet}
+ */
 public class TaskSheetConnection extends ConnectionEntity {
 
+    /**
+     * Empty constructor for json-transport
+     */
     protected TaskSheetConnection() {
 
     }
 
+    /**
+     * Creates a Connection entity with all neccessary information
+     * 
+     * @param taskSheetTitle
+     *            The title of the task sheet
+     * @param tasks
+     *            The tasks to insert into the task sheet
+     */
     public TaskSheetConnection(String taskSheetTitle, List<PhoenixTask> tasks) {
-        super();
         addAttribute("title", taskSheetTitle);
         addEntities(tasks);
+    }
+
+    /**
+     * Creates a Connection entity with all neccessary information
+     * 
+     * @param taskSelectors
+     *            The title of the task sheet
+     * @param taskSheetTitle
+     *            The tasks to insert into the task sheet
+     */
+    public TaskSheetConnection(List<SelectEntity<PhoenixTask>> taskSelectors, String taskSheetTitle) {
+        addAttribute("title", taskSheetTitle);
+        addSelectEntities(PhoenixTask.class, taskSelectors);
     }
 }

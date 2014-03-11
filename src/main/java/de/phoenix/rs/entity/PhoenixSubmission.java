@@ -39,6 +39,10 @@ import de.phoenix.rs.key.AddToEntity;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
+/**
+ * Submissions are submission for a single task containg texts and binary
+ * attachments
+ */
 public class PhoenixSubmission implements PhoenixEntity {
 
     /** URI of the submission resource */
@@ -124,6 +128,15 @@ public class PhoenixSubmission implements PhoenixEntity {
         }
     }
 
+    /**
+     * Constructor for client
+     * 
+     * @param fileAttachments
+     *            List of files as binary attachments
+     * @param fileTexts
+     *            List of files as text based attachments
+     * @throws IOException
+     */
     public PhoenixSubmission(List<File> fileAttachments, List<File> fileTexts) throws IOException {
         this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
         for (File attachment : fileAttachments) {
@@ -181,10 +194,16 @@ public class PhoenixSubmission implements PhoenixEntity {
         return task;
     }
 
+    /**
+     * @return The status of this submission.
+     */
     public int getStatus() {
         return status;
     }
 
+    /**
+     * @return The status text of the submission
+     */
     public String getStatusText() {
         return statusText;
     }
@@ -232,10 +251,30 @@ public class PhoenixSubmission implements PhoenixEntity {
         return base(client, baseURL).path(WEB_RESOURCE_GET_TASK_SUBMISSIONS);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixSubmission> </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The get webresource for PhoenixSubmission
+     */
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixSubmission> </xmp> The
+     * SelectEntity must match only one entity to delete, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The get webresource for PhoenixSubmission
+     */
     public static WebResource deleteResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_DELETE);
     }

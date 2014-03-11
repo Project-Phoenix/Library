@@ -170,7 +170,8 @@ public class PhoenixAttachment implements PhoenixEntity {
     }
 
     /**
-     * @return The name concated with its type
+     * @return The fullname of the attachment in the format: <br>
+     *         <code>NAME.TYPE</code>
      */
     @JsonIgnore
     public String getFullname() {
@@ -206,10 +207,32 @@ public class PhoenixAttachment implements PhoenixEntity {
         return content.length;
     }
 
+    /**
+     * Resource needs: <xmp> UpdateEntity<PhoenixAttachment> </xmp> The
+     * UpdateEntity must match only one entity to update, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The Update webresource for PhoenixAttachment
+     */
     public static WebResource updateResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_UPDATE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixAttachment> </xmp> The
+     * SelectEntity must match only one entity to delete, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The delete webresource for PhoenixAttachment
+     */
     public static WebResource deleteResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_DELETE);
     }

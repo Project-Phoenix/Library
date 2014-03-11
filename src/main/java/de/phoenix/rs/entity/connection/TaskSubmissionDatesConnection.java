@@ -22,17 +22,58 @@ import org.joda.time.DateTime;
 
 import de.phoenix.rs.entity.PhoenixLectureGroupTaskSheet;
 import de.phoenix.rs.entity.PhoenixTask;
+import de.phoenix.rs.entity.PhoenixTaskSubmissionDates;
 import de.phoenix.rs.key.ConnectionEntity;
+import de.phoenix.rs.key.SelectEntity;
 
+/**
+ * Decorate class for a {@link ConnectionEntity} to create a
+ * {@link PhoenixTaskSubmissionDates}
+ */
 public class TaskSubmissionDatesConnection extends ConnectionEntity {
 
+    /**
+     * Empty constructor for json-transport
+     */
     protected TaskSubmissionDatesConnection() {
 
     }
 
+    /**
+     * Creates a Connection entity with all neccessary information
+     * 
+     * @param deadline
+     *            The deadline for the task
+     * @param releasedate
+     *            The release date of the task
+     * @param taskSheet
+     *            The tasksheet the task is in
+     * @param task
+     *            The task itself
+     */
     public TaskSubmissionDatesConnection(DateTime deadline, DateTime releasedate, PhoenixLectureGroupTaskSheet taskSheet, PhoenixTask task) {
         addEntity(task);
         addEntity(taskSheet);
+
+        addAttribute("deadline", deadline);
+        addAttribute("releaseDate", releasedate);
+    }
+
+    /**
+     * Creates a Connection entity with all neccessary information
+     * 
+     * @param deadline
+     *            The deadline for the task
+     * @param releasedate
+     *            The release date of the task
+     * @param taskSheetSelector
+     *            The tasksheet the task is in
+     * @param taskSelector
+     *            The task itself
+     */
+    public TaskSubmissionDatesConnection(DateTime deadline, DateTime releasedate, SelectEntity<PhoenixLectureGroupTaskSheet> taskSheetSelector, SelectEntity<PhoenixTask> taskSelector) {
+        addSelectEntity(PhoenixLectureGroupTaskSheet.class, taskSheetSelector);
+        addSelectEntity(PhoenixTask.class, taskSelector);
 
         addAttribute("deadline", deadline);
         addAttribute("releaseDate", releasedate);

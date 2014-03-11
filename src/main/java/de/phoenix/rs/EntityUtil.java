@@ -22,6 +22,9 @@ import java.util.List;
 
 import com.sun.jersey.api.client.ClientResponse;
 
+/**
+ * Util class for entity handeling with the jersey API
+ */
 public class EntityUtil {
 
     private EntityUtil() {

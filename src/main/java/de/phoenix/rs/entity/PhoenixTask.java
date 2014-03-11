@@ -202,10 +202,23 @@ public class PhoenixTask implements PhoenixEntity {
         return new ArrayList<PhoenixAttachment>(attachments);
     }
 
+    /**
+     * Disallow certain content for this task. All submissions containing
+     * anything of this content will rejected. This is useful to prevent
+     * malicious code(like java.io access) or forbid Java implementation for
+     * solutions
+     * 
+     * @param content
+     *            The content to disallow
+     */
     public void setDisallowedContent(DisallowedContent content) {
         this.disallowedContent = content;
     }
 
+    /**
+     * @return The disallowed content for this task - normally it is
+     *         <code>null</code>
+     */
     public DisallowedContent getDisallowedContent() {
         return disallowedContent;
     }
@@ -260,26 +273,83 @@ public class PhoenixTask implements PhoenixEntity {
         return response.getEntity(GENERIC_TYPE);
     }
 
+    /**
+     * Resource needs: <xmp> PhoenixTask </xmp> Duplicate titles will return an
+     * error
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The create webresource for PhoenixTask
+     */
     public static WebResource createResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_CREATE);
     }
 
+    /**
+     * Resource needs: <xmp> UpdateEntity<PhoenixTask> </xmp> The UpdateEntity
+     * must match only one entity to update, otherwise it will return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The update webresource for PhoenixTask
+     */
     public static WebResource updateResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_UPDATE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixTask> </xmp> The SelectEntity
+     * must match only one entity to delete, otherwise it will return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The delete webresource for PhoenixTask
+     */
     public static WebResource deleteResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_DELETE);
     }
 
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixTask> </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The get webresource for PhoenixTask
+     */
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
     }
 
+    /**
+     * Resource needs nothing
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The getAllTitles webresource for PhoenixTask
+     */
     public static WebResource getAllTitlesResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GETALL_TITLES);
     }
 
+    /**
+     * Resource needs: <xmp> AddToEntity<PhoenixTask, PhoenixSubmission> </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The submit webresource for PhoenixTask
+     */
     public static WebResource submitResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_ADD_SUBMISSION);
     }
