@@ -21,14 +21,9 @@ package de.phoenix.rs.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.GenericEntity;
-
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
-import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
@@ -111,40 +106,6 @@ public class PhoenixLecture implements PhoenixEntity {
      */
     public List<PhoenixDetails> getLectureDetails() {
         return new ArrayList<PhoenixDetails>(lectureDetails);
-    }
-
-    /**
-     * Generic Type for {@link PhoenixLecture}
-     * 
-     * @deprecated No longer necessary for sending and receiving lists
-     */
-
-    private final static GenericType<List<PhoenixLecture>> GENERIC_TYPE = new GenericType<List<PhoenixLecture>>() {
-    };
-
-    /**
-     * Convert a list to an generic entity to send it via JX-RS
-     * 
-     * @param list
-     *            List containing {@link PhoenixLecture}
-     * @return Generic Entity to send via JX-RS
-     * @deprecated No longer necessary for sending and receiving lists
-     */
-    public final static GenericEntity<List<PhoenixLecture>> toSendableList(List<PhoenixLecture> list) {
-        return new GenericEntity<List<PhoenixLecture>>(list, GENERIC_TYPE.getType());
-    }
-
-    /**
-     * Extract the entity from the response and convert it to a normal list
-     * 
-     * @param response
-     *            Response containg an list from JX-RS
-     * @return List containg values as {@link PhoenixLecture}
-     * @deprecated No longer necessary for sending and receiving lists. Use
-     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
-     */
-    public final static List<PhoenixLecture> fromSendableList(ClientResponse response) {
-        return response.getEntity(GENERIC_TYPE);
     }
 
     /**

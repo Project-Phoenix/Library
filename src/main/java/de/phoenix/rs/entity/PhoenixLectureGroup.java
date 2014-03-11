@@ -21,18 +21,13 @@ package de.phoenix.rs.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.core.GenericEntity;
-
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalTime;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.date.Weekday;
-import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
@@ -174,39 +169,6 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      */
     public PhoenixLecture getLecture() {
         return lecture;
-    }
-
-    /**
-     * Generic Type for {@link PhoenixLectureGroup}
-     * 
-     * @deprecated No longer necessary for sending and receiving lists
-     */
-    private final static GenericType<List<PhoenixLectureGroup>> GENERIC_TYPE = new GenericType<List<PhoenixLectureGroup>>() {
-    };
-
-    /**
-     * Convert a list to an generic entity to send it via JX-RS
-     * 
-     * @param list
-     *            List containing {@link PhoenixLectureGroup}
-     * @return Generic Entity to send via JX-RS
-     * @deprecated No longer necessary for sending and receiving lists
-     */
-    public final static GenericEntity<List<PhoenixLectureGroup>> toSendableList(List<PhoenixLectureGroup> list) {
-        return new GenericEntity<List<PhoenixLectureGroup>>(list, GENERIC_TYPE.getType());
-    }
-
-    /**
-     * Extract the entity from the response and convert it to a normal list
-     * 
-     * @param response
-     *            Response containg an list from JX-RS
-     * @return List containg values as {@link PhoenixLectureGroup}
-     * @deprecated No longer necessary for sending and receiving lists. Use
-     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
-     */
-    public final static List<PhoenixLectureGroup> fromSendableList(ClientResponse response) {
-        return response.getEntity(GENERIC_TYPE);
     }
 
     /**

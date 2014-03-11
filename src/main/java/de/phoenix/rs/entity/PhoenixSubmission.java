@@ -24,16 +24,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.ws.rs.core.GenericEntity;
-
 import org.joda.time.DateTime;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
-import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
 import de.phoenix.rs.key.AddToEntity;
 import de.phoenix.rs.key.Key;
@@ -206,39 +201,6 @@ public class PhoenixSubmission implements PhoenixEntity {
      */
     public String getStatusText() {
         return statusText;
-    }
-
-    /**
-     * Generic Type for {@link PhoenixSubmission}
-     * 
-     * @deprecated No longer necessary for sending and receiving lists
-     */
-    private final static GenericType<List<PhoenixSubmission>> GENERIC_TYPE = new GenericType<List<PhoenixSubmission>>() {
-    };
-
-    /**
-     * Convert a list to an generic entity to send it via JX-RS
-     * 
-     * @param list
-     *            List containing {@link PhoenixSubmission}
-     * @return Generic Entity to send via JX-RS
-     * @deprecated No longer necessary for sending and receiving lists
-     */
-    public final static GenericEntity<List<PhoenixSubmission>> toSendableList(List<PhoenixSubmission> list) {
-        return new GenericEntity<List<PhoenixSubmission>>(list, GENERIC_TYPE.getType());
-    }
-
-    /**
-     * Extract the entity from the response and convert it to a normal list
-     * 
-     * @param response
-     *            Response containg an list from JX-RS
-     * @return List containg values as {@link PhoenixSubmission}
-     * @deprecated No longer necessary for sending and receiving lists. Use
-     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
-     */
-    public final static List<PhoenixSubmission> fromSendableList(ClientResponse response) {
-        return response.getEntity(GENERIC_TYPE);
     }
 
     @Deprecated

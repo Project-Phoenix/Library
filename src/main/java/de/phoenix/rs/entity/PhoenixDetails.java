@@ -18,22 +18,15 @@
 
 package de.phoenix.rs.entity;
 
-import java.util.List;
-
-import javax.ws.rs.core.GenericEntity;
-
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
 
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.date.Weekday;
-import de.phoenix.rs.EntityUtil;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
@@ -182,40 +175,6 @@ public class PhoenixDetails implements PhoenixEntity {
      */
     public LocalDate getEndDate() {
         return endDate;
-    }
-
-    /**
-     * Generic Type for {@link PhoenixDetails}
-     * 
-     * @deprecated No longer necessary for sending and receiving lists
-     */
-
-    private final static GenericType<List<PhoenixDetails>> GENERIC_TYPE = new GenericType<List<PhoenixDetails>>() {
-    };
-
-    /**
-     * Convert a list to an generic entity to send it via JX-RS
-     * 
-     * @param list
-     *            List containing {@link PhoenixDetails}
-     * @return Generic Entity to send via JX-RS
-     * @deprecated No longer necessary for sending and receiving lists
-     */
-    public final static GenericEntity<List<PhoenixDetails>> toSendableList(List<PhoenixDetails> list) {
-        return new GenericEntity<List<PhoenixDetails>>(list, GENERIC_TYPE.getType());
-    }
-
-    /**
-     * Extract the entity from the response and convert it to a normal list
-     * 
-     * @param response
-     *            Response containg an list from JX-RS
-     * @return List containg values as {@link PhoenixDetails}
-     * @deprecated No longer necessary for sending and receiving lists. Use
-     *             instead {@link EntityUtil#extractEntityList(ClientResponse)}
-     */
-    public final static List<PhoenixDetails> fromSendableList(ClientResponse response) {
-        return response.getEntity(GENERIC_TYPE);
     }
 
     /**
