@@ -23,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
@@ -42,6 +43,7 @@ public class JacksonConfigurator implements ContextResolver<ObjectMapper> {
         mapper.registerModule(new JodaModule());
         mapper.enableDefaultTyping();
         mapper.enableDefaultTyping(DefaultTyping.NON_FINAL, As.WRAPPER_OBJECT);
+        mapper.setSerializationInclusion(Include.NON_NULL);
     }
 
     @Override
