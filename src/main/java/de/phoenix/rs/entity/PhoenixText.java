@@ -86,53 +86,6 @@ public class PhoenixText implements PhoenixEntity {
     }
 
     /**
-     * Constructor for client side. Creationdate is not saved in unix files, so
-     * you have to give it manually
-     * 
-     * @param file
-     *            The file containing the text
-     * @param creationDate
-     *            Creation date of the file
-     * @throws IOException
-     * 
-     * 
-     * @deprecated Use {@link #PhoenixText(File, String)} instead to avoid wrong
-     *             filenames
-     */
-    public PhoenixText(File file) throws IOException {
-        read(file);
-
-        this.name = file.getName();
-        int fileSeperator = name.lastIndexOf('.');
-        if (fileSeperator == -1) {
-            this.type = "";
-        } else {
-            this.type = name.substring(fileSeperator + 1);
-            name = name.substring(0, fileSeperator);
-        }
-    }
-
-    /**
-     * Constructor for client. The date is set by the server!
-     * 
-     * @param text
-     *            The content of this text
-     * @param name
-     *            The name of the text file
-     * @param type
-     *            The file ending
-     * 
-     * 
-     * @deprecated Use {@link #PhoenixText(File, String)} instead to avoid wrong
-     *             filenames and wrong types
-     */
-    public PhoenixText(String text, String name, String type) {
-        this.text = text;
-        this.name = name;
-        this.type = type;
-    }
-
-    /**
      * Constructor for client. Creates an phoenix text and capsulates a text
      * file
      * 

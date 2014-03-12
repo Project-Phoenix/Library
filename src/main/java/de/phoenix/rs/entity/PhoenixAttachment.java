@@ -81,21 +81,6 @@ public class PhoenixAttachment implements PhoenixEntity {
     }
 
     /**
-     * Constructor for the client.
-     * 
-     * @param file
-     *            The file containing binary data
-     * @param creationDate
-     *            The creation date of the file
-     * @throws IOException
-     * @deprecated Use {@link #PhoenixAttachment(File, String)} instead to avoid
-     *             wrong filenames
-     */
-    public PhoenixAttachment(File file) throws IOException {
-        this(file, file.getName());
-    }
-
-    /**
      * Constructor for client. Creates an phoenix attachment and capsulates a
      * binary file
      * 

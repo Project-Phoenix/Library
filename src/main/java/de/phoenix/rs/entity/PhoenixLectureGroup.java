@@ -21,7 +21,6 @@ package de.phoenix.rs.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalTime;
 
 import com.sun.jersey.api.client.Client;
@@ -38,15 +37,6 @@ public class PhoenixLectureGroup implements PhoenixEntity {
 
     /** URI of the lecture group resource */
     public static final String WEB_RESOURCE_ROOT = "lectureGroup";
-
-    /**
-     * SubURI of the lecture group resource to create a lecture group and assign
-     * it to a lecture
-     * 
-     * @param {@link PhoenixLectureGroup} Task to create
-     * @deprecated Use the {@link PhoenixLecture#WEB_RESOURCE_ADD_GROUP} instead
-     */
-    public static final String WEB_RESOURCE_CREATE = "create";
 
     public static final String WEB_RESOURCE_GET = "get";
 
@@ -69,33 +59,6 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      */
     protected PhoenixLectureGroup() {
 
-    }
-
-    /**
-     * Constructor for client
-     * 
-     * @param name
-     *            The name of the group
-     * @param maxMember
-     *            The max possible member of the group
-     * @param submissionDeadlineWeekday
-     *            The weekday of the default submission. Use
-     *            {@link DateTimeConstants} Monday-Sunday
-     * @param submissionDeadlineTime
-     *            The default deadline time for this group to assign submission.
-     *            The day of the deadline is defined by
-     *            submissionDeadlineWeekyday
-     * @param details
-     *            Detail information about the lecture group (room, time and how
-     *            often)
-     * @param lecture
-     *            The lecture the group is assigned to
-     * @deprecated Use
-     *             {@link #PhoenixLectureGroup(String, int, Weekday, LocalTime, List, PhoenixLecture)}
-     *             instead using {@link Weekday}
-     */
-    public PhoenixLectureGroup(String name, int maxMember, int submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details, PhoenixLecture lecture) {
-        this(name, maxMember, Weekday.forID(submissionDeadlineWeekday), submissionDeadlineTime, details, lecture);
     }
 
     /**

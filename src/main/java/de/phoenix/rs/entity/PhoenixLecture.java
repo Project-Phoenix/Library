@@ -43,14 +43,6 @@ public class PhoenixLecture implements PhoenixEntity {
     public static final String WEB_RESOURCE_CREATE = "create";
 
     /**
-     * SubURI of the lecture resource to get all lectures
-     * 
-     * @return List<{@link PhoenixLecture}> All lectures
-     */
-    @Deprecated
-    public static final String WEB_RESOURCE_GETALL = "getAll";
-
-    /**
      * SubURI of the lecture resource to get search for lectures
      * 
      * @param SelectEntity

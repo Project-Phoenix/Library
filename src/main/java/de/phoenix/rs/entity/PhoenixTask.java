@@ -18,11 +18,11 @@
 
 package de.phoenix.rs.entity;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
@@ -37,47 +37,18 @@ public class PhoenixTask implements PhoenixEntity {
 
     /** URI of the task resource */
     public static final String WEB_RESOURCE_ROOT = "task";
-    /**
-     * SubURI of the task resource to create an task
-     * 
-     * @param PhoenixTask
-     *            Task to create
-     */
-    public static final String WEB_RESOURCE_CREATE = "create";
-    /**
-     * SubURI of the task resource to update an task
-     * 
-     * @param Updateable
-     *            <PhoenixTask, String> Task to update identified by the old
-     *            title
-     */
-    public static final String WEB_RESOURCE_UPDATE = "update";
-    /**
-     * SubURI of the task resource to delete an single task
-     * 
-     * @param PhoenixTask
-     *            Task to delete from the system
-     */
-    public static final String WEB_RESOURCE_DELETE = "delete";
-    /**
-     * SubURI of the task resource to get all tasks
-     * 
-     * @deprecated Use {@link #WEB_RESOURCE_GET}
-     */
-    public static final String WEB_RESOURCE_GETALL = "getAll";
-    /**
-     * SubURI of the task resource to get all tasks
-     */
-    public static final String WEB_RESOURCE_GETALL_TITLES = "getAllTitles";
-    /**
-     * SubURI of the task resource to look for a task by its title
-     * 
-     * @param String
-     *            The title of the task
-     * @deprecated Use {@link #WEB_RESOURCE_GET}
-     */
 
-    public static final String WEB_RESOURCE_GETBYTITLE = "getByTitle";
+    /** SubURI of the task resource to create an task */
+    public static final String WEB_RESOURCE_CREATE = "create";
+
+    /** SubURI of the task resource to update an task */
+    public static final String WEB_RESOURCE_UPDATE = "update";
+
+    /** SubURI of the task resource to delete an single task */
+    public static final String WEB_RESOURCE_DELETE = "delete";
+
+    /** SubURI of the task resource to get all tasks */
+    public static final String WEB_RESOURCE_GETALL_TITLES = "getAllTitles";
 
     public static final String WEB_RESOURCE_GET = "get";
 
@@ -89,7 +60,10 @@ public class PhoenixTask implements PhoenixEntity {
 
     private DisallowedContent disallowedContent;
 
+    @JsonProperty
     private List<PhoenixAttachment> attachments;
+
+    @JsonProperty
     private List<PhoenixText> answerPattern;
 
     /**
@@ -121,68 +95,13 @@ public class PhoenixTask implements PhoenixEntity {
     }
 
     /**
-     * Constructor for the client
-     * 
-     * @param title
-     *            The title of the task
-     * @param description
-     *            The task description
-     * @param fileAttachments
-     *            A list of binary files
-     * @param filePattern
-     *            A list of text based files
-     * @throws IOException
-     * 
-     * @deprecated Use {@link #PhoenixTask(List, List, String, String)} instead
-     *             to avoid wrong file names
-     */
-    public PhoenixTask(String title, String description, List<File> fileAttachments, List<File> filePattern) throws IOException {
-        this.title = title;
-        this.description = description;
-
-        this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
-        for (File attachment : fileAttachments) {
-            attachments.add(new PhoenixAttachment(attachment));
-        }
-        this.answerPattern = new ArrayList<PhoenixText>(filePattern.size());
-        for (File patter : filePattern) {
-            answerPattern.add(new PhoenixText(patter));
-        }
-    }
-
-    /**
-     * 
-     * Constructor for the client
-     * 
-     * @param title
-     *            The title of the task
-     * @param texts
-     *            A list of the answer pattern
-     * @param description
-     *            The task description
-     * @param attachments
-     *            A list of binary files
-     * @throws IOException
-     * @deprecated Use {@link #PhoenixTask(List, List, String, String)} instead
-     *             to avoid wrong filenames
-     */
-    public PhoenixTask(String title, List<PhoenixText> texts, String description, List<File> attachments) throws IOException {
-        this.title = title;
-        this.description = description;
-        this.answerPattern = new ArrayList<PhoenixText>(texts);
-
-        for (File file : attachments) {
-            this.attachments.add(new PhoenixAttachment(file));
-        }
-    }
-
-    /**
      * @return The task description
      */
     public String getDescription() {
         return description;
     }
 
+    @JsonIgnore
     /**
      * @return Copy of list to the text pattern
      */
@@ -190,6 +109,7 @@ public class PhoenixTask implements PhoenixEntity {
         return new ArrayList<PhoenixText>(answerPattern);
     }
 
+    @JsonIgnore
     /**
      * @return Copy of list to the attachments
      */
@@ -216,16 +136,6 @@ public class PhoenixTask implements PhoenixEntity {
      */
     public DisallowedContent getDisallowedContent() {
         return disallowedContent;
-    }
-
-    @Deprecated
-    protected void setAttachments(List<PhoenixAttachment> attachments) {
-        this.attachments = attachments;
-    }
-
-    @Deprecated
-    protected void setPattern(List<PhoenixText> pattern) {
-        this.answerPattern = pattern;
     }
 
     /**

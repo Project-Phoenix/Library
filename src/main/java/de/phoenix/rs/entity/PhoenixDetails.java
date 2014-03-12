@@ -18,7 +18,6 @@
 
 package de.phoenix.rs.entity;
 
-import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
@@ -69,33 +68,6 @@ public class PhoenixDetails implements PhoenixEntity {
      */
     protected PhoenixDetails() {
 
-    }
-
-    /**
-     * Constructor for client/server
-     * 
-     * @param room
-     *            The room where the event is happening
-     * @param weekday
-     *            The day of the week, defined by the constants of
-     *            {@link DateTimeConstants} (Monday-Sunday)
-     * @param startTime
-     *            The time when the events starts
-     * @param interval
-     *            The interval of the event. Will be replaced by an enum
-     * @param startDate
-     *            The start date of the event(before this date, the event does
-     *            not exist!)
-     * @param endDate
-     *            The end date of the event(after this date, the event does not
-     *            exist!)
-     * @deprecated Use
-     *             {@link #PhoenixDetails(String, Weekday, LocalTime, LocalTime, Period, LocalDate, LocalDate)}
-     *             using the {@link Weekday} instead of unsafe constants
-     */
-
-    public PhoenixDetails(String room, int weekday, LocalTime startTime, LocalTime endTime, Period interval, LocalDate startDate, LocalDate endDate) {
-        this(room, Weekday.forID(weekday), startTime, endTime, interval, startDate, endDate);
     }
 
     /**

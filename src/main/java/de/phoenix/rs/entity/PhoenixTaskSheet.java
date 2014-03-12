@@ -38,22 +38,6 @@ public class PhoenixTaskSheet implements PhoenixEntity {
     /** URI of the task resource */
     public static final String WEB_RESOURCE_ROOT = "taskSheet";
 
-    /**
-     * SubURI of the tasksheet resource to create an TaskSheet
-     * 
-     * @param {@link PhoenixTaskSheet} TaskSheet to create
-     * @deprecated
-     */
-    public static final String WEB_RESOURCE_CREATE = "create";
-
-    /**
-     * SubURI of the tasksheet resource to get all tasksheets
-     * 
-     * @return List<{@link PhoenixTaskSheet} All task sheets
-     * @deprecated Use {@link #WEB_RESOURCE_GET} instead
-     * */
-    public static final String WEB_RESOURCE_GETALL = "getAll";
-
     public static final String WEB_RESOURCE_GET = "get";
 
     public static final String WEB_RESOURCE_CONNECT_TASKSHEET_WITH_TASK = "connectTasksheetWithTask";
@@ -70,29 +54,6 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      */
     public PhoenixTaskSheet() {
 
-    }
-
-    /**
-     * Constructor for server
-     * 
-     * @param tasks
-     * @param creationDate
-     * @deprecated
-     */
-    public PhoenixTaskSheet(List<PhoenixTask> tasks, DateTime creationDate) {
-        this(tasks);
-        this.creationDate = creationDate;
-    }
-
-    /**
-     * Constructor for client
-     * 
-     * @param tasks
-     *            Tasks concerning to the tasksheet
-     * @deprecated
-     */
-    public PhoenixTaskSheet(List<PhoenixTask> tasks) {
-        this.tasks = new ArrayList<PhoenixTask>(tasks);
     }
 
     /**
@@ -138,23 +99,6 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      */
     public DateTime getCreationDate() {
         return creationDate;
-    }
-
-    /**
-     * Resource needs: <xmp> PhoenixTaskSheet </xmp> Duplicate titles will
-     * return an error
-     * 
-     * @param client
-     *            Using for accessing the webresource
-     * @param baseURL
-     *            The baseURL of the REST webservice
-     * @return The create webresource for PhoenixTaskSheet
-     * @deprecated Use the
-     *             {@link #connectTaskSheetWithTaskResource(Client, String)}
-     *             resource
-     */
-    public static WebResource createResource(Client client, String baseURL) {
-        return base(client, baseURL).path(WEB_RESOURCE_CREATE);
     }
 
     /**

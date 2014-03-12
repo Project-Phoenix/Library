@@ -21,7 +21,6 @@ package de.phoenix.rs.entity;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -29,8 +28,6 @@ import org.joda.time.DateTime;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
-import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
-import de.phoenix.rs.key.AddToEntity;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
@@ -42,27 +39,6 @@ public class PhoenixSubmission implements PhoenixEntity {
 
     /** URI of the submission resource */
     public static final String WEB_RESOURCE_ROOT = "submission";
-    /**
-     * SubURI of the submission resource to submit a submission for a task
-     * 
-     * @param {@link PhoenixSubmission} Submission to submit
-     * 
-     * @return {@link PhoenixSubmissionResult} <br>
-     *         Result containing the {@link SubmissionStatus} and the status
-     *         text as a string
-     * @deprecated Use {@link PhoenixTask#WEB_RESOURCE_ADD_SUBMISSION} instead
-     */
-    public static final String WEB_RESOURCE_SUBMIT = "submit";
-    /**
-     * SubURI of the submission resource to get all submissions by one task
-     * 
-     * @param {@link PhoenixTask} PhoenixTask holding submissions
-     * 
-     * @return List<{@link PhoenixSubmission}> <br>
-     *         Submissions for the task
-     * @deprecated Use the get resource
-     */
-    public static final String WEB_RESOURCE_GET_TASK_SUBMISSIONS = "getByTask";
 
     public static final String WEB_RESOURCE_GET = "get";
 
@@ -82,42 +58,7 @@ public class PhoenixSubmission implements PhoenixEntity {
     /**
      * Empty constructor for json transport
      */
-    public PhoenixSubmission() {
-    }
-
-    /**
-     * Constructor for the client
-     * 
-     * @param task
-     *            The task the submission is for
-     * @param fileAttachments
-     *            Binary files attached to this submission
-     * @param fileTexts
-     *            Text files attached to this submission
-     * @throws IOException
-     * @deprecated Use {@link #PhoenixSubmission(List, List)} in combination
-     *             with {@link AddToEntity} and the
-     *             {@link PhoenixTask#submitResource(Client, String)} resource
-     *             to upload a submission. This will also send the complete task
-     *             to the database, but only the title is neccessary for this!
-     */
-
-    public PhoenixSubmission(PhoenixTask task, List<File> fileAttachments, List<File> fileTexts) throws IOException {
-
-        this.task = task;
-        // Don't send the attachments via JSON
-        this.task.setAttachments(Collections.<PhoenixAttachment> emptyList());
-        this.task.setPattern(Collections.<PhoenixText> emptyList());
-
-        this.attachments = new ArrayList<PhoenixAttachment>(fileAttachments.size());
-        for (File attachment : fileAttachments) {
-            attachments.add(new PhoenixAttachment(attachment, attachment.getName()));
-        }
-
-        this.texts = new ArrayList<PhoenixText>(fileTexts.size());
-        for (File text : fileTexts) {
-            texts.add(new PhoenixText(text, text.getName()));
-        }
+    protected PhoenixSubmission() {
     }
 
     /**
@@ -191,16 +132,6 @@ public class PhoenixSubmission implements PhoenixEntity {
      */
     public PhoenixSubmissionResult getResult() {
         return result;
-    }
-
-    @Deprecated
-    public static WebResource submitResource(Client client, String baseURL) {
-        return base(client, baseURL).path(WEB_RESOURCE_SUBMIT);
-    }
-
-    @Deprecated
-    public static WebResource getByTaskResource(Client client, String baseURL) {
-        return base(client, baseURL).path(WEB_RESOURCE_GET_TASK_SUBMISSIONS);
     }
 
     /**
