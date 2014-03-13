@@ -218,4 +218,13 @@ public class JSONConfiguration extends Configuration {
         return this.values.containsKey(name);
     }
 
+    @Override
+    public boolean remove(String name) {
+        boolean res = this.values.remove(name) != null;
+        if (res) {
+            this.update();
+        }
+        return res;
+    }
+
 }

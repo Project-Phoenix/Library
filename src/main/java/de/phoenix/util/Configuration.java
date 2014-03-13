@@ -218,4 +218,13 @@ public abstract class Configuration {
      */
     public abstract boolean exists(String name);
 
+    /**
+     * Removes the attribute from the configuration.
+     * 
+     * @param name
+     *            The attributes name to remove
+     * @return <code>true</code> if, and only if, the attributes names exists.
+     *         Otherwise <code>false</code>
+     */
+    public abstract boolean remove(String name);
 }
