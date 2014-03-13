@@ -42,6 +42,8 @@ public class PhoenixLectureGroup implements PhoenixEntity {
 
     public static final String WEB_RESOURCE_DELETE = "delete";
 
+    public static final String WEB_RESOURCE_UPDATE = "update";
+
     @Key
     private String name;
     private int maxMember;
@@ -62,7 +64,7 @@ public class PhoenixLectureGroup implements PhoenixEntity {
     }
 
     /**
-     * Constructor for client
+     * Constructor for server
      * 
      * @param name
      *            The name of the group
@@ -87,6 +89,31 @@ public class PhoenixLectureGroup implements PhoenixEntity {
         this.submissionDeadlineTime = submissionDeadlineTime;
         this.details = new ArrayList<PhoenixDetails>(details);
         this.lecture = lecture;
+    }
+
+    /**
+     * Constructor for client
+     * 
+     * @param name
+     *            The name of the group
+     * @param maxMember
+     *            The max possible member of the group
+     * @param submissionDeadlineWeekday
+     *            The weekday of the default submission.
+     * @param submissionDeadlineTime
+     *            The default deadline time for this group to assign submission.
+     *            The day of the deadline is defined by
+     *            submissionDeadlineWeekyday
+     * @param details
+     *            Detail information about the lecture group (room, time and how
+     *            often)
+     */
+    public PhoenixLectureGroup(String name, int maxMember, Weekday submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details) {
+        this.name = name;
+        this.maxMember = maxMember;
+        this.submissionDeadlineWeekday = submissionDeadlineWeekday;
+        this.submissionDeadlineTime = submissionDeadlineTime;
+        this.details = new ArrayList<PhoenixDetails>(details);
     }
 
     /**
@@ -160,6 +187,21 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      */
     public static WebResource deleteResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_DELETE);
+    }
+
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixLectureGroup> </xmp> The
+     * UpdateEntity must match only one entity to delete, otherwise it will
+     * return NOT OK
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The update webresource for PhoenixLectureGroup
+     */
+    public static WebResource updateResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_UPDATE);
     }
 
     private static WebResource base(Client client, String baseURL) {
