@@ -42,6 +42,9 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
     @Key
     private PhoenixLectureGroup lectureGroup;
 
+    @Key
+    private String taskSheetTitle;
+
     private List<PhoenixDatedTask> tasks;
 
     /**
@@ -54,10 +57,12 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
     /**
      * Constructor for server
      * 
+     * @param taskSheetTitle
      * @param tasks
      * @param lectureGroup
      */
-    public PhoenixLectureGroupTaskSheet(PhoenixLectureGroup lectureGroup, List<PhoenixDatedTask> tasks) {
+    public PhoenixLectureGroupTaskSheet(String taskSheetTitle, PhoenixLectureGroup lectureGroup, List<PhoenixDatedTask> tasks) {
+        this.taskSheetTitle = taskSheetTitle;
         this.tasks = tasks;
         this.lectureGroup = lectureGroup;
     }
@@ -74,6 +79,13 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
      */
     public List<PhoenixDatedTask> getTasks() {
         return tasks;
+    }
+
+    /**
+     * @return The assigned task sheet title
+     */
+    public String getTaskSheetTitle() {
+        return taskSheetTitle;
     }
 
     /**

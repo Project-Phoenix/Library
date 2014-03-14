@@ -74,7 +74,7 @@ public class ToStringTest {
         pAutoTask = new PhoenixAutomaticTask(Arrays.asList(pAttachment), Arrays.asList(pText), "Test Auto Description", "TestAutoTask", "TestBackend", Arrays.asList(pTest));
         pTaskSheet = new PhoenixTaskSheet("TestTaskSheet", Arrays.asList(pTask, pAutoTask), DateTime.now());
         pDatedTask = new PhoenixDatedTask(dateTime, dateTime.plusDays(1), pTask);
-        pLectureGroupTaskSheet = new PhoenixLectureGroupTaskSheet(pLectureGroup, Arrays.asList(pDatedTask));
+        pLectureGroupTaskSheet = new PhoenixLectureGroupTaskSheet(pTaskSheet.getTitle(), pLectureGroup, Arrays.asList(pDatedTask));
         pTaskSubmissionDate = new PhoenixTaskSubmissionDates(dateTime.plusHours(1), dateTime, pLectureGroupTaskSheet, pTask);
 
         pSubmissionResult = new PhoenixSubmissionResult(SubmissionStatus.OK, "TestStatus");
