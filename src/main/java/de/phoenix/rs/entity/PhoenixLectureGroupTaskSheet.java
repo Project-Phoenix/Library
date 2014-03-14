@@ -54,23 +54,6 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
     }
 
     /**
-     * Constructor for client
-     * 
-     * @param defaultDeadline
-     *            The default deadline for its tasks. If not further described
-     *            by a {@link PhoenixTaskSubmissionDates}, all tasks of this
-     *            tasksheet will have this dead line
-     * @param defaultReleaseDate
-     *            The default release date for this group task sheet. If not
-     *            further * described by a {@link PhoenixTaskSubmissionDates},
-     *            all tasks of this tasksheet will have this release date
-     */
-    public PhoenixLectureGroupTaskSheet(DateTime defaultDeadline, DateTime defaultReleaseDate) {
-        this.defaultDeadline = defaultDeadline;
-        this.defaultReleaseDate = defaultReleaseDate;
-    }
-
-    /**
      * Constructor for server
      * 
      * @param defaultDeadline

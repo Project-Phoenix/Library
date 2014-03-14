@@ -54,7 +54,7 @@ public class PhoenixTaskSubmissionDates implements PhoenixEntity {
     }
 
     /**
-     * Constructor for client / server
+     * Constructor for server
      * 
      * @param deadline
      *            The dead line until a user can submit solutions for a task

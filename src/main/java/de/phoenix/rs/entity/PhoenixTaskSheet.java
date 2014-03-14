@@ -19,7 +19,6 @@
 package de.phoenix.rs.entity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -57,17 +56,6 @@ public class PhoenixTaskSheet implements PhoenixEntity {
     }
 
     /**
-     * Constructor for client
-     * 
-     * @param Title
-     *            The title of this task sheet
-     */
-    public PhoenixTaskSheet(String title) {
-        this.title = title;
-        this.tasks = Collections.emptyList();
-    }
-
-    /**
      * Constructor for server
      * 
      * @param Title
@@ -78,7 +66,7 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      *            The creation date
      */
     public PhoenixTaskSheet(String title, List<PhoenixTask> tasks, DateTime creationDate) {
-        this(title);
+        this.title = title;
         this.tasks = new ArrayList<PhoenixTask>(tasks);
         this.creationDate = creationDate;
     }
