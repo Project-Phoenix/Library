@@ -30,6 +30,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.phoenix.date.Weekday;
+import de.phoenix.rs.entity.PhoenixLectureGroupTaskSheet.PhoenixDatedTask;
 import de.phoenix.rs.entity.PhoenixSubmissionResult.SubmissionStatus;
 
 public class ToStringTest {
@@ -44,6 +45,7 @@ public class ToStringTest {
     private static PhoenixSubmissionResult pSubmissionResult;
     private static PhoenixSubmission pSubmission;
     private static PhoenixTaskSheet pTaskSheet;
+    private static PhoenixDatedTask pDatedTask;
     private static PhoenixLectureGroupTaskSheet pLectureGroupTaskSheet;
 
     private static PhoenixTaskSubmissionDates pTaskSubmissionDate;
@@ -71,13 +73,13 @@ public class ToStringTest {
         pTest.setTimeout(10);
         pAutoTask = new PhoenixAutomaticTask(Arrays.asList(pAttachment), Arrays.asList(pText), "Test Auto Description", "TestAutoTask", "TestBackend", Arrays.asList(pTest));
         pTaskSheet = new PhoenixTaskSheet("TestTaskSheet", Arrays.asList(pTask, pAutoTask), DateTime.now());
-        pLectureGroupTaskSheet = new PhoenixLectureGroupTaskSheet(dateTime.plusDays(1), dateTime, pTaskSheet, pLectureGroup);
+        pDatedTask = new PhoenixDatedTask(dateTime, dateTime.plusDays(1), pTask);
+        pLectureGroupTaskSheet = new PhoenixLectureGroupTaskSheet(pLectureGroup, Arrays.asList(pDatedTask));
         pTaskSubmissionDate = new PhoenixTaskSubmissionDates(dateTime.plusHours(1), dateTime, pLectureGroupTaskSheet, pTask);
 
         pSubmissionResult = new PhoenixSubmissionResult(SubmissionStatus.OK, "TestStatus");
         pSubmission = new PhoenixSubmission(dateTime, pTask, pSubmissionResult, Arrays.asList(pAttachment), Arrays.asList(pText));
     }
-
     @Test
     public void testToString() {
 

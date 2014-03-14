@@ -18,6 +18,8 @@
 
 package de.phoenix.rs.entity;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import com.sun.jersey.api.client.Client;
@@ -37,14 +39,10 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
 
     public static final String WEB_RESOURCE_GET = "get";
 
-    private DateTime defaultDeadline;
-    private DateTime defaultReleaseDate;
-
-    @Key
-    private PhoenixTaskSheet taskSheet;
-
     @Key
     private PhoenixLectureGroup lectureGroup;
+
+    private List<PhoenixDatedTask> tasks;
 
     /**
      * Empty constructor for json-transport
@@ -56,30 +54,12 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
     /**
      * Constructor for server
      * 
-     * @param defaultDeadline
-     * @param defaultReleaseDate
-     * @param taskSheet
+     * @param tasks
      * @param lectureGroup
      */
-    public PhoenixLectureGroupTaskSheet(DateTime defaultDeadline, DateTime defaultReleaseDate, PhoenixTaskSheet taskSheet, PhoenixLectureGroup lectureGroup) {
-        this.defaultDeadline = defaultDeadline;
-        this.defaultReleaseDate = defaultReleaseDate;
-        this.taskSheet = taskSheet;
+    public PhoenixLectureGroupTaskSheet(PhoenixLectureGroup lectureGroup, List<PhoenixDatedTask> tasks) {
+        this.tasks = tasks;
         this.lectureGroup = lectureGroup;
-    }
-
-    /**
-     * @return The default deadline for this task sheet and its tasks
-     */
-    public DateTime getDefaultDeadline() {
-        return defaultDeadline;
-    }
-
-    /**
-     * @return The default release date for this task sheet and its tasks
-     */
-    public DateTime getDefaultReleaseDate() {
-        return defaultReleaseDate;
     }
 
     /**
@@ -90,10 +70,69 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
     }
 
     /**
-     * @return The tasksheet assigned to the lecture group
+     * @return The tasks combined with their invidual release and deadline dates
      */
-    public PhoenixTaskSheet getTaskSheet() {
-        return taskSheet;
+    public List<PhoenixDatedTask> getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Decorator class to combine a task with its release and dead line dates
+     * 
+     * @author Kilian
+     * 
+     */
+    public static class PhoenixDatedTask {
+
+        private DateTime releaseDate;
+        private DateTime deadlineDate;
+        private PhoenixTask task;
+
+        /**
+         * Empty constructor for json-transport
+         */
+        protected PhoenixDatedTask() {
+
+        }
+
+        /**
+         * Constructor for server
+         * 
+         * @param releaseDate
+         * @param deadlineDate
+         * @param task
+         */
+        public PhoenixDatedTask(DateTime releaseDate, DateTime deadlineDate, PhoenixTask task) {
+            this.releaseDate = releaseDate;
+            this.deadlineDate = deadlineDate;
+            this.task = task;
+        }
+
+        /**
+         * @return The deadline until a user can submit a solution for the task
+         */
+        public DateTime getDeadlineDate() {
+            return deadlineDate;
+        }
+
+        /**
+         * @return The release date for the task
+         */
+        public DateTime getReleaseDate() {
+            return releaseDate;
+        }
+
+        /**
+         * @return The task itself
+         */
+        public PhoenixTask getTask() {
+            return task;
+        }
+
+        @Override
+        public String toString() {
+            return "PhoenixDatedTask={Deadline:" + deadlineDate + ";ReleaseDate:" + releaseDate + ";Task:" + task + "}";
+        }
     }
 
     /**
@@ -129,7 +168,7 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixLectureGroupTaskSheet={DefaultDeadline=%s;DefaultReleaseDate=%s;PhoenixTaskSheet=%s;PhoenixLectureGroup=%s}", defaultDeadline, defaultReleaseDate, taskSheet, lectureGroup);
+        return String.format("PhoenixLectureGroupTaskSheet={PhoenixDatedTasks:%s;PhoenixLectureGroup=%s}", tasks, lectureGroup);
     }
 
 }
