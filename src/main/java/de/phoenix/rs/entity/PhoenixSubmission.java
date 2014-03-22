@@ -21,6 +21,7 @@ package de.phoenix.rs.entity;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -80,6 +81,19 @@ public class PhoenixSubmission implements PhoenixEntity {
         for (File text : fileTexts) {
             texts.add(new PhoenixText(text, text.getName()));
         }
+    }
+
+    /**
+     * Constructor for client
+     * 
+     * @param attachments
+     *            List of binary attachments
+     * @param texts
+     *            List of text encoded attachments, normally the source code
+     */
+    public PhoenixSubmission(Collection<PhoenixAttachment> attachments, Collection<PhoenixText> texts) {
+        this.attachments = new ArrayList<PhoenixAttachment>(attachments);
+        this.texts = new ArrayList<PhoenixText>(texts);
     }
 
     /**
