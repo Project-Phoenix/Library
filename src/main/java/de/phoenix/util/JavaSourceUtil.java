@@ -41,7 +41,12 @@ public class JavaSourceUtil {
             throw new IllegalArgumentException("{ not after class");
 
         classIndex += "class ".length();
-        return javaSource.substring(classIndex, bracketIndex).trim();
+        String className = javaSource.substring(classIndex, bracketIndex).trim();
+        if (className.isEmpty()) {
+            throw new IllegalArgumentException("No class name found!");
+        }
+        return className;
+        
     }
 
 }

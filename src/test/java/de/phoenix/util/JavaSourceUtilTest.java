@@ -56,12 +56,46 @@ public class JavaSourceUtilTest {
         assertEquals("RunnerTest", JavaSourceUtil.extractClassName(sourceCode));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test()
     public void noClassTest() {
-        
+
         //@formatter:off
         String sourceCode = ""
                 + "public interface RunnerTest {"
+                + "     "
+                + "     @Test"
+                + "     public void bla();"
+                + ""
+                + "}";
+        //@formatter:on
+        try {
+            JavaSourceUtil.extractClassName(sourceCode);
+            fail("no exception thrown!");
+        } catch (Exception e) {
+        }
+
+        //@formatter:off
+        sourceCode = ""
+                + "public enum RunnerTest {"
+                + "     "
+                + "     @Test"
+                + "     public void bla();"
+                + ""
+                + "}";
+        //@formatter:on        
+        try {
+            JavaSourceUtil.extractClassName(sourceCode);
+            fail("no exception thrown!");
+        } catch (Exception e) {
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void noClassNameTest() {
+
+        //@formatter:off
+        String sourceCode = ""
+                + "public class {"
                 + "     "
                 + "     @Test"
                 + "     public void bla();"
