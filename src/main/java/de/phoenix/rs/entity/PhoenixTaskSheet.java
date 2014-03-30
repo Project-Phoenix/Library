@@ -40,8 +40,10 @@ public class PhoenixTaskSheet implements PhoenixEntity {
     public static final String WEB_RESOURCE_GET = "get";
 
     public static final String WEB_RESOURCE_CONNECT_TASKSHEET_WITH_TASK = "connectTasksheetWithTask";
-    
-    public static final String WEB_RESOUECE_REMOVE_TASK_FROM_TASKSHEET = "removeTaskFromTaskSheet";
+
+    public static final String WEB_RESOURCE_REMOVE_TASK_FROM_TASKSHEET = "removeTaskFromTaskSheet";
+
+    public static final String WEB_RESOURCE_ADD_TASK_TO_TASKSHEET = "addTaskToTaskSheet";
 
     @Key
     private String title;
@@ -111,14 +113,36 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      *            Using for accessing the webresource
      * @param baseURL
      *            The baseURL of the REST webservice
-     * @return The get webresource for PhoenixTaskSheet
+     * @return The create web resource for PhoenixTaskSheet
      */
     public static WebResource connectTaskSheetWithTaskResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_CONNECT_TASKSHEET_WITH_TASK);
     }
-    
+
+    /**
+     * Resource needs: <xmp> DisconnectTaskTaskSheet </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The webresource to remove a single task from a task sheet
+     */
     public static WebResource removeTaskFromTaskSheetResource(Client client, String baseURL) {
-        return base(client, baseURL).path(WEB_RESOUECE_REMOVE_TASK_FROM_TASKSHEET);
+        return base(client, baseURL).path(WEB_RESOURCE_REMOVE_TASK_FROM_TASKSHEET);
+    }
+
+    /**
+     * Resource needs: <xmp> ConnectionEntity </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The webresource to add a single task to a task sheet
+     */
+    public static WebResource addTaskToTaskSheet(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_ADD_TASK_TO_TASKSHEET);
     }
 
     private static WebResource base(Client client, String baseURL) {
