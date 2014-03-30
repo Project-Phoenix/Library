@@ -40,6 +40,8 @@ public class PhoenixTaskSheet implements PhoenixEntity {
     public static final String WEB_RESOURCE_GET = "get";
 
     public static final String WEB_RESOURCE_CONNECT_TASKSHEET_WITH_TASK = "connectTasksheetWithTask";
+    
+    public static final String WEB_RESOUECE_REMOVE_TASK_FROM_TASKSHEET = "removeTaskFromTaskSheet";
 
     @Key
     private String title;
@@ -113,6 +115,10 @@ public class PhoenixTaskSheet implements PhoenixEntity {
      */
     public static WebResource connectTaskSheetWithTaskResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_CONNECT_TASKSHEET_WITH_TASK);
+    }
+    
+    public static WebResource removeTaskFromTaskSheetResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOUECE_REMOVE_TASK_FROM_TASKSHEET);
     }
 
     private static WebResource base(Client client, String baseURL) {
