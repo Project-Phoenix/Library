@@ -22,7 +22,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
@@ -146,6 +148,10 @@ public class PhoenixSubmission implements PhoenixEntity {
      */
     public PhoenixSubmissionResult getResult() {
         return result;
+    }
+
+    public Map<String, String> getPatternTaskMap() {
+        return new HashMap<String, String>(); // TODO: IMPLEMENT ME
     }
 
     /**
