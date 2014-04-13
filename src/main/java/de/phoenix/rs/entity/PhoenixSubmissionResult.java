@@ -25,7 +25,36 @@ public class PhoenixSubmissionResult {
 
     public enum SubmissionStatus {
 
-        ERROR(), SUBMITTED(), COMPILED(), TEST_FAILED(), OK();
+        /**
+         * Generic error - check the status text
+         */
+        ERROR(),
+        /**
+         * The submission was successfully submitted, but not compiled nor
+         * tested
+         */
+        SUBMITTED(),
+        /**
+         * The submission was successfully submitted and compiled. The
+         * {@link PhoenixAutomaticTask} had no tests.
+         */
+        COMPILED(),
+        /**
+         * The submission was successfully submitted, but not compiled nor
+         * tests, because of missing classes or misspelled names. Check the
+         * status text for further information
+         */
+        MISSING_FILES(),
+        /**
+         * The submission was successfully submitted and compiled, but failed
+         * some tests. Check the status text for further information
+         */
+        TEST_FAILED(),
+        /**
+         * The submission was successfully submitted, compiled and passed all
+         * tests. Nice one!
+         */
+        OK();
     }
 
     private SubmissionStatus status;
