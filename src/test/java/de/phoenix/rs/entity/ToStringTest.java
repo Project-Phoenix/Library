@@ -70,7 +70,7 @@ public class ToStringTest {
 
         pTask = new PhoenixTask(Arrays.asList(pAttachment), Arrays.asList(pText), "TestDescription", "TestTask");
         pTest = new PhoenixTaskTest(pText);
-        pTest.setTimeout(10);
+        pTest.setTimeout(10000);
         pAutoTask = new PhoenixAutomaticTask(Arrays.asList(pAttachment), Arrays.asList(pText), "Test Auto Description", "TestAutoTask", "TestBackend", Arrays.asList(pTest));
         pTaskSheet = new PhoenixTaskSheet("TestTaskSheet", Arrays.asList(pTask, pAutoTask), DateTime.now());
         pDatedTask = new PhoenixDatedTask(dateTime, dateTime.plusDays(1), pTask);

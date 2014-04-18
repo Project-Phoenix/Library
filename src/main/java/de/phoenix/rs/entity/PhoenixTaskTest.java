@@ -41,7 +41,7 @@ public class PhoenixTaskTest {
      */
     public PhoenixTaskTest(PhoenixText content) {
         this.content = content;
-        this.setTimeout(10);
+        this.setTimeout(10000);
     }
 
     /**
