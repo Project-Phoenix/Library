@@ -33,15 +33,19 @@ public enum PhoenixStatusType implements StatusType {
     /**
      * When a {@link SelectEntity} matches more than one entity, but should match only one. Usually in delete or updates functions.
      */
-    MULTIPLE_ENTITIES   (Family.CLIENT_ERROR,   460,    "Multiple entities!"),
+    MULTIPLE_ENTITIES       (Family.CLIENT_ERROR,   460,    "Multiple entities!"),
     /**
      * When a {@link SelectEntity} matches no entity, but should match one. Usually in delete or updates functions.
      */
-    NO_ENTITIES         (Family.CLIENT_ERROR,   461,    "No entities!"),
+    NO_ENTITIES             (Family.CLIENT_ERROR,   461,    "No entities!"),
     /**
      * When there is already another entity with the same name.
      */
-    DUPLIATE_ENTITY     (Family.CLIENT_ERROR,   462,    "Duplicate entity!");
+    DUPLIATE_ENTITY         (Family.CLIENT_ERROR,   462,    "Duplicate entity!"),
+    /**
+     * When there is already another entity with the same name.
+     */
+    NO_CURRENT_TASKSHEET    (Family.OTHER,          463,    "No Current Tasksheet!");
     //@formatter:on
 
     private final Family family;

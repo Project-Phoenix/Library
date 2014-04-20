@@ -25,6 +25,7 @@ import org.joda.time.DateTime;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 
+import de.phoenix.rs.PhoenixStatusType;
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
 
@@ -38,6 +39,8 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
     public static final String WEB_RESOURCE_CREATE = "create";
 
     public static final String WEB_RESOURCE_GET = "get";
+
+    public static final String WEB_RESOURCE_CURRENT_TASKSHEET = "current";
 
     @Key
     private PhoenixLectureGroup lectureGroup;
@@ -168,10 +171,26 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
      *            Using for accessing the webresource
      * @param baseURL
      *            The baseURL of the REST webservice
-     * @return The create webresource for PhoenixLectureGroupTaskSheet
+     * @return The get webresource for PhoenixLectureGroupTaskSheet
      */
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
+    }
+
+    /**
+     * Resource needs: <xmp> SelectEntity<PhoenixLectureGroup> </xmp> This
+     * resource retrieves the task sheet, the group has to solve at next. If no
+     * current task sheet to solve is found, the error code
+     * {@link PhoenixStatusType#NO_CURRENT_TASKSHEET} is retrieved
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The create webresource for PhoenixLectureGroupTaskSheet
+     */
+    public static WebResource currentTaskSheet(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_CURRENT_TASKSHEET);
     }
 
     private static WebResource base(Client client, String baseURL) {
