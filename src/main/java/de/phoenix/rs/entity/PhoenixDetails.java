@@ -18,6 +18,8 @@
 
 package de.phoenix.rs.entity;
 
+import java.security.InvalidParameterException;
+
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
@@ -96,6 +98,11 @@ public class PhoenixDetails implements PhoenixEntity {
         this.interval = interval;
         this.startDate = startDate;
         this.endDate = endDate;
+
+        if (startTime.isAfter(endTime))
+            throw new InvalidParameterException("StartTime is after EndTime!");
+        if (startDate.isAfter(endDate))
+            throw new InvalidParameterException("StartDate is after EndDate!");
     }
 
     /**

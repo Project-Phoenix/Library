@@ -59,7 +59,7 @@ public class ConnectionEntityTest {
     public void testAutomatic() {
         ConnectionEntity ce = new ConnectionEntity();
 
-        PhoenixDetails details = new PhoenixDetails("testRoom", Weekday.MONDAY, new LocalTime(12, 30), new LocalTime(14, 00), new Period(), new LocalDate(1991, 3, 3), new LocalDate(1990, 3, 3));
+        PhoenixDetails details = new PhoenixDetails("testRoom", Weekday.MONDAY, new LocalTime(12, 30), new LocalTime(14, 00), new Period(), new LocalDate(1991, 3, 24), new LocalDate(1992, 3, 24));
         ce.addEntity(details);
 
         SelectEntity<PhoenixDetails> detailsSelector = ce.getFirstSelectEntity(PhoenixDetails.class);
@@ -71,7 +71,7 @@ public class ConnectionEntityTest {
     public void testAutomaticList() {
         ConnectionEntity ce = new ConnectionEntity();
 
-        PhoenixDetails detail = new PhoenixDetails("testRoom", Weekday.MONDAY, new LocalTime(12, 30), new LocalTime(14, 00), new Period(), new LocalDate(1991, 3, 3), new LocalDate(1990, 3, 3));
+        PhoenixDetails detail = new PhoenixDetails("testRoom", Weekday.MONDAY, new LocalTime(12, 30), new LocalTime(14, 00), new Period(), new LocalDate(1991, 3, 24), new LocalDate(1992, 3, 24));
 
         List<PhoenixDetails> detailList = Arrays.asList(detail, detail);
 
