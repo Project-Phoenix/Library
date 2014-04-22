@@ -25,6 +25,9 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import de.phoenix.rs.entity.PhoenixAutomaticTask;
+import de.phoenix.rs.entity.PhoenixTask;
+
 public class ConnectionEntity {
 
     @JsonProperty
@@ -59,7 +62,11 @@ public class ConnectionEntity {
     }
 
     public ConnectionEntity addEntity(PhoenixEntity entity) {
-        this.addSelectEntity(entity.getClass(), KeyReader.createSelect(entity));
+        // TODO: Fix it!
+        if (entity instanceof PhoenixAutomaticTask)
+            this.addSelectEntity(PhoenixTask.class, KeyReader.createSelect(entity));
+        else
+            this.addSelectEntity(entity.getClass(), KeyReader.createSelect(entity));
 
         return this;
     }
