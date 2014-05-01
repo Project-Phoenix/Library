@@ -38,6 +38,8 @@ import de.phoenix.rs.entity.PhoenixTask;
 import de.phoenix.rs.entity.PhoenixTaskSheet;
 import de.phoenix.rs.entity.PhoenixTaskSubmissionDates;
 import de.phoenix.rs.entity.PhoenixText;
+import de.phoenix.security.user.PhoenixUser;
+import de.phoenix.security.user.PhoenixUserLevel;
 
 /**
  * Reader of {@link Key} fields from {@link PhoenixEntity} to create
@@ -81,6 +83,8 @@ public class KeyReader {
         indexEntity(PhoenixTaskSheet.class, map);
         indexEntity(PhoenixTaskSubmissionDates.class, map);
         indexEntity(PhoenixText.class, map);
+        indexEntity(PhoenixUser.class, map);
+        indexEntity(PhoenixUserLevel.class, map);
     }
 
     /**

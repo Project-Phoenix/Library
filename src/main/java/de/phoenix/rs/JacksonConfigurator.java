@@ -25,6 +25,7 @@ import javax.ws.rs.ext.Provider;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -44,6 +45,7 @@ public class JacksonConfigurator implements ContextResolver<ObjectMapper> {
         mapper.enableDefaultTyping();
         mapper.enableDefaultTyping(DefaultTyping.NON_FINAL, As.WRAPPER_OBJECT);
         mapper.setSerializationInclusion(Include.NON_NULL);
+        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
     }
 
     @Override
