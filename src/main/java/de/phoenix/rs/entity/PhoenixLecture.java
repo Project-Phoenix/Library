@@ -60,6 +60,8 @@ public class PhoenixLecture implements PhoenixEntity {
 
     public static final String WEB_RESOURCE_ADD_DETAIL = "addDetail";
 
+    public static final String WEB_RESOURCE_GET_ONLY_TITLES = "getTitles";
+
     @Key
     private String title;
 
@@ -185,6 +187,17 @@ public class PhoenixLecture implements PhoenixEntity {
      */
     public static WebResource addDetailResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_ADD_DETAIL);
+    }
+
+    /**
+     * Resource needs: <xmp> Nothing </xmp>
+     * The resource returns all available 
+     * @param client
+     * @param baseURL
+     * @return
+     */
+    public static WebResource getOnlyTitlesResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_GET_ONLY_TITLES);
     }
 
     private static WebResource base(Client client, String baseURL) {
