@@ -31,6 +31,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import de.phoenix.security.user.PermissionTree;
+
 public class PermissionTreeTest {
 
     private List<String> readAllLines(File f) throws Exception {

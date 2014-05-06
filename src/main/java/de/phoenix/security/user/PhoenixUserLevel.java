@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
-import de.phoenix.security.permission.datastructure.PermissionTree;
 
 public class PhoenixUserLevel implements PhoenixEntity {
 

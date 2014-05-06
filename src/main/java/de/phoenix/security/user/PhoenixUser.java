@@ -29,6 +29,7 @@ public class PhoenixUser implements PhoenixEntity {
     public static final String WEB_RESOURCE_ROOT = "user";
     public static final String WEB_RESOURCE_CREATE = "create";
     public static final String WEB_RESOURCE_GET = "get";
+    public static final String WEB_RESOURCE_LOGIN = "login";
 
     private String surname;
     private String name;
@@ -106,6 +107,19 @@ public class PhoenixUser implements PhoenixEntity {
      */
     public static WebResource getResource(Client client, String baseURL) {
         return base(client, baseURL).path(WEB_RESOURCE_GET);
+    }
+    
+    /**
+     * Resource needs: <xmp> LoginAttempt </xmp>
+     * 
+     * @param client
+     *            Using for accessing the webresource
+     * @param baseURL
+     *            The baseURL of the REST webservice
+     * @return The login webresource for PhoenixUser
+     */
+    public static WebResource loginResource(Client client, String baseURL) {
+        return base(client, baseURL).path(WEB_RESOURCE_LOGIN);
     }
 
     private static WebResource base(Client client, String baseURL) {
