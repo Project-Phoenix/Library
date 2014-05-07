@@ -170,11 +170,16 @@ public class PhoenixText implements PhoenixEntity {
         File f = File.createTempFile(name, type);
         f.deleteOnExit();
 
-        PrintWriter writer = new PrintWriter(f, "UTF-8");
+        return writeToFile(f);
+    }
+
+    public File writeToFile(File target) throws IOException {
+
+        PrintWriter writer = new PrintWriter(target, "UTF-8");
         writer.write(text);
         writer.close();
 
-        return f;
+        return target;
     }
 
     /**

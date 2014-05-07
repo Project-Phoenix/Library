@@ -126,10 +126,17 @@ public class PhoenixAttachment implements PhoenixEntity {
         }
         File f = File.createTempFile(name, type);
         f.deleteOnExit();
-        FileOutputStream fout = new FileOutputStream(f);
+
+        return writeToFile(f);
+    }
+
+    public File writeToFile(File target) throws IOException {
+
+        FileOutputStream fout = new FileOutputStream(target);
         fout.write(content);
         fout.close();
-        return f;
+
+        return target;
     }
 
     /**
