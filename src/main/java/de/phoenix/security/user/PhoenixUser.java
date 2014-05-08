@@ -23,6 +23,7 @@ import com.sun.jersey.api.client.WebResource;
 
 import de.phoenix.rs.key.Key;
 import de.phoenix.rs.key.PhoenixEntity;
+import de.phoenix.security.user.permission.PhoenixUserLevel;
 
 public class PhoenixUser implements PhoenixEntity {
 

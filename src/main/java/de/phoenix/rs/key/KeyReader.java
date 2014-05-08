@@ -39,7 +39,7 @@ import de.phoenix.rs.entity.PhoenixTaskSheet;
 import de.phoenix.rs.entity.PhoenixTaskSubmissionDates;
 import de.phoenix.rs.entity.PhoenixText;
 import de.phoenix.security.user.PhoenixUser;
-import de.phoenix.security.user.PhoenixUserLevel;
+import de.phoenix.security.user.permission.PhoenixUserLevel;
 
 /**
  * Reader of {@link Key} fields from {@link PhoenixEntity} to create

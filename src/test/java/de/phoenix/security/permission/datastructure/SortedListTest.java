@@ -26,7 +26,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.phoenix.security.user.PermissionTree.SortedList;
+import de.phoenix.security.user.permission.PermissionTree.SortedList;
 
 public class SortedListTest {
 

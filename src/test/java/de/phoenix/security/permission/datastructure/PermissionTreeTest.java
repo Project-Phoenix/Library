@@ -31,7 +31,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import de.phoenix.security.user.PermissionTree;
+import de.phoenix.security.user.permission.PermissionTree;
 
 public class PermissionTreeTest {
 

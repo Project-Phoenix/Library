@@ -16,10 +16,11 @@
  * along with Library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.phoenix.security.user;
+package de.phoenix.security.user.permission;
 
 import de.phoenix.rs.key.ConnectionEntity;
 import de.phoenix.rs.key.SelectEntity;
+import de.phoenix.security.user.PhoenixUser;
 
 public class UserUserLevelConnection extends ConnectionEntity {
 

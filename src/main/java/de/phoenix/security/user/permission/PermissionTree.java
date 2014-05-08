@@ -16,7 +16,7 @@
  * along with WebService.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.phoenix.security.user;
+package de.phoenix.security.user.permission;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,8 +28,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PermissionTree implements Comparable<PermissionTree> {
 
-    
-    private PermissionTree root;
     private List<PermissionTree> childs;
 
     private final String node;
@@ -38,7 +36,7 @@ public class PermissionTree implements Comparable<PermissionTree> {
      * Creates a new permission tree without a node and without any childs
      */
     public PermissionTree() {
-        this(null, null);
+        this(null);
     }
 
     /**
@@ -48,27 +46,7 @@ public class PermissionTree implements Comparable<PermissionTree> {
      *            The node without any "."
      */
     private PermissionTree(final String node) {
-        this(null, node);
-    }
-
-    /**
-     * Creates a child node
-     * 
-     * @param root
-     *            The parent of this child
-     * @param node
-     *            The node without any "."
-     */
-    private PermissionTree(final PermissionTree root, final String node) {
-        this.root = root;
         this.node = node;
-    }
-
-    /**
-     * @return The root of this tree
-     */
-    public PermissionTree getRoot() {
-        return root;
     }
 
     /**
@@ -108,7 +86,7 @@ public class PermissionTree implements Comparable<PermissionTree> {
         // There is already a wildcard - no need to add subnodes of a wildcard
         if (Collections.binarySearch(childs, WILDCARD_NODE) >= 0)
             return this;
-        PermissionTree newNode = new PermissionTree(this, node);
+        PermissionTree newNode = new PermissionTree(node);
 
         // Check if the node is already in the tree
         if (Collections.binarySearch(childs, newNode) >= 0)
