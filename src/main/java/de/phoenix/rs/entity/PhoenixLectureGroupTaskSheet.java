@@ -146,7 +146,7 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
 
         @Override
         public String toString() {
-            return "PhoenixDatedTask={Deadline:" + deadlineDate + ";ReleaseDate:" + releaseDate + ";Task:" + task + "}";
+            return "PhoenixDatedTask [releaseDate=" + releaseDate + ", deadlineDate=" + deadlineDate + ", task=" + task + "]";
         }
     }
 
@@ -199,7 +199,7 @@ public class PhoenixLectureGroupTaskSheet implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixLectureGroupTaskSheet={PhoenixDatedTasks:%s;PhoenixLectureGroup=%s}", tasks, lectureGroup);
+        return "PhoenixLectureGroupTaskSheet [lectureGroup=" + lectureGroup + ", taskSheetTitle=" + taskSheetTitle + ", tasks=" + tasks + "]";
     }
 
 }

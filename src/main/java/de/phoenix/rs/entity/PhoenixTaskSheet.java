@@ -151,6 +151,6 @@ public class PhoenixTaskSheet implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixTaskSheet={Title=%s;CreationDate=%s;Tasks=%s}", title, creationDate, tasks);
+        return "PhoenixTaskSheet [title=" + title + ", tasks=" + tasks + ", creationDate=" + creationDate + "]";
     }
 }

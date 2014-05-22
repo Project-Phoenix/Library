@@ -135,6 +135,6 @@ public class PhoenixTaskSubmissionDates implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixTaskSubmissionDates={Deadline=%s;ReleaseDate=%s;PhoenixTask=%s;PhoenixLectureGroupTaskSheet=%s};", deadline, releaseDate, task, lectureGroupTaskSheet);
+        return "PhoenixTaskSubmissionDates [deadline=" + deadline + ", releaseDate=" + releaseDate + ", lectureGroupTaskSheet=" + lectureGroupTaskSheet + ", task=" + task + "]";
     }
 }

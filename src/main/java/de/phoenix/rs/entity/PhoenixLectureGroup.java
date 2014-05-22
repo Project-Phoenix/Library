@@ -46,6 +46,7 @@ public class PhoenixLectureGroup implements PhoenixEntity {
 
     @Key
     private String name;
+    private String description;
     private int maxMember;
 
     private Weekday submissionDeadlineWeekday;
@@ -81,9 +82,43 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      *            often)
      * @param lecture
      *            The lecture the group is assigned to
+     * @deprecated Use
+     *             {@link #PhoenixLectureGroup(String, String, int, Weekday, LocalTime, List, PhoenixLecture)}
+     *             with its description
      */
     public PhoenixLectureGroup(String name, int maxMember, Weekday submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details, PhoenixLecture lecture) {
         this.name = name;
+        this.maxMember = maxMember;
+        this.submissionDeadlineWeekday = submissionDeadlineWeekday;
+        this.submissionDeadlineTime = submissionDeadlineTime;
+        this.details = new ArrayList<PhoenixDetails>(details);
+        this.lecture = lecture;
+    }
+
+    /**
+     * Constructor for server
+     * 
+     * @param name
+     *            The name of the group
+     * @param description
+     *            The detailed description for this lecture group
+     * @param maxMember
+     *            The max possible member of the group
+     * @param submissionDeadlineWeekday
+     *            The weekday of the default submission.
+     * @param submissionDeadlineTime
+     *            The default deadline time for this group to assign submission.
+     *            The day of the deadline is defined by
+     *            submissionDeadlineWeekyday
+     * @param details
+     *            Detail information about the lecture group (room, time and how
+     *            often)
+     * @param lecture
+     *            The lecture the group is assigned to
+     */
+    public PhoenixLectureGroup(String name, String description, int maxMember, Weekday submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details, PhoenixLecture lecture) {
+        this.name = name;
+        this.description = description;
         this.maxMember = maxMember;
         this.submissionDeadlineWeekday = submissionDeadlineWeekday;
         this.submissionDeadlineTime = submissionDeadlineTime;
@@ -107,9 +142,34 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      * @param details
      *            Detail information about the lecture group (room, time and how
      *            often)
+     * @deprecated Use
+     *             {@link #PhoenixLectureGroup(String, String, int, Weekday, LocalTime, List)}
+     *             with the description
      */
     public PhoenixLectureGroup(String name, int maxMember, Weekday submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details) {
+        this(name, "", maxMember, submissionDeadlineWeekday, submissionDeadlineTime, details);
+    }
+
+    /**
+     * Constructor for client
+     * 
+     * @param name
+     *            The name of the group
+     * @param maxMember
+     *            The max possible member of the group
+     * @param submissionDeadlineWeekday
+     *            The weekday of the default submission.
+     * @param submissionDeadlineTime
+     *            The default deadline time for this group to assign submission.
+     *            The day of the deadline is defined by
+     *            submissionDeadlineWeekyday
+     * @param details
+     *            Detail information about the lecture group (room, time and how
+     *            often)
+     */
+    public PhoenixLectureGroup(String name, String description, int maxMember, Weekday submissionDeadlineWeekday, LocalTime submissionDeadlineTime, List<PhoenixDetails> details) {
         this.name = name;
+        this.description = description;
         this.maxMember = maxMember;
         this.submissionDeadlineWeekday = submissionDeadlineWeekday;
         this.submissionDeadlineTime = submissionDeadlineTime;
@@ -128,6 +188,13 @@ public class PhoenixLectureGroup implements PhoenixEntity {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * @return The description of this lecture group
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**
@@ -210,6 +277,7 @@ public class PhoenixLectureGroup implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixLectureGroup={Name=%s;MaxMember=%d;SubmissionDeadlineWeekday=%s;SubmissionDeadlineTime=%s;Details=%s}", name, maxMember, submissionDeadlineWeekday, submissionDeadlineTime, details);
+        return "PhoenixLectureGroup [name=" + name + ", description=" + description + ", maxMember=" + maxMember + ", submissionDeadlineWeekday=" + submissionDeadlineWeekday + ", submissionDeadlineTime=" + submissionDeadlineTime + ", details=" + details + ", lecture=" + lecture + "]";
     }
+
 }

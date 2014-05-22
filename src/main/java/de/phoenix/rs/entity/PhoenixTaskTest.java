@@ -72,6 +72,6 @@ public class PhoenixTaskTest {
 
     @Override
     public String toString() {
-        return "PhoenixTest={timeout=" + timeout + ";content=" + content + "}";
+        return "PhoenixTaskTest [timeout=" + timeout + ", content=" + content + "]";
     }
 }

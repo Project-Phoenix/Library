@@ -65,6 +65,8 @@ public class PhoenixLecture implements PhoenixEntity {
     @Key
     private String title;
 
+    private String description;
+
     private List<PhoenixDetails> lectureDetails;
 
     /**
@@ -82,10 +84,36 @@ public class PhoenixLecture implements PhoenixEntity {
      * @param details
      *            Details for this lectures (different dates of the lecture for
      *            example)
+     * @deprecated Use {@link #PhoenixLecture(String, String, List)} with the
+     *             description
      */
     public PhoenixLecture(String title, List<PhoenixDetails> details) {
+        this(title, "", details);
+    }
+
+    /**
+     * Constructor for client/server
+     * 
+     * @param title
+     *            The title of the lecture
+     * @param description
+     *            The further description
+     * @param details
+     *            Details for this lectures (different dates of the lecture for
+     *            example)
+     */
+    public PhoenixLecture(String title, String description, List<PhoenixDetails> details) {
         this.title = title;
+        this.description = description;
         this.lectureDetails = new ArrayList<PhoenixDetails>(details);
+
+    }
+
+    /**
+     * @return The description of this lecture
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**
@@ -190,8 +218,8 @@ public class PhoenixLecture implements PhoenixEntity {
     }
 
     /**
-     * Resource needs: <xmp> Nothing </xmp>
-     * The resource returns all available 
+     * Resource needs: <xmp> Nothing </xmp> The resource returns all available
+     * 
      * @param client
      * @param baseURL
      * @return
@@ -206,7 +234,7 @@ public class PhoenixLecture implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixLecture={Title=%s;Details=%s}", getTitle(), getLectureDetails());
+        return "PhoenixLecture [title=" + title + ", description=" + description + ", lectureDetails=" + lectureDetails + "]";
     }
 
 }

@@ -232,7 +232,7 @@ public class PhoenixTask implements PhoenixEntity {
 
     @Override
     public String toString() {
-        return String.format("PhoenixTask={Title=%s;Description=%s;Attachments=%s;Pattern=%s}", getTitle(), getDescription(), getAttachments(), getPattern());
+        return "PhoenixTask [title=" + title + ", description=" + description + ", disallowedContent=" + disallowedContent + ", attachments=" + attachments + ", answerPattern=" + answerPattern + "]";
     }
 
 }

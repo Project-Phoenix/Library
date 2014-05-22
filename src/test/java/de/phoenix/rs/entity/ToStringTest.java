@@ -65,8 +65,8 @@ public class ToStringTest {
         pAttachment = new PhoenixAttachment(new byte[]{1, 2, 3, 4, 5, 6}, dateTime, "ExampleAttachment", "dat");
         pDetail = new PhoenixDetails("G1-123", Weekday.MONDAY, time, time.plusHours(1), Period.weeks(1), date, date.plusDays(1));
 
-        pLecture = new PhoenixLecture("TestLecture", Arrays.asList(pDetail));
-        pLectureGroup = new PhoenixLectureGroup("TestGroup", 1, Weekday.MONDAY, time, Arrays.asList(pDetail), pLecture);
+        pLecture = new PhoenixLecture("TestLecture", "description", Arrays.asList(pDetail));
+        pLectureGroup = new PhoenixLectureGroup("TestGroup", "description", 1, Weekday.MONDAY, time, Arrays.asList(pDetail), pLecture);
 
         pTask = new PhoenixTask(Arrays.asList(pAttachment), Arrays.asList(pText), "TestDescription", "TestTask");
         pTest = new PhoenixTaskTest(pText);
